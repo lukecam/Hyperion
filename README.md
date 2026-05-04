@@ -9,4 +9,4 @@
 Hyperion is a fork of [Adonis](https://github.com/Epix-Incorporated/Adonis), a Roblox administrative system, with a stronger emphasis on administration and performance.
 
 <h2 id="install"> Installation </h2>
-Currently, installing Hyperion is not advised but if you wish to do so, please read Method 3 for Adonis installs [here](https://github.com/Epix-Incorporated/Adonis#--installation-).
+Currently, installing Hyperion is not advised but if you wish to do so, please read Method 3 for Adonis installs here: https://github.com/Epix-Incorporated/Adonis#--installation-
