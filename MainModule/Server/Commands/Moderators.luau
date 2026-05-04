@@ -948,7 +948,7 @@ return function(Vargs, env)
 				end
 				for i = 0.1, 5, 0.1 do
 					if service.CountTable(tab) - 2 >= service.CountTable(players) then break end
-					wait(0.1)
+					task.wait(0.1)
 				end
 				return tab
 			end;
@@ -1689,7 +1689,7 @@ return function(Vargs, env)
 					AutoUpdate = 1;
 				})
 
-				delay(120, function() Logs.TempUpdaters[voteKey] = nil end)
+				task.delay(120, function() Logs.TempUpdaters[voteKey] = nil end)
 			end
 		};
 
@@ -1777,7 +1777,7 @@ return function(Vargs, env)
 					AutoUpdate = 1;
 				})
 
-				delay(120, function() Logs.TempUpdaters[voteKey] = nil end)
+				task.delay(120, function() Logs.TempUpdaters[voteKey] = nil end)
 			end
 		};
 
@@ -2746,7 +2746,7 @@ return function(Vargs, env)
 							newChar = p.Character ~= oChar and p.Character or p.CharacterAdded:Wait()
 
 							if newChar then
-								wait(); -- Let it finish loading character contents
+								task.wait(); -- Let it finish loading character contents
 
 								newHumanoid = newChar:FindFirstChildOfClass("Humanoid");
 								newPrimary = newChar.PrimaryPart or (newHumanoid and newHumanoid.RootPart) or oChar:FindFirstChild("HumanoidRootPart");
@@ -3022,7 +3022,7 @@ return function(Vargs, env)
 							humanoidDesc[property] = color
 						end
 
-						task.defer(humanoid.ApplyDescription, humanoid, humanoidDesc, Enum.AssetTypeVerification.Always)
+						task.defer(humanoid.ApplyDescriptionAsync, humanoid, humanoidDesc, Enum.AssetTypeVerification.Always)
 					end
 				end
 			end
