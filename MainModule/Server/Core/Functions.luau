@@ -1078,46 +1078,6 @@ return function(Vargs, GetEnv)
 			end
 		end;
 
-		Cape = function(player, isdon, material, color, decal, reflect)
-			material = material or "Neon"
-			if not Functions.GetEnumValue(Enum.Material, material) then
-				error("Invalid material value")
-			end
-			--material = assert(Enum.Material:FromName(material or "Neon"), "Invalid material value")
-
-			Functions.UnCape(player)
-			local torso = player.Character:FindFirstChild("HumanoidRootPart")
-
-			if torso then
-				if type(color) == "table" then
-					color = Color3.new(unpack(color))
-				end
-
-				local data = {
-					Color = color;
-					Parent = player.Character;
-					Material = material;
-					Reflectance = reflect;
-					Decal = decal;
-				}
-
-				if isdon and Settings.DonorCapes and Settings.LocalCapes then
-					Remote.Send(player, "Function", "NewCape", data)
-				else
-					local ind = service.HttpService:GenerateGUID(false)
-					Variables.LocalEffects[ind] = {
-						Player = player;
-						Part = player.Character.HumanoidRootPart;
-						Data = data;
-						Type = "Cape";
-					}
-					for _, v in service.Players:GetPlayers() do
-						Remote.Send(v, "Function", "NewCape", data)
-					end
-				end
-			end
-		end;
-
 		PlayAnimation = function(player, animId)
 			if player.Character and tonumber(animId) then
 				local human = player.Character:FindFirstChildOfClass("Humanoid")
@@ -1183,75 +1143,6 @@ return function(Vargs, GetEnv)
 				end
 			end
 		end;
-
-		makeRobot = function(player, num, health, speed, damage, walk, attack, friendly)
-			local Deps = server.Deps
-
-			local char = player.Character
-			local torso = char:FindFirstChild("HumanoidRootPart") or char.PrimaryPart
-			local pos = torso.CFrame
-
-			local oldArchivable = char.Archivable
-			char.Archivable = true
-			local clone = char:Clone()
-			char.Archivable = oldArchivable
-
-			for i = 1, num do
-				local new = clone:Clone()
-				local hum = new:FindFirstChildOfClass("Humanoid")
-
-				local brain = Deps.Assets.BotBrain:Clone()
-				local event = brain.Event
-
-				local oldAnim = new:FindFirstChild("Animate")
-				local anim = hum.RigType == Enum.HumanoidRigType.R15 and Deps.Assets.R15Animate:Clone() or Deps.Assets.R6Animate:Clone()
-
-				new.Name = player.Name
-				new.Archivable = false
-				new.ModelStreamingMode = Enum.ModelStreamingMode.Atomic
-				new:PivotTo(pos * CFrame.Angles(0, math.rad((360/num)*i+90), 0) * CFrame.new((num*0.2)+5, 0, 0) * CFrame.Angles(0, math.pi / 2, 0))
-
-				hum.WalkSpeed = speed
-				hum.MaxHealth = health
-				hum.Health = health
-
-				if oldAnim then
-					oldAnim:Destroy()
-				end
-
-				anim.Parent = new
-				brain.Parent = new
-
-				anim.Disabled = false
-				brain.Disabled = false
-				new.Parent = workspace
-
-				if i % 5 == 1 then
-					task.wait()
-				end
-
-				task.defer(event.Fire, event, "SetSetting", {
-					Creator = player;
-					Friendly = friendly;
-					TeamColor = player.TeamColor;
-					Attack = attack;
-					Swarm = attack;
-					Walk = walk;
-					Damage = damage;
-					Health = health;
-					WalkSpeed = speed;
-					SpecialKey = service.HttpService:GenerateGUID(false);
-				})
-
-				if walk then
-					task.defer(task.defer, event.Fire, event, "Init")
-				end
-
-				table.insert(Variables.Objects, new)
-			end
-
-			clone:Destroy()
-		end,
 
 		GetJoints = function(character)
 			local temp = {}
@@ -1446,25 +1337,6 @@ return function(Vargs, GetEnv)
 
 			for _, v in service.Players:GetPlayers() do
 				v:Kick(`Server Shutdown: {reason or "No Reason Given"}`)
-			end
-		end;
-
-		Donor = function(plr)
-			if Admin.CheckDonor(plr) and Settings.DonorCapes then
-				local PlayerData = Core.GetPlayer(plr) or {Donor = {}}
-				local donor = PlayerData.Donor or {}
-
-				if donor and donor.Enabled then
-					local img, color, material
-					if donor and donor.Cape then
-						img, color, material = donor.Cape.Image, donor.Cape.Color, donor.Cape.Material
-					else
-						img, color, material = "0", "White", "Neon"
-					end
-					if plr and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
-						Functions.Cape(plr, true, material, color, img)
-					end
-				end
 			end
 		end;
 
