@@ -342,10 +342,6 @@ return function(data, env)
 			Text = "Info";
 		})
 
-		local donorTab = tabFrame:NewTab("Donate", {
-			Text = "Donate";
-		})
-
 		local keyTab = tabFrame:NewTab("Keybinds", {
 			Text = "Keybinds";
 		})
@@ -364,9 +360,7 @@ return function(data, env)
 
 		if data.Tab then
 			local Tab = string.lower(data.Tab)
-			if Tab == "donate" then
-				donorTab:FocusTab()
-			elseif Tab == "keybinds" then
+			if Tab == "keybinds" then
 				keyTab:FocusTab()
 			elseif Tab == "aliases" then
 				aliasTab:FocusTab()
@@ -422,7 +416,7 @@ return function(data, env)
 				Text = "Credits";
 				Size = UDim2.new(0, 130, 0, 40);
 				Position = UDim2.new(1, -135, 0, 95);
-				BackgroundTransparency = 0.5;
+				BackgroundTransparency = 0.5;	
 				Events = {
 					MouseButton1Down = function()
 						UI.Make("Credits", {})
@@ -431,45 +425,9 @@ return function(data, env)
 			})
 
 			infoTab:Add("TextButton", {
-				Text = "Get Loader";
-				Size = UDim2.new(0, 130, 0, 40);
-				Position = UDim2.new(1, -135, 0, 140);
-				BackgroundTransparency = 0.5;
-				Events = {
-					MouseButton1Down = function()
-						promptPurchase(false, 7510622625)
-					end
-				}
-			}):Add("ImageLabel", {
-				BackgroundTransparency = 1;
-				Image = "rbxassetid://7346570801";
-				ImageTransparency = 0.2;
-				Size = UDim2.new(0, 18, 0, 18);
-				Position = UDim2.new(1, -22, 0, 4);
-			})
-
-			infoTab:Add("TextButton", {
-				Text = "Get Source";
-				Size = UDim2.new(0, 130, 0, 40);
-				Position = UDim2.new(1, -135, 0, 185);
-				BackgroundTransparency = 0.5;
-				Events = {
-					MouseButton1Down = function()
-						promptPurchase(false, 7510592873)
-					end
-				}
-			}):Add("ImageLabel", {
-				BackgroundTransparency = 1;
-				Image = "rbxassetid://7346570801";
-				ImageTransparency = 0.2;
-				Size = UDim2.new(0, 18, 0, 18);
-				Position = UDim2.new(1, -22, 0, 4);
-			})
-
-			infoTab:Add("TextButton", {
 				Text = "Open Console";
 				Size = UDim2.new(0, 130, 0, 40);
-				Position = UDim2.new(1, -135, 0, 230);
+				Position = UDim2.new(1, -135, 0, 140);
 				BackgroundTransparency = 0.5;
 				Events = {
 					MouseButton1Down = function()
@@ -490,7 +448,7 @@ return function(data, env)
 			ZIndex = 10;
 		}
 
-		local loadingIcons = {donorTab:Add("ImageLabel", LOAD_ICON), keyTab:Add("ImageLabel", LOAD_ICON), aliasTab:Add("ImageLabel", LOAD_ICON), clientTab:Add("ImageLabel", LOAD_ICON), gameTab:Add("ImageLabel", LOAD_ICON)}
+		local loadingIcons = {keyTab:Add("ImageLabel", LOAD_ICON), aliasTab:Add("ImageLabel", LOAD_ICON), clientTab:Add("ImageLabel", LOAD_ICON), gameTab:Add("ImageLabel", LOAD_ICON)}
 		gTable = window.gTable
 		window:Ready()
 
@@ -506,7 +464,7 @@ return function(data, env)
 		end)
 
 		playerData = Remote.Get("PlayerData")
-		chatMod = Remote.Get("Setting",{"Prefix","SpecialPrefix","BatchKey","AnyPrefix","DonorCommands","DonorCapes"})
+		chatMod = Remote.Get("Setting",{"Prefix","SpecialPrefix","BatchKey","AnyPrefix"})
 		settingsData = Remote.Get("AllSettings")
 		Variables.Aliases = playerData.Aliases or {}
 		commandPrefix = if type(chatMod.Prefix) == "table" then chatMod.Prefix[1] else chatMod.Prefix
@@ -514,371 +472,6 @@ return function(data, env)
 		for _, v in loadingIcons do
 			v:Destroy()
 		end
-
-		--// Donor Tab
-		do
-			local donorData = playerData.Donor
-			local currentMaterial = donorData and donorData.Cape.Material
-			local currentTexture = donorData and donorData.Cape.Image
-			local currentColor = donorData and donorData.Cape.Color
-
-			if type(currentColor) == "table" then
-				currentColor = Color3.new(unpack(currentColor, 1, 3))
-			else
-				currentColor = BrickColor.new(currentColor).Color
-			end
-
-			local dStatus = donorTab:Add("TextLabel", {
-				Text = " Donor Status: ";
-				Size = UDim2.new(1, -10, 0, 20);
-				Position = UDim2.new(0, 5, 0, 5);
-				BackgroundTransparency = 0.25;
-				TextXAlignment = "Left";
-			}):Add("TextLabel", {
-				Text = (playerData.isDonor and "Donated") or "Not a Donor";
-				Size = UDim2.new(0, 150, 1, 0);
-				Position = UDim2.new(1, -155, 0, 0);
-				BackgroundTransparency = 1;
-				TextXAlignment = "Right";
-			})
-
-			local function updateStatus()
-				dStatus.Text = "Updating..."
-
-				if chatMod.DonorCapes and playerData.isDonor then
-					if type(donorData) == "table" and donorData.Cape and type(donorData.Cape) == "table" then
-						if donorData.Enabled and service.Players.LocalPlayer.Character then
-							Functions.NewCape({
-								Color = type(currentColor) == "table" and Color3.new(unpack(currentColor)) or currentColor or "White";
-								Parent = service.Players.LocalPlayer.Character;
-								Material = donorData.Cape.Material or "Neon";
-								--Reflectance = reflect;
-								Decal = donorData.Cape.Image;
-							})
-						elseif service.Players.LocalPlayer.Character then
-							Functions.RemoveCape(service.Players.LocalPlayer.Character)
-						end
-					end
-				end
-
-				task.defer(function()
-					dStatus.Text = Remote.Get("UpdateDonor", playerData.Donor)
-					task.wait(0.5)
-					dStatus.Text = "Donated"
-				end)
-			end
-
-			donorTab:Add("TextLabel", {
-				Text = " Donor Cape: ";
-				Size = UDim2.new(1, -10, 0, 20);
-				Position = UDim2.new(0, 5, 0, 25);
-				BackgroundTransparency = 0.8;
-				TextXAlignment = "Left";
-				Children = {
-					{
-						Class = "Boolean";
-						TextXAlignment = "Right";
-						Size = UDim2.new(0, 150, 1, 0);
-						Position = UDim2.new(1, -155, 0, 0);
-						TextTransparency = (playerData.isDonor and 0) or 0.5;
-						BackgroundTransparency = 1;
-						Enabled = playerData.isDonor and playerData.Donor.Enabled;
-						OnToggle = playerData.isDonor and function(enabled)
-							service.Debounce("DonorStatusUpdate", function()
-								playerData.Donor.Enabled = enabled
-								updateStatus()
-							end)
-						end
-					}
-				}
-			})
-
-			donorTab:Add("TextLabel", {
-				Text = " Cape Color: ";
-				Size = UDim2.new(1, -10, 0, 20);
-				Position = UDim2.new(0, 5, 0, 45);
-				BackgroundTransparency = 0.25;
-				TextXAlignment = "Left";
-				Children = {
-					{
-						Class = "TextButton";
-						Text = "";
-						Size = UDim2.new(0, 40, 1, -6);
-						Position = UDim2.new(1, -45, 0, 3);
-						BackgroundColor3 = currentColor;
-						TextTransparency = (playerData.isDonor and 0) or 0.5;
-						BackgroundTransparency = 0;
-						BorderPixelSize = 1;
-						BorderColor3 = Color3.fromRGB(100, 100, 100);
-						OnClick = playerData.isDonor and function(new)
-							service.Debounce("DonorStatusUpdate", function()
-								local newColor = UI.Make("ColorPicker", {
-									Color = currentColor;
-								})
-
-								currentColor = newColor or currentColor
-								new.BackgroundColor3 = currentColor
-								donorData.Cape.Color = {currentColor.R; currentColor.G; currentColor.B;}
-								updateStatus()
-							end)
-						end
-					}
-				}
-			})
-
-			donorTab:Add("TextLabel", {
-				Text = " Cape Material: ";
-				Size = UDim2.new(1, -10, 0, 20);
-				Position = UDim2.new(0, 5, 0, 65);
-				BackgroundTransparency = 0.8;
-				TextXAlignment = "Left";
-				Children = {
-					{
-						Class = "Dropdown";
-						Size = UDim2.new(0, 100, 1, 0);
-						Position = UDim2.new(1, -105, 0, 0);
-						BackgroundTransparency = 1;
-						Selected = currentMaterial;
-						TextAlignment = "Right";
-						NoArrow = true;
-						TextProperties = {
-							TextTransparency = (playerData.isDonor and 0) or 0.5;
-						};
-
-						Options = playerData.isDonor and {
-							"Brick";
-							"Cobblestone";
-							"Concrete";
-							"CorrodedMetal";
-							"DiamondPlate";
-							"Fabric";
-							"Foil";
-							"ForceField";
-							"Granite";
-							"Grass";
-							"Ice";
-							"Marble";
-							"Metal";
-							"Neon";
-							"Pebble";
-							"Plastic";
-							"Sand";
-							"Slate";
-							"SmoothPlastic";
-							"Wood";
-							"WoodPlanks";
-							"Glass";
-						};
-
-						OnSelect = function(selection)
-							service.Debounce("DonorStatusUpdate", function()
-								donorData.Cape.Material = selection
-								updateStatus()
-							end)
-						end;
-					}
-				}
-			})
-
-			donorTab:Add("TextLabel", {
-				Text = " Cape Texture: ";
-				Size = UDim2.new(1, -10, 0, 20);
-				Position = UDim2.new(0, 5, 0, 85);
-				BackgroundTransparency = 0.25;
-				TextXAlignment = "Left";
-				Children = {
-					{
-						Class = "TextButton";
-						TextXAlignment = "Right";
-						Text = currentTexture or 0;
-						Size = UDim2.new(0, 100, 1, 0);
-						Position = UDim2.new(1, -105, 0, 0);
-						TextTransparency = (playerData.isDonor and 0) or 0.5;
-						BackgroundTransparency = 1;
-						OnClick = playerData.isDonor and function(textureButton)
-							service.Debounce("DonorStatusUpdate", function()
-								local lastValid = currentTexture
-								local donePreview = false
-								local pWindow = UI.Make("Window", {
-									Name = "CapeTexture";
-									Title = "Texture Preview";
-									Size = {200, 250};
-									Ready = true;
-									OnClose = function()
-										donePreview = true;
-									end
-								})
-
-								local img = pWindow:Add("ImageLabel", {
-									BackgroundTransparency = 1;
-									Image = `rbxthumb://type=Asset&id={currentTexture}&w=420&h=420`;
-									Size = UDim2.new(1, -10, 1, -80);
-									Position = UDim2.new(0, 5, 0, 35);
-								})
-
-								local lastChange = 0;
-								pWindow:Add("TextBox", {
-									Text = currentTexture;
-									Size = UDim2.new(1, -10, 0, 30);
-									Position = UDim2.new(0, 5, 0, 5);
-									TextChanged = function(text, enter, new)
-										local lastVal = math.random();
-
-										lastChange = lastVal;
-
-										delay(0.5, function()
-											if lastChange == lastVal then --// So we only do the update when they finish typing
-												local num = tonumber(text)
-												if num then
-													lastValid = num
-													img.Image = `rbxthumb://type=Asset&id={num}&w=420&h=420`;
-												else
-													new.Text = lastValid
-												end
-											end
-										end)
-									end
-								})
-
-								pWindow:Add("TextButton", {
-									Text = "Select";
-									Size = UDim2.new(1, -10, 0, 30);
-									Position = UDim2.new(0, 5, 1, -35);
-									OnClick = function(new)
-										currentTexture = lastValid;
-										donorData.Cape.Image = lastValid;
-										textureButton.Text = lastValid;
-										donePreview = true;
-
-										pWindow:Close()
-										updateStatus()
-									end
-								})
-							end)
-						end
-					}
-				}
-			})
-
-			local donorPerks = {
-				"Perks you get here: "
-			}
-
-			local capePerks,cmdPerks = {
-				"Customizable Cape (see above)";
-				"Access to !cape";
-				"Access to !uncape";
-			},{
-				"Access to !sparkles <BrickColor>";
-				"Access to !unsparkles";
-				"Access to !particle <textureID> <startColor3> <endColor3>";
-				"Access to !unparticle";
-				"Access to !fire <BrickColor>";
-				"Access to !unfire";
-				"Access to !light <BrickColor>";
-				"Access to !unlight";
-				"Access to !avataritem/!hat/!shirt/!pants <ID>";
-				"Access to !myhats";
-				"Access to !removehat <name>";
-				"Access to !removehats";
-				"Access to !neon <BrickColor>";
-				"Access to !removetshirt";
-			}
-
-
-			if chatMod.DonorCapes then
-				for _, v in ipairs(capePerks) do
-					table.insert(donorPerks, v)
-				end
-			else
-				table.insert(donorPerks, "Donor capes are disabled here")
-			end
-
-			if chatMod.DonorCommands then
-				for _, v in ipairs(cmdPerks) do
-					table.insert(donorPerks, v)
-				end
-			else
-				table.insert(donorPerks, "Donor commands are disabled here")
-			end
-
-			donorTab:Add("ScrollingFrame", {
-				Size = UDim2.new(1, -145, 1, -115);
-				Position = UDim2.new(0, 5, 0, 110);
-			}):GenerateList(donorPerks, {
-				TextXAlignment = "Left";
-			})
-
-			local dFrame = donorTab:Add("Frame", {
-				Size = UDim2.new(0, 140, 1, -110);
-				Position = UDim2.new(1, -140, 0, 105);
-				BackgroundTransparency = 1;
-			})
-
-			dFrame:Add("TextButton", {
-				Text = "Donate (Perks)";
-				Size = UDim2.new(1, -10, 0, 40);
-				Position = UDim2.new(0, 5, 0, 5);
-				BackgroundTransparency = 0.5;
-				BackgroundColor3 = Color3.fromRGB(231, 6, 141);
-				OnClick = function()
-					promptPurchase(true, 1348327) --497917601)
-				end
-			})
-
-			dFrame:Add("TextLabel", {
-				Text = "Extra (No Perks): ";
-				TextXAlignment = "Left";
-				Size = UDim2.new(1, 0, 0, 30);
-				Position = UDim2.new(0, 5, 1, -80);
-				BackgroundTransparency = 1;
-			})
-
-			dFrame:Add("TextButton", {
-				Text = "50";
-				Size = UDim2.new(0, 60, 0, 20);
-				Position = UDim2.new(0, 5, 1, -50);
-				BackgroundTransparency = 0.7;
-				BackgroundColor3 = Color3.new(0,1,0):lerp(Color3.new(1,0,0), 0.1);
-				OnClick = function()
-					promptPurchase(true, 5212076)
-				end
-			})
-
-			dFrame:Add("TextButton", {
-				Text = "100";
-				Size = UDim2.new(0, 60, 0, 20);
-				Position = UDim2.new(0.5, 5, 1, -50);
-				BackgroundTransparency = 0.5;
-				BackgroundColor3 = Color3.new(0,1,0):lerp(Color3.new(1,0,0), 0.3);
-				OnClick = function()
-					promptPurchase(true, 5212077)
-				end
-			})
-
-			dFrame:Add("TextButton", {
-				Text = "500";
-				Size = UDim2.new(0, 60, 0, 20);
-				Position = UDim2.new(0, 5, 1, -25);
-				BackgroundTransparency = 0.5;
-				BackgroundColor3 = Color3.new(0,1,0):lerp(Color3.new(1,0,0), 0.6);
-				OnClick = function()
-					promptPurchase(true, 5212081)
-				end
-			})
-
-			dFrame:Add("TextButton", {
-				Text = "1000";
-				Size = UDim2.new(0, 60, 0, 20);
-				Position = UDim2.new(0.5, 5, 1, -25);
-				BackgroundTransparency = 0.5;
-				BackgroundColor3 = Color3.new(0,1,0):lerp(Color3.new(1,0,0), 0.9);
-				OnClick = function()
-					promptPurchase(true, 5212082)
-				end
-			})
-		end
-
 
 		--// Keybinds
 		do
