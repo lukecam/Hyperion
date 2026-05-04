@@ -182,7 +182,7 @@ return function(Vargs, GetEnv)
 
 		HandleTextChatCommands = function()
 			local data = Remote.Get("PlayerData")
-			local adminLevel, isDonor = data.AdminLevel, data.isDonor
+			local adminLevel = data.AdminLevel
 
 			if service.TextChatService and service.TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 				local function onCommandAdded(command)
@@ -199,7 +199,7 @@ return function(Vargs, GetEnv)
 
 					local commandLevel = command:GetAttribute("AdminLevel")
 
-					if type(commandLevel) == "number" and commandLevel > adminLevel or commandLevel == "Donors" and not isDonor then
+					if type(commandLevel) == "number" and commandLevel > adminLevel then
 						command.Parent = nil
 					end
 				end

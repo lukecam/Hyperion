@@ -101,10 +101,6 @@ return {
 	Console = [[ Command console ]];
 	Console_AdminsOnly = [[ Makes it so if the console is enabled, only admins will see it ]];
 
-	DonorCommands = [[ Show your support for the script and let donors use commands like !sparkles ]];
-	DonorCapes = [[ Determines if donors have capes ]];
-	LocalCapes = [[ Makes Donor capes local instead of removing them ]];
-
 	HelpSystem = [[ Allows players to call admins for help using !help ]];
 	HelpButton = [[ Shows a little help button in the bottom right corner ]];
 	HelpButtonImage = [[ Change this to change the help button's image ]];
