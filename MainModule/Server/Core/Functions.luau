@@ -148,7 +148,7 @@ return function(Vargs, GetEnv)
 				Function = function(msg, plr, parent, players, delplayers, addplayers, randplayers, getplr, plus, isKicking, isServer, dontError, useFakePlayer, allowUnknownUsers)
 					for _,v in parent:GetChildren() do
 						local p = getplr(v)
-						if p and p:IsFriendsWith(plr.UserId) then
+						if p and p:IsFriendsWithAsync(plr.UserId) then
 							table.insert(players, p)
 							plus()
 						end

@@ -46,7 +46,7 @@ return function(data, env)
 		Text = "Game"
 	})
 
-	local isFriends = player:IsFriendsWith(service.Players.LocalPlayer.UserId)
+	local isFriends = player:IsFriendsWithAsync(service.Players.LocalPlayer.UserId)
 	if player ~= service.Players.LocalPlayer then
 		window:AddTitleButton({
 			Text = "";
@@ -136,11 +136,11 @@ return function(data, env)
 		for _, v in ipairs({
 			{data.IsServerOwner, "Private Server Owner", client.MatIcons.Grade, "User owns the current private server"},
 			{data.IsDonor, "Adonis Donor", "rbxassetid://6877822142", "User has purchased the Adonis donation pass/shirt"},
-			{player:GetRankInGroup(886423) == 10, "Adonis Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Adonis admin system (see credit list)"},
-			{player:GetRankInGroup(886423) >= 12, "Adonis Developer", "rbxassetid://6878433601", "User is an official developer of the Adonis admin system (see credit list)"},
+			{player:GetRankInGroupAsync(886423) == 10, "Adonis Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Adonis admin system (see credit list)"},
+			{player:GetRankInGroupAsync(886423) >= 12, "Adonis Developer", "rbxassetid://6878433601", "User is an official developer of the Adonis admin system (see credit list)"},
 			{player.UserId == 1237666 or player.UserId == 698712377, "Adonis Creator [Sceleratis/Davey_Bones]", "rbxassetid://6878433601", "You're looking at the creator of the Adonis admin system!"},
-			{player:IsInGroup(1200769) or player:IsInGroup(2868472), "Roblox Staff", "rbxassetid://6811962259", "User is an official Roblox employee (!)"},
-			{player:IsInGroup(3514227), "DevForum Member", "rbxassetid://6383940476", "User is a member of the Roblox Developer Forum"},
+			{player:GetRankInGroupAsync(1200769) or player:GetRankInGroupAsync(2868472), "Roblox Staff", "rbxassetid://6811962259", "User is an official Roblox employee (!)"},
+			{player:GetRankInGroupAsync(3514227), "DevForum Member", "rbxassetid://6383940476", "User is a member of the Roblox Developer Forum"},
 			}) do
 			if v[1] then
 				generaltab:Add("TextLabel", {
@@ -471,7 +471,7 @@ return function(data, env)
 					self.Active = false
 					self.AutoButtonColor = false
 					client.Remote.Send("ProcessCommand", string.format("%sviewtools%s%s", data.CmdPrefix, data.CmdSplitKey, player.Name))
-					wait(2)
+					task.wait(2)
 					self.AutoButtonColor = true
 					self.Active = true
 				end
