@@ -899,94 +899,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Lag = {
-			Prefix = Settings.Prefix;
-			Commands = {"lag", "fpslag"};
-			Args = {"player"};
-			Description = "Makes the target player(s)'s FPS drop";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string}, data: {any})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					if Admin.CheckAuthority(plr, v, "lag") then
-						Remote.Send(v, "Function", "SetFPS", 5.6)
-					end
-				end
-			end
-		};
-
-		UnLag = {
-			Prefix = Settings.Prefix;
-			Commands = {"unlag", "unfpslag"};
-			Args = {"player"};
-			Description = "Un-Lag";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.Send(v, "Function", "RestoreFPS")
-				end
-			end
-		};
-
-		Crash = {
-			Prefix = Settings.Prefix;
-			Commands = {"crash"};
-			Args = {"player"};
-			Description = "Crashes the target player(s)";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string}, data: {any})
-				for _, v in service.GetPlayers(plr, args[1], {IsKicking = true}) do
-					if Admin.CheckAuthority(plr, v, "crash") then
-						Remote.Send(v, "Function", "Crash")
-					end
-				end
-			end
-		};
-
-		HardCrash = {
-			Prefix = Settings.Prefix;
-			Commands = {"hardcrash"};
-			Args = {"player"};
-			Description = "Hard-crashes the target player(s)";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string}, data: {any})
-				for _, v in service.GetPlayers(plr, args[1], {IsKicking = true}) do
-					if Admin.CheckAuthority(plr, v, "hard-crash") then
-						Remote.Send(v, "Function", "HardCrash")
-					end
-				end
-			end
-		};
-
-		RAMCrash = {
-			Prefix = Settings.Prefix;
-			Commands = {"ramcrash", "memcrash"};
-			Args = {"player"};
-			Description = "RAM-crashes the target player(s)";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string}, data: {any})
-				for _, v in service.GetPlayers(plr, args[1], {IsKicking = true}) do
-					if Admin.CheckAuthority(plr, v, "RAM-crash") then
-						Remote.Send(v, "Function", "RAMCrash")
-					end
-				end
-			end
-		};
-
-		GPUCrash = {
-			Prefix = Settings.Prefix;
-			Commands = {"gpucrash"};
-			Args = {"player"};
-			Description = "GPU crashes the target player(s)";
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string}, data: {any})
-				for _, v in service.GetPlayers(plr, args[1], {IsKicking = true}) do
-					if Admin.CheckAuthority(plr, v, "GPU-crash") then
-						Remote.Send(v, "Function", "GPUCrash")
-					end
-				end
-			end
-		};
-
 		CustomKick = {
 			Prefix = Settings.Prefix;
 			Commands = {"ckick", "customkick", "customcrash"};
@@ -1144,43 +1056,22 @@ return function(Vargs, env)
 			end
 		};
 
-		Nil = {
+		PromptPlusPurchase = {
 			Prefix = Settings.Prefix;
-			Commands = {"nil"};
+			Commands = {"promptpluspurchase", "pluspurchaseprompt"};
 			Args = {"player"};
-			Hidden = true;
-			Description = `Deletes the player forcefully, causing them to be kicked for "Player has been removed from the DataModel"`;
-			AdminLevel = "Admins";
-			Function = function(plr: Player, args: {string})
-				local sourcePlayerLevel = Admin.GetLevel(plr)
-				for _, v in service.GetPlayers(plr, args[1]) do
-					if Admin.GetLevel(v) <= sourcePlayerLevel then
-						v.Character = nil
-						v.Parent = nil
-						Functions.Hint(`Sent {service.FormatPlayer(v)} to nil`, {plr})
-					else
-						Functions.Hint(`You don't have permission to send {service.FormatPlayer(v)} to nil`, {plr})
-					end
-				end
-			end
-		};
-
-		PromptPremiumPurchase = {
-			Prefix = Settings.Prefix;
-			Commands = {"promptpremiumpurchase", "premiumpurchaseprompt"};
-			Args = {"player"};
-			Description = "Opens the Roblox Premium purchase prompt for the target player(s)";
+			Description = "Opens the Roblox Plus purchase prompt for the target player(s)";
 			AdminLevel = "Admins";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					service.MarketplaceService:PromptPremiumPurchase(v)
+					service.MarketplaceService:PromptRobloxSubscriptionPurchase(v)
 				end
 			end
 		};
 
 		RobloxNotify = {
 			Prefix = Settings.Prefix;
-			Commands = {"rbxnotify", "robloxnotify", "robloxnotif", "rblxnotify", "rnotif", "rn"};
+			Commands = {"robloxnotify"};
 			Args = {"player", "duration (seconds)", "text"};
 			Filter = true;
 			Description = "Sends a Roblox-styled notification for the target player(s)";
@@ -1198,7 +1089,7 @@ return function(Vargs, env)
 
 		Disguise = {
 			Prefix = Settings.Prefix;
-			Commands = {"disguise", "masquerade"};
+			Commands = {"disguise"};
 			Args = {"player", "username"};
 			Description = "Names the player, chars the player, and modifies the player's chat tag";
 			AdminLevel = "Admins";
@@ -1236,7 +1127,7 @@ return function(Vargs, env)
 
 		UnDisguise = {
 			Prefix = Settings.Prefix;
-			Commands = {"undisguise", "removedisguise", "cleardisguise", "nodisguise"};
+			Commands = {"undisguise"};
 			Args = {"player"};
 			Description = "Removes the player's disguise";
 			AdminLevel = "Admins";

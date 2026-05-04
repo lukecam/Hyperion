@@ -48,7 +48,7 @@ return function(Vargs, env)
 
 		UnDirectBan = {
 			Prefix = Settings.Prefix;
-			Commands = {"directunban", "undirectban"};
+			Commands = {"undirectban"};
 			Args = {"username(s)"};
 			Description = "Removes the specified user(s) from the global ban list; saves";
 			AdminLevel = "Creators";
@@ -78,33 +78,6 @@ return function(Vargs, env)
 					end
 				end
 			end
-		};
-
-		GlobalPlace = {
-			Prefix = Settings.Prefix;
-			Commands = {"globalplace", "gplace", "globalforceplace"};
-			Args = {"placeId"};
-			Description = "Force all game-players to teleport to a desired place";
-			AdminLevel = "Creators";
-			CrossServerDenied = true;
-			IsCrossServer = true;
-			NoStudio = true;
-			Function = function(plr: Player, args: {string})
-				local placeId = assert(tonumber(args[1]), "Invalid/missing PlaceId (argument #2)")
-
-				local ans = Remote.GetGui(plr, "YesNoPrompt", {
-					Title = "Force-teleport all users?";
-					Icon = server.MatIcons.Warning;
-					Question = `Would you really like to force all game-players to teleport to place '{placeId}'?`;
-				})
-				if ans == "Yes" then
-					if not Core.CrossServer("NewRunCommand", {Name = plr.Name; UserId = plr.UserId, AdminLevel = Admin.GetLevel(plr)}, `{Settings.Prefix}forceplace all {placeId}`) then
-						error("CrossServer handler not ready; please try again later")
-					end
-				else
-					Functions.Hint("Operation cancelled", {plr})
-				end
-			end;
 		};
 
 		ForcePlace = {
@@ -149,7 +122,7 @@ return function(Vargs, env)
 
 		MakeHeadAdmin = {
 			Prefix = Settings.Prefix;
-			Commands = {"headadmin", "owner", "hadmin", "oa"};
+			Commands = {"headadmin"};
 			Args = {"player"};
 			Description = "Makes the target player(s) a HeadAdmin; Saves";
 			AdminLevel = "Creators";
@@ -171,7 +144,7 @@ return function(Vargs, env)
 
 		TempHeadAdmin = {
 			Prefix = Settings.Prefix;
-			Commands = {"tempheadadmin", "tempowner", "toa", "thadmin"};
+			Commands = {"tempheadadmin"};
 			Args = {"player"};
 			Description = "Makes the target player(s) a temporary head admin; Does not save";
 			AdminLevel = "Creators";
@@ -209,7 +182,7 @@ return function(Vargs, env)
 
 		ClearPlayerData = {
 			Prefix = Settings.Prefix;
-			Commands = {"clearplayerdata", "clrplrdata", "clearplrdata", "clrplayerdata"};
+			Commands = {"clearplayerdata"};
 			Args = {"UserId"};
 			Description = "Clears PlayerData linked to the specified UserId";
 			AdminLevel = "Creators";
@@ -242,129 +215,6 @@ return function(Vargs, env)
 			AdminLevel = "Creators";
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "Terminal")
-			end
-		};
-
-		ScriptEditor = {
-			Prefix = Settings.Prefix;
-			Commands = {"scripteditor", "se"};
-			Args = {"new/edit/delete/run","name"};
-			Description = "Opens Script editor";
-			CrossServerDenied = true;
-			AdminLevel = "Creators";
-			Function = function(plr: Player, args: {string})
-				assert(Settings.CodeExecution, "CodeExecution must be enabled for this command to work")
-				assert(plr ~= false and not service.Wrapped(plr), "A player is needed to run CodeExecution related commands.")
-
-				if type(Remote.RemoteExecutionConfirmed) == "table" and not Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] then
-					local ans = Remote.GetGui(plr, "YesNoPrompt", {
-						Icon = server.MatIcons.Warning;
-						Question = "Are you sure you want to use the script editor command? (Once confirmed, you will not be asked again)";
-						Title = "Adonis ScriptEditor";
-						Delay = 3;
-					})
-
-					if ans == "Yes" then
-						Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] = true
-					else
-						return
-					end
-				end
-
-				local Operation = assert(args[1], "Operation not defined (argument #1)")
-				local Name = assert(args[2], "Name not defined (argument #2)")
-				local se = Variables.ScriptEditor[tostring(plr.UserId)]
-				if not se then
-					se = {}
-					Variables.ScriptEditor[tostring(plr.UserId)] = se
-				end
-
-				if Operation:lower() == "new" then
-					se[Name] = {
-						Script = false;
-					}
-
-					Commands.ScriptEditor.Function(plr,{"edit",Name})
-				elseif Operation:lower() == "edit" then
-					Remote.MakeGui(plr, "ScriptEditor",{
-						Name = Name;
-						Script = se[Name].Script
-					})
-				elseif Operation:lower() == "delete" then
-					assert(se[Name], "No script found")
-
-					se[Name] = nil
-				elseif Operation:lower() == "run" then
-					assert(se[Name], "No script found")
-
-					local oError = error
-					local newenv = setfenv(getfenv(),{
-						print = function(...) local args, str = table.pack(...), "" for i = 1, args.n do str ..= `{(i > 1 and " " or "")}{args[i]}` end Remote.MakeGui(plr, "Output",{Title = "WARN"; Message = `{str}`}) end;
-						warn = function(...) local args, str = table.pack(...), "" for i = 1, args.n do str ..= `{(i > 1 and " " or "")}{args[i]}` end Remote.MakeGui(plr, "Output",{Title = "WARN"; Message = `{str}`}) end;
-						error = function(reason, level)
-							if level ~= nil and type(level) ~= "number" then
-								oError(string.format("bad argument #2 to 'error' (number expected, got %s)", type(level)), 2)
-							end
-
-							Remote.MakeGui(plr, "Output",{Title = "LUA_DEMAND_ERROR"; Message = `LUA_DEMAND_ERROR: {reason}`})
-							oError(`Adonis ScriptEditor error: {reason}`, (level or 1) + 1)
-						end;
-					})
-
-					service.TrackTask(`Thread: ScriptEditor: {plr.UserId}: {Name}`,function()
-						local func,err = Core.Loadstring(se[Name]["Script"], newenv)
-						if func then
-							local Succ,Err = pcall(function()
-								func()
-							end)
-
-							Remote.MakeGui(plr,'Output',{Title = 'ScriptEditor error'; Message = `ScriptEditor error: {Err}`})
-						else
-							Remote.MakeGui(plr,'Output',{Title = 'ScriptEditor error'; Message = `ScriptEditor error: {err}`})
-						end
-					end)
-				end
-			end,
-		};
-
-		CreateStarterScript = {
-			Prefix = Settings.Prefix;
-			Commands = {"starterscript", "clientstarterscript", "starterclientscript", "createstarterscript"};
-			Args = {"name", "code"};
-			Description = "Executes the given code on everyone's client upon respawn";
-			AdminLevel = "Creators";
-			NoFilter = true;
-			CrossServerDenied = true;
-			Function = function(plr: Player, args: {string})
-				assert(Settings.CodeExecution, "CodeExecution must be enabled for this command to work")
-				assert(plr ~= false and not service.Wrapped(plr), "A player is needed to run CodeExecution related commands.")
-
-				if type(Remote.RemoteExecutionConfirmed) == "table" and not Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] then
-					local ans = Remote.GetGui(plr, "YesNoPrompt", {
-						Icon = server.MatIcons.Warning;
-						Question = "Are you sure you want to use the starterscript command? (Once confirmed, you will not be asked again)";
-						Title = "Adonis StarterScript";
-						Delay = 3;
-					})
-
-					if ans == "Yes" then
-						Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] = true
-					else
-						return
-					end
-				end
-
-				assert(args[1], "Missing starter script name (argument #1)")
-				assert(args[2], "Missing LocalScript code (argument #2)")
-
-				local bytecode = Core.Bytecode(args[2])
-				assert(string.find(bytecode, "\27Lua"), `LocalScript unable to be created: {string.gsub(bytecode, "Loadstring%.LuaX:%d+:", "")}`)
-
-				local new = Core.NewScript("LocalScript", args[2], true)
-				new.Name = `[Adonis] {args[1]}`
-				new.Parent = service.StarterGui
-				new.Disabled = false
-				Functions.Hint("Created starter script", {plr})
 			end
 		};
 
