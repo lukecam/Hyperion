@@ -1036,29 +1036,6 @@ return function(Vargs, GetEnv)
 			end
 		end;
 
-		SetAtmosphere = function(prop, value)
-			local atmosphere = service.Lighting:FindFirstChildWhichIsA("Atmosphere")
-
-			if atmosphere then
-				if value == nil and atmosphere[prop] and typeof(atmosphere[prop]) ~= "Instance" then
-					atmosphere:Destroy()
-					table.clear(Variables.AtmosphereSettings)
-				else
-					atmosphere[prop] = value
-					Variables.AtmosphereSettings[prop] = value
-				end
-			elseif value ~= nil then
-				atmosphere = Instance.new("Atmosphere")
-				Variables.AtmosphereSettings[prop] = value
-
-				for k, v in Variables.AtmosphereSettings do
-					atmosphere[k] = v
-				end
-
-				atmosphere.Parent = service.Lighting
-			end
-		end;
-
 		ChatMessage = function(msg,color,font,size)
 			local tab = {}
 

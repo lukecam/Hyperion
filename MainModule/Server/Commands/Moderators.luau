@@ -602,41 +602,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Punish = {
-			Prefix = Settings.Prefix;
-			Commands = {"punish"};
-			Args = {"player"};
-			Description = "Removes the target player(s)'s character";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					local char = v.Character
-					if char then
-						Remote.LoadCode(v, [[service.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)]])
-						char.Parent = service.UnWrap(Settings.Storage)
-					end
-				end
-			end
-		};
-
-		UnPunish = {
-			Prefix = Settings.Prefix;
-			Commands = {"unpunish"};
-			Args = {"player"};
-			Description = "UnPunishes the target player(s)";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1])  do
-					local char = v.Character
-					if char then
-						char.Parent = workspace
-						char:MakeJoints()
-						Remote.LoadCode(v, [[service.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)]])
-					end
-				end
-			end
-		};
-
 		Freeze = {
 			Prefix = Settings.Prefix;
 			Commands = {"freeze"};
@@ -658,7 +623,7 @@ return function(Vargs, env)
 
 		Thaw = {
 			Prefix = Settings.Prefix;
-			Commands = {"thaw", "unfreeze", "unice"};
+			Commands = {"unfreeze"};
 			Args = {"player"};
 			Description = "UnFreezes the target players, thaws them out";
 			AdminLevel = "Moderators";
@@ -699,47 +664,6 @@ return function(Vargs, env)
 							wait(3)
 							pcall(function() plate:Destroy() end)
 						end
-					end)
-				end
-			end
-		};
-
-		AFK = {
-			Prefix = Settings.Prefix;
-			Commands = {"afk"};
-			Args = {"player"};
-			Description = "FFs, Gods, Names, Freezes, and removes the target player's tools until they jump.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
-						local ff = service.New("ForceField", v.Character)
-						local hum = v.Character.Humanoid
-						local orig = hum.MaxHealth
-						local tools = service.New("Model")
-						hum.MaxHealth = math.huge
-						wait()
-						hum.Health = hum.MaxHealth
-						for k, t in v.Backpack:GetChildren() do
-							t.Parent = tools
-						end
-						Admin.RunCommand(`{Functions.GetMainPrefix()}name`, v.Name, `-AFK-_{service.FormatPlayer(v)}_-AFK-`)
-						local torso = v.Character.HumanoidRootPart
-						local pos = torso.CFrame
-						local running=true
-						local event
-						event = v.Character.Humanoid.Jumping:Connect(function()
-							running = false
-							ff:Destroy()
-							hum.Health = orig
-							hum.MaxHealth = orig
-							for k, t in tools:GetChildren() do
-								t.Parent = v.Backpack
-							end
-							Admin.RunCommand(`{Functions.GetMainPrefix()}unname`, v.Name)
-							event:Disconnect()
-						end)
-						repeat torso.CFrame = pos wait() until not v or not v.Character or not torso or not running or not torso.Parent
 					end)
 				end
 			end
@@ -830,329 +754,6 @@ return function(Vargs, env)
 			end
 		};
 
-		RemoveHats = {
-			Prefix = Settings.Prefix;
-			Commands = {"removehats", "nohats", "clearhats", "rhats"};
-			Args = {"player"};
-			Description = "Removes any hats the target is currently wearing and from their HumanoidDescription.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, p in service.GetPlayers(plr, args[1]) do
-					local humanoid: Humanoid? = p.Character and p.Character:FindFirstChildOfClass("Humanoid")
-					if humanoid then
-						local humanoidDesc: HumanoidDescription = humanoid:GetAppliedDescription()
-						local DescsToRemove = {"HatAccessory","HairAccessory","FaceAccessory","NeckAccessory","ShouldersAccessory","FrontAccessory","BackAccessory","WaistAccessory"}
-						for _, prop in DescsToRemove do
-							humanoidDesc[prop] = ""
-						end
-						humanoid:ApplyDescription(humanoidDesc, Enum.AssetTypeVerification.Always)
-					end
-				end
-			end
-		};
-
-		RemoveHat = {
-			Prefix = Settings.Prefix;
-			Commands = {"removehat", "rhat"};
-			Args = {"player", "accessory name"};
-			Description = "Removes specific hat(s) the target is currently wearing";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				-- TODO: HumanoidDescription
-				assert(args[2], "Argument(s) missing or nil")
-				for _, p in service.GetPlayers(plr, args[1]) do
-					if not p.Character then continue end
-					for _, v in p.Character:GetChildren() do
-						if v:IsA("Accessory") and v.Name:lower() == args[2]:lower() then
-							v:Destroy()
-						end
-					end
-				end
-			end
-		};
-
-		RemoveLayeredClothings = {
-			Prefix = Settings.Prefix;
-			Commands = {"removelayeredclothings"};
-			Args = {"player"};
-			Description = "Remvoes layered clothings from their HumanoidDescription.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, p in service.GetPlayers(plr, args[1]) do
-					local humanoid: Humanoid? = p.Character and p.Character:FindFirstChildOfClass("Humanoid")
-					if humanoid then
-						local humanoidDesc: HumanoidDescription = humanoid:GetAppliedDescription()
-						local accessoryBlob = humanoidDesc:GetAccessories(false)
-
-						for i=#accessoryBlob, 1, -1 do -- backwards loop due to table.remove
-							local blobItem = accessoryBlob[i]
-
-							if blobItem.IsLayered then
-								table.remove(accessoryBlob, i)
-							end
-						end
-
-						humanoidDesc:SetAccessories(accessoryBlob, false)
-						humanoid:ApplyDescription(humanoidDesc, Enum.AssetTypeVerification.Always)
-					end
-				end
-			end
-		};
-
-		PrivateChat = {
-			Prefix = Settings.Prefix;
-			Commands = {"privatechat", "dm", "pchat"};
-			Args = {"player", "message (optional)"};
-			Filter = true;
-			Description = "Send a private message to a player";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Missing player name")
-
-				local sessionName = service.HttpService:GenerateGUID(false) --// Used by the private chat windows
-				local newSession = Remote.NewSession("PrivateChat")
-				local history = {}
-
-				newSession.Data.History = history
-
-				local function getPeerList()
-					local peers = {}
-					for peer in newSession.Users do
-						table.insert(peers, {
-							Name = peer.Name;
-							DisplayName = peer.DisplayName;
-							UserId = peer.UserId;
-							--Instance = service.UnWrap(peer);
-						})
-					end
-					return peers
-				end
-
-				local function getFilteredHistory(player)
-					local canUsersDirectChatAsyncCache = {}
-					local newHistory = {}
-
-					for _, historyItem in history do
-						local canUsersChat = false
-						local newHistoryItem = {
-							Message = nil,
-							Sender = {
-								Name = historyItem.Sender.Name,
-								DisplayName = historyItem.Sender.DisplayName,
-								UserId = historyItem.Sender.UserId,
-								Icon = historyItem.Sender.Icon
-							}
-						}
-
-						if player.UserId == historyItem.Sender.UserId or historyItem.Sender.UserId == 0 then
-							canUsersChat = true
-							newHistoryItem.Sender.IsMessageRestricted = false
-						elseif canUsersDirectChatAsyncCache[historyItem.Sender.UserId] ~= nil then
-							canUsersChat = canUsersDirectChatAsyncCache[historyItem.Sender.UserId]
-							newHistoryItem.Sender.IsMessageRestricted = not canUsersDirectChatAsyncCache[historyItem.Sender.UserId]
-						else
-							local success, canUserChatData = pcall(service.TextChatService.CanUsersDirectChatAsync, service.TextChatService, player.UserId, {historyItem.Sender.UserId})
-							if success then
-								canUsersChat = #canUserChatData > 0
-								canUsersDirectChatAsyncCache[historyItem.Sender.UserId] = canUsersChat
-								newHistoryItem.Sender.IsMessageRestricted = not canUsersChat
-							else
-								newHistoryItem.Sender.IsMessageRestrictedError = true
-							end
-						end
-
-						newHistoryItem.Message = canUsersChat and historyItem.Message or nil
-
-						table.insert(newHistory, newHistoryItem)
-					end
-
-					return newHistory
-				end
-
-				local function systemMessage(msg)
-					local data = {
-						Name = "* SYSTEM *";
-						UserId = 0;
-						Icon = 0;
-					};
-					table.insert(history, {
-						Sender = data;
-						Message = msg;
-					});
-					newSession:SendToUsers("PlayerSentMessage", data, msg)
-				end;
-
-				newSession:ConnectEvent(function(p, cmd, ...)
-					local args = table.pack(...)
-
-					if not p then -- System event(s)
-						if cmd == "LastUserRemoved" then
-							newSession:End()
-						end
-					else	-- Player event(s)
-						if cmd == "SendMessage" then
-							local message = string.sub(tostring(args[1]), 1, 140)
-							local filtered = service.BroadcastFilter(message, p)
-
-							if filtered ~= message then
-								Remote.MakeGui(p, "Output", {
-									Title = "Filter error",
-									Message = "A message filtering error occurred; please try again."
-								})
-							else
-								local gotIcon, status = service.Players:GetUserThumbnailAsync(p.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48);
-								local data, msg = {
-									Name = p.Name;
-									DisplayName = p.DisplayName;
-									UserId = p.UserId;
-									Icon = status and gotIcon or "rbxasset://textures/ui/GuiImagePlaceholder.png";
-								}, filtered
-
-								table.insert(history, {
-									Sender = data;
-									Message = msg;
-								})
-
-								if #history > 200 then
-									table.remove(history, 1)
-								end
-
-								for sessionPlayer in newSession.Users do
-									local newData = {
-										Name = data.Name,
-										DisplayName = data.DisplayName,
-										UserId = data.UserId,
-										Icon = data.Icon
-									}
-
-									local canUsersChat = false
-									if p.UserId == sessionPlayer.UserId then
-										canUsersChat = true
-									else
-										local success, canUserChatData = pcall(service.TextChatService.CanUsersDirectChatAsync, service.TextChatService, p.UserId, {sessionPlayer.UserId})
-										if success then
-											canUsersChat = #canUserChatData > 0
-											newData.IsMessageRestricted = not canUsersChat
-										else
-											newData.IsMessageRestrictedError = true
-										end
-									end
-
-									local messageToSend = canUsersChat and msg or nil
-
-									newSession:SendToUser(sessionPlayer, "PlayerSentMessage", newData, messageToSend)
-								end
-							end
-						elseif cmd == "LeaveSession" or cmd == "RemovedFromSession" then
-							newSession:RemoveUser(p)
-							systemMessage(string.format("<i>%s has left the session</i>", p.Name))
-							newSession:SendToUsers("UpdatePeerList", getPeerList())
-
-							if p == plr then
-								systemMessage("<i>Session ended: Session owner left</i>")
-								newSession:End()
-							end
-						elseif cmd == "EndSession" and p == plr then
-							systemMessage("<i>Session ended</i>")
-							newSession:End()
-						elseif cmd == "AddPlayerToSession" and (p == plr or Admin.CheckAdmin(p)) then
-							local peer = args[1]
-							local filteredHistory = getFilteredHistory(peer)
-
-							if peer then
-								local canUserChatSuccess, canUserChatData = pcall(service.TextChatService.CanUserChatAsync, service.TextChatService, peer.UserId)
-								if not canUserChatSuccess then
-									return Functions.Hint(`Unable to add {service.FormatPlayer(peer)} to the session because an error occurred.`, {p})
-								end
-
-								if not canUserChatData then
-									return Functions.Hint(`Unable to add {service.FormatPlayer(peer)} to the session due to them not being able to chat.`, {p})
-								end
-
-								newSession:AddUser(peer)
-								newSession:SendToUser(peer, "AddedToSession")
-								systemMessage(string.format("<i>%s added %s to the session</i>", service.FormatPlayer(p), service.FormatPlayer(peer)))
-								Remote.MakeGui(peer, "PrivateChat", {
-									Owner = plr;
-									SessionKey = newSession.SessionKey;
-									SessionName = sessionName;
-									History = filteredHistory;
-									CanManageUsers = Admin.CheckAdmin(peer);
-								})
-								newSession:SendToUsers("UpdatePeerList", getPeerList())
-							end
-						elseif cmd == "RemovePlayerFromSession" and (p == plr or Admin.CheckAdmin(p)) then
-							local peer = args[1]
-
-							if peer then
-								for pr in newSession.Users do
-									if peer.UserId and peer.UserId == pr.UserId then
-										newSession:SendToUser(pr, "RemovedFromSession")
-										newSession:RemoveUser(pr)
-										systemMessage(string.format("<i>%s removed %s from the session</i>", p.Name, pr.Name))
-									end
-								end
-							end
-
-							newSession:SendToUsers("UpdatePeerList", getPeerList())
-						elseif cmd == "GetPeerList" then
-							newSession:SendToUser(p, "UpdatePeerList", getPeerList())
-						end
-					end
-				end)
-
-				systemMessage("<i>Chat session started</i>")
-
-				if args[2] then
-					local gotIcon, status = service.Players:GetUserThumbnailAsync(plr.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
-					local data = {
-						Name = plr.Name;
-						DisplayName = plr.DisplayName;
-						UserId = plr.UserId;
-						Icon = status and gotIcon or "rbxasset://textures/ui/GuiImagePlaceholder.png";
-					}
-
-					table.insert(history, {
-						Sender = data;
-						Message = args[2];
-					})
-				end
-
-				newSession:AddUser(plr)
-				Remote.MakeGui(plr, "PrivateChat", {
-					Owner = plr;
-					SessionKey = newSession.SessionKey;
-					SessionName = sessionName;
-					History = getFilteredHistory(plr);
-					CanManageUsers = true;
-				})
-
-				for i, v in service.GetPlayers(plr, args[1]) do
-					if v ~= plr then
-						local success, canUserChatData = pcall(service.TextChatService.CanUserChatAsync, service.TextChatService, v.UserId)
-						if not success then
-							Functions.Hint(`Unable to add {service.FormatPlayer(v)} to the session because an error occurred.`, {plr})
-							continue
-						end
-
-						if not canUserChatData then
-							Functions.Hint(`Unable to add {service.FormatPlayer(v)} to the session due to them not being able to chat.`, {plr})
-							continue
-						end
-
-						newSession:AddUser(v)
-						Remote.MakeGui(v, "PrivateChat", {
-							Owner = plr;
-							SessionKey = newSession.SessionKey;
-							SessionName = sessionName;
-							History = getFilteredHistory(v);
-							CanManageUsers = Admin.CheckAdmin(v);
-						})
-					end
-				end
-			end
-		};
-
 		PrivateMessage = {
 			Prefix = Settings.Prefix;
 			Commands = {"pm", "privatemessage"};
@@ -1212,47 +813,6 @@ return function(Vargs, env)
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
 					Remote.RemoveLocal(v, "WINDOW_SUNRAYS", "Camera")
-				end
-			end
-		};
-
-		UnBloom = {
-			Prefix = Settings.Prefix;
-			Commands = {"unbloom", "unscreenbloom"};
-			Args = {"player"};
-			Description = "UnBloom the target player's screen";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.RemoveLocal(v, "WINDOW_BLOOM", "Camera")
-				end
-			end
-		};
-
-		UnBlur = {
-			Prefix = Settings.Prefix;
-			Commands = {"unblur", "unscreenblur"};
-			Args = {"player"};
-			Description = "UnBlur the target player's screen";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.RemoveLocal(v, "WINDOW_BLUR", "Camera")
-				end
-			end
-		};
-
-		UnLightingEffect = {
-			Prefix = Settings.Prefix;
-			Commands = {"unlightingeffect", "unscreeneffect"};
-			Args = {"player"};
-			Description = "Remove admin made lighting effects from the target player's screen";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					for _, e in {"BLUR", "BLOOM", "THERMAL", "SUNRAYS", "COLORCORRECTION"} do
-						Remote.RemoveLocal(v, `WINDOW_{e}`, "Camera")
-					end
 				end
 			end
 		};
@@ -1355,7 +915,7 @@ return function(Vargs, env)
 
 		PlayerList = {
 			Prefix = Settings.Prefix;
-			Commands = {"players", "playerlist", "listplayers"};
+			Commands = {"playerlist"};
 			Args = {"autoupdate? (default: true)"};
 			Description = "Shows you all players currently in-game, including nil ones";
 			AdminLevel = "Moderators";
@@ -1542,29 +1102,6 @@ return function(Vargs, env)
 				for i, v in Variables.Cameras do
 					if string.sub(v.Name, 1, #args[1]) == args[1] then
 						Remote.Send(plr, "Function", "SetView", v.Brick)
-					end
-				end
-			end
-		};
-
-		ForceView = {
-			Prefix = Settings.Prefix;
-			Commands = {"fview", "forceview", "forceviewplayer", "fv"};
-			Args = {"player1", "player2"};
-			Description = "Forces one player to view another";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				local targets = service.GetPlayers(plr, args[2])
-				for _, viewer in service.GetPlayers(plr, args[1]) do
-					for _, target in targets do
-						local targetHum = target.Character and target.Character:FindFirstChildOfClass("Humanoid")
-						if not targetHum then continue end
-						local rootPart = target.Character.PrimaryPart
-						if not rootPart then continue end
-						Functions.ResetReplicationFocus(viewer)
-						viewer.ReplicationFocus = rootPart
-						Remote.Send(viewer, "Function", "SetView", targetHum)
-						Functions.Hint(`{service.FormatPlayer(viewer)} is now viewing {service.FormatPlayer(target)}`, {plr})
 					end
 				end
 			end
@@ -2246,7 +1783,7 @@ return function(Vargs, env)
 
 		ToolList = {
 			Prefix = Settings.Prefix;
-			Commands = {"tools", "toollist", "toolcenter", "savedtools", "addedtools", "toolpanel", "toolspanel"};
+			Commands = {"tools", "toollist", "toolpanel", "toolspanel"};
 			Args = {};
 			Description = `Shows you a list of tools that can be obtained via the {Settings.Prefix}give command, and other useful utilities`;
 			AdminLevel = "Moderators";
@@ -2270,24 +1807,6 @@ return function(Vargs, env)
 			end;
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "ToolPanel", Logs.ListUpdaters.ToolList(plr))
-			end
-		};
-
-		Piano = {
-			Prefix = Settings.Prefix;
-			Commands = {"piano"};
-			Args = {"player"};
-			Description = "Gives you a playable keyboard piano. Credit to NickPatella.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for i, v in service.GetPlayers(plr, args[1]) do
-					local Dropper = v:FindFirstChildOfClass("PlayerGui") or v:FindFirstChildOfClass("Backpack")
-					if Dropper then
-						local piano = Deps.Assets.Piano:Clone()
-						piano.Parent = Dropper
-						piano.Disabled = false
-					end
-				end
 			end
 		};
 
@@ -2543,75 +2062,6 @@ return function(Vargs, env)
 							end
 						end
 					end)
-				end
-			end
-		};
-
-		Sell = {
-			Prefix = Settings.Prefix;
-			Commands = {"sell", "promptpurchase"};
-			Args = {"player", "id"};
-			Description = "Prompts the player(s) to buy the product belonging to the ID you supply";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					service.MarketPlace:PromptPurchase(v, tonumber(args[2]), false)
-				end
-			end
-		};
-
-		Capes = {
-			Prefix = Settings.Prefix;
-			Commands = {"capes", "capelist"};
-			Args = {};
-			Description = "Shows you the list of capes for the cape command";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				local list = table.create(#Variables.Capes)
-				for _, v in Variables.Capes do
-					table.insert(list, v.Name)
-				end
-				Remote.MakeGui(plr, "List", {Title = "Cape List", Tab = list;})
-			end
-		};
-
-		Cape = {
-			Prefix = Settings.Prefix;
-			Commands = {"cape", "givecape"};
-			Args = {"player", "name/color", "material", "reflectance", "id"};
-			Description = `Gives the target player(s) the cape specified, do {Settings.Prefix}capes to view a list of available capes`;
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				local color="White"
-				if pcall(function() return BrickColor.new(args[2]) end) then color = args[2] end
-				local mat = args[3] or "Fabric"
-				local ref = args[4]
-				local id = args[5]
-				if args[2] and not args[3] then
-					for k, cape in Variables.Capes do
-						if string.lower(args[2])==string.lower(cape.Name) then
-							color = cape.Color
-							mat = cape.Material
-							ref = cape.Reflectance
-							id = cape.ID
-						end
-					end
-				end
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Functions.Cape(v, false, mat, color, id, ref)
-				end
-			end
-		};
-
-		UnCape = {
-			Prefix = Settings.Prefix;
-			Commands = {"uncape", "removecape"};
-			Args = {"player"};
-			Description = "Removes the target player(s)'s cape";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Functions.UnCape(v)
 				end
 			end
 		};
@@ -2898,27 +2348,6 @@ return function(Vargs, env)
 			end
 		};
 
-		BubbleChat = {
-			Prefix = Settings.Prefix;
-			Commands = {"bchat", "dchat", "bubblechat", "dialogchat"};
-			Args = {"player", "color(red/green/blue/white/off)"};
-			Description = "Gives the target player(s) a little chat gui, when used will let them chat (local only messages) using dialog bubbles";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				local CHAT_COLORS = {
-					red = Enum.ChatColor.Red,
-					green = Enum.ChatColor.Green,
-					blue = Enum.ChatColor.Blue,
-					white = Enum.ChatColor.White,
-					off = "off"
-				}
-				local chatColor = args[2] and CHAT_COLORS[args[2]:lower()] or CHAT_COLORS.red
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.MakeGui(v, "BubbleChat", {Color = chatColor;})
-				end
-			end
-		};
-
 		Track = {
 			Prefix = Settings.Prefix,
 			Commands = {"track", "trace", "find", "locate"},
@@ -3030,35 +2459,6 @@ return function(Vargs, env)
 						if trackTargets then
 							trackTargets[v] = nil
 						end
-					end
-				end
-			end
-		};
-
-		Phase = {
-			Prefix = Settings.Prefix;
-			Commands = {"phase"};
-			Args = {"player"};
-			Description = "Makes the player(s) character completely local";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.MakeLocal(v, v.Character)
-				end
-			end
-		};
-
-		UnPhase = {
-			Prefix = Settings.Prefix;
-			Commands = {"unphase"};
-			Args = {"player"};
-			Description = "UnPhases the target player(s)";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					if v.Character then
-						Remote.MoveLocal(v, v.Character.Name, false, workspace)
-						v.Character.Parent = workspace
 					end
 				end
 			end
@@ -3504,318 +2904,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Transparency = {
-			Prefix = Settings.Prefix;
-			Commands = {"transparency", "trans"};
-			Args = {"player", "% value (0-1)"};
-			Description = "Set the transparency of the target's character";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for i, v in service.GetPlayers(plr, args[1]) do
-					if v.Character then
-						for k, p in v.Character:GetChildren() do
-							if p:IsA("BasePart") and p.Name ~= "HumanoidRootPart" then
-								p.Transparency = args[2]
-								if p.Name == "Head" then
-									for _, v2 in p:GetChildren() do
-										if v2:IsA("Decal") then
-											v2.Transparency = args[2]
-										end
-									end
-								end
-							elseif p:IsA("Accessory") and #p:GetChildren() ~= 0 then
-								for _, v2 in p:GetChildren() do
-									if v2:IsA("BasePart") then
-										v2.Transparency = args[2]
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-		};
-
-		TransparentPart = {
-			Prefix = Settings.Prefix;
-			Commands = {"transparentpart"};
-			Args = {"player", "part names", "% value (0-1)"};
-			Description = "Set the transparency of the target's character's parts, including accessories; supports a comma-separated list of part names";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for i, player in service.GetPlayers(plr, args[1]) do
-					if player.Character then
-						local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-						if humanoid then
-							local rigType =  humanoid.RigType
-							local GroupPartInputs = {"LeftArm", "RightArm", "RightLeg", "LeftLeg", "Torso"}
-							local PartInputs = {"Head", "UpperTorso", "LowerTorso", "LeftUpperArm", "LeftLowerArm", "LeftHand", "RightUpperArm", "RightLowerArm", "RightHand", "LeftUpperLeg", "LeftLowerLeg", "LeftFoot", "RightUpperLeg", "RightLowerLeg", "RightFoot"}
-
-							local usageText = {
-								"Possible inputs are:",
-								"R6: Head, LeftArm, RightArm, RightLeg, LeftLeg, Torso",
-								"R15: Head, UpperTorso, LowerTorso, LeftUpperArm, LeftLowerArm, LeftHand, RightUpperArm, RightLowerArm, RightHand, LeftUpperLeg, LeftLowerLeg, LeftFoot, RightUpperLeg, RightLowerLeg, RightFoot",
-								"",
-								"If the input is 'LeftArm' on a R15 rig, it will select the entire Left Arm for R15.",
-								"Special Inputs: all, accessories",
-								"all: All limbs including accessories. If this is specified it will ignore all other specified parts.",
-								"limbs: Changes the transparency of all limbs",
-								"face: Changes the transparency of the face",
-								"accessories: Changes transparency of accessories"
-							}
-
-							if not (args[2]) then
-								--assert(args[2], "No parts specified. See developer console for possible inputs.")
-								local tab = table.create(#usageText)
-								for _,v in usageText do
-									table.insert(tab, {
-										Text = v;
-										Desc = v;
-									})
-								end
-								--// Generate the UI for this player
-								server.Remote.MakeGui(plr, "List", {
-									Tab = tab;
-									Title = "Command Usage";
-								})
-								return
-							end
-
-							local partInput = {}
-							local inputs = string.split(args[2], ",")
-
-							for _, v in inputs do
-								if v ~= "" then
-									if v == "all" then
-										partInput = "all"
-										break -- break if "all" is found.
-									end
-
-									-- Validate inputs
-									if v == "limbs" or v == "face" or v == "accessories" then
-										table.insert(partInput, v)
-									else
-										local found = false
-										while found ~= true do
-											for _,v2 in GroupPartInputs do
-												if v == v2 then
-													table.insert(partInput, v)
-													found = true
-													break
-												end
-											end
-
-											for _,v2 in PartInputs do
-												if v == v2 then
-													table.insert(partInput, v)
-													found = true
-													break
-												end
-											end
-
-											if not (found) then
-												assert(nil, `'{v}' is not a valid input. Run command with no arguments to see possible inputs.`)
-											end
-										end
-									end
-								else
-									assert(nil, "Part argument contains empty value.")
-								end
-							end
-
-
-							-- Check if partInput is a table
-							if type(partInput) == "table" then
-								local hash = {}
-
-								-- Check for duplicates
-								for i,v in partInput do
-									if not (hash[v]) then
-										hash[v] = i -- Store into table to check for duplicates.
-									else
-										assert(nil, `Duplicate '{v}' found in input. Specify each input once only.`)
-									end
-								end
-
-
-								-- Clean up the parts we don't need, depending on rigType, to allow this command to be more dynamic
-
-								if rigType == Enum.HumanoidRigType.R15 then
-									for i = #partInput, 1, -1 do
-										if partInput[i] == "RightArm" then
-											local foundKeys = {}
-											for k2, v2 in partInput do
-												if v2 == "RightUpperArm" or v2 == "RightLowerArm" or v2 == "RightHand" then
-													table.insert(foundKeys, k2)
-												end
-											end
-											-- If not all keys were found just remove all keys and add them manually
-											if #foundKeys ~= 3 then
-												for _, foundKey in foundKeys do
-													table.remove(partInput, foundKey)
-												end
-												table.insert(partInput, "RightUpperArm")
-												table.insert(partInput, "RightLowerArm")
-												table.insert(partInput, "RightHand")
-											end
-											table.remove(partInput, i) -- Remove the group part input
-
-										elseif partInput[i] == "LeftArm" then
-											local foundKeys = {}
-											for k2, v2 in partInput do
-												if v2 == "LeftUpperArm" or v2 == "LeftLowerArm" or v2 == "LeftHand" then
-													table.insert(foundKeys, k2)
-												end
-											end
-
-											if #foundKeys ~= 3 then
-												for _, foundKey in foundKeys do
-													table.remove(partInput, foundKey)
-												end
-												table.insert(partInput, "LeftUpperArm")
-												table.insert(partInput, "LeftLowerArm")
-												table.insert(partInput, "LeftHand")
-											end
-											table.remove(partInput, i)
-										elseif partInput[i] == "RightLeg" then
-											local foundKeys = {}
-											for i = #partInput, 1, -1 do
-												if partInput[i] == "RightUpperLeg" or partInput[i] == "RightLowerLeg" or partInput[i] == "RightFoot" then
-													table.insert(foundKeys, partInput[i])
-												end
-											end
-											if #foundKeys ~= 3 then
-												for _, foundKey in foundKeys do
-													table.remove(partInput, foundKey)
-												end
-												table.insert(partInput, "RightUpperLeg")
-												table.insert(partInput, "RightLowerLeg")
-												table.insert(partInput, "RightFoot")
-											end
-											table.remove(partInput, i)
-										elseif partInput[i] == "LeftLeg" then
-											local foundKeys = {}
-											for k2, v2 in partInput do
-												if v2 == "LeftUpperLeg" or v2 == "LeftLowerLeg" or v2 == "LeftFoot" then
-													table.insert(foundKeys, k2)
-												end
-											end
-
-											if #foundKeys ~= 3 then
-												for _, foundKey in foundKeys do
-													table.remove(partInput, foundKey)
-												end
-												table.insert(partInput, "LeftUpperLeg")
-												table.insert(partInput, "LeftLowerLeg")
-												table.insert(partInput, "LeftFoot")
-											end
-											table.remove(partInput, i)
-										elseif partInput[i] == "Torso" then
-											local foundKeys = {}
-											for k2, v2 in partInput do
-												if v2 == "UpperTorso" or v2 == "LowerTorso" then
-													table.insert(foundKeys, k2)
-												end
-											end
-											if #foundKeys ~= 2 then
-												for _, foundKey in foundKeys do
-													table.remove(partInput, foundKey)
-												end
-												table.insert(partInput, "UpperTorso")
-												table.insert(partInput, "LowerTorso")
-											end
-											table.remove(partInput, i)
-										end
-									end
-								end
-
-								if rigType == Enum.HumanoidRigType.R6 then
-									local partsToRemove = {
-										["RightUpperArm"] = true,
-										["RightLowerArm"] = true,
-										["RightHand"] = true,
-										["LeftUpperArm"] = true,
-										["LeftLowerArm"] = true,
-										["LeftHand"] = true,
-										["RightUpperLeg"] = true,
-										["RightLowerLeg"] = true,
-										["RightFoot"] = true,
-										["LeftUpperLeg"] = true,
-										["LeftLowerLeg"] = true,
-										["LeftFoot"] = true,
-										["UpperTorso"] = true,
-										["LowerTorso"] = true
-									}
-
-									for i = #partInput, 1, -1 do
-										if partsToRemove[partInput[i]] then
-											table.remove(partInput, i)
-										end
-									end
-								end
-
-								-- Make chosen parts transparent
-								for k, v in partInput do
-									if not (v == "limbs" or v == "face" or v == "accessories") then
-										local part = player.Character:FindFirstChild(v)
-										if part ~= nil and part:IsA("BasePart") then
-											part.Transparency = args[3]
-										end
-
-									elseif v == "limbs" then
-										for key, part in player.Character:GetChildren() do
-											if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
-												part.Transparency = args[3]
-											end
-										end
-
-									elseif v == "face" then
-										local headPart = player.Character:FindFirstChild("Head")
-										for _, v2 in headPart:GetChildren() do
-											if v2:IsA("Decal") then
-												v2.Transparency = args[3]
-											end
-										end
-
-									elseif v == "accessories" then
-										for key, part in player.Character:GetChildren() do
-											if part:IsA("Accessory") then
-												for _, v2 in part:GetChildren() do
-													if v2:IsA("BasePart") then
-														v2.Transparency = args[3]
-													end
-												end
-											end
-										end
-									end
-								end
-
-							elseif partInput == "all" then
-								for k, p in player.Character:GetChildren() do
-									if p:IsA("BasePart") and p.Name ~= "HumanoidRootPart" then
-										p.Transparency = args[3]
-										if p.Name == "Head" then
-											for _, v2 in p:GetChildren() do
-												if v2:IsA("Decal") then
-													v2.Transparency = args[3]
-												end
-											end
-										end
-									elseif p:IsA("Accessory") and #p:GetChildren() ~= 0 then
-										for _, v2 in p:GetChildren() do
-											if v2:IsA("BasePart") then
-												v2.Transparency = args[3]
-											end
-										end
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-		};
-
 		Invisible = {
 			Prefix = Settings.Prefix;
 			Commands = {"invisible", "invis"};
@@ -4019,107 +3107,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Ambient = {
-			Prefix = Settings.Prefix;
-			Commands = {"ambient"};
-			Args = {"num,num,num", "optional player"};
-			Description = "Change Ambient";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Argument 1 missing")
-				local color = assert(Functions.ParseColor3(args[1]), "Invalid color provided")
-
-				if args[2] then
-					for _, v in service.GetPlayers(plr, args[2]) do
-						Remote.SetLighting(v, "Ambient", color)
-					end
-				else
-					Functions.SetLighting("Ambient", color)
-				end
-			end
-		};
-
-		OutdoorAmbient = {
-			Prefix = Settings.Prefix;
-			Commands = {"oambient", "outdoorambient"};
-			Args = {"num,num,num", "optional player"};
-			Description = "Change OutdoorAmbient";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Argument 1 missing")
-				local color = assert(Functions.ParseColor3(args[1]), "Invalid color provided")
-
-				if args[2] then
-					for _, v in service.GetPlayers(plr, args[2]) do
-						Remote.SetLighting(v, "OutdoorAmbient", color)
-					end
-				else
-					Functions.SetLighting("OutdoorAmbient", color)
-				end
-			end
-		};
-
-		RemoveFog = {
-			Prefix = Settings.Prefix;
-			Commands = {"nofog", "fogoff", "unfog"};
-			Args = {"optional player"};
-			Description = "Fog Off";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				if args[1] then
-					for _, v in service.GetPlayers(plr, args[1]) do
-						Remote.SetLighting(v, "FogEnd", 1000000000000)
-					end
-				else
-					Functions.SetLighting("FogEnd", 1000000000000)
-				end
-			end
-		};
-
-		Shadows = {
-			Prefix = Settings.Prefix;
-			Commands = {"shadows"};
-			Args = {"on/off", "optional player"};
-			Description = "Determines if shadows are on or off";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				if string.lower(args[1])=="on" or string.lower(args[1])=="true" then
-					if args[2] then
-						for _, v in service.GetPlayers(plr, args[2]) do
-							Remote.SetLighting(v, "GlobalShadows", true)
-						end
-					else
-						Functions.SetLighting("GlobalShadows", true)
-					end
-				elseif string.lower(args[1])=="off" or string.lower(args[1])=="false" then
-					if args[2] then
-						for _, v in service.GetPlayers(plr, args[2]) do
-							Remote.SetLighting(v, "GlobalShadows", false)
-						end
-					else
-						Functions.SetLighting("GlobalShadows", false)
-					end
-				end
-			end
-		};
-
-		Brightness = {
-			Prefix = Settings.Prefix;
-			Commands = {"brightness"};
-			Args = {"number", "optional player"};
-			Description = "Change Brightness";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				if args[2] then
-					for _, v in service.GetPlayers(plr, args[2]) do
-						Remote.SetLighting(v, "Brightness", args[1])
-					end
-				else
-					Functions.SetLighting("Brightness", args[1])
-				end
-			end
-		};
-
 		Time = {
 			Prefix = Settings.Prefix;
 			Commands = {"time", "timeofday"};
@@ -4133,49 +3120,6 @@ return function(Vargs, env)
 					end
 				else
 					Functions.SetLighting("TimeOfDay", args[1])
-				end
-			end
-		};
-
-
-		FogColor = {
-			Prefix = Settings.Prefix;
-			Commands = {"fogcolor"};
-			Args = {"num,num,num", "optional player"};
-			Description = "Fog Color";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Argument 1 missing")
-				local color = assert(Functions.ParseColor3(args[1]), "Invalid color provided")
-
-				if service.Lighting:FindFirstChildWhichIsA("Atmosphere") then
-					Functions.SetAtmosphere("Color", color)
-				end
-				if args[2] then
-					for _, v in service.GetPlayers(plr, args[2]) do
-						Remote.SetLighting(v, "FogColor", color)
-					end
-				else
-					Functions.SetLighting("FogColor", color)
-				end
-			end
-		};
-
-		FogStartEnd = {
-			Prefix = Settings.Prefix;
-			Commands = {"fog"};
-			Args = {"start", "end", "optional player"};
-			Description = "Fog Start/End";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				if args[3] then
-					for _, v in service.GetPlayers(plr, args[3]) do
-						Remote.SetLighting(v, "FogEnd", args[2])
-						Remote.SetLighting(v, "FogStart", args[1])
-					end
-				else
-					Functions.SetLighting("FogEnd", args[2])
-					Functions.SetLighting("FogStart", args[1])
 				end
 			end
 		};
@@ -4433,7 +3377,7 @@ return function(Vargs, env)
 
 		SetHealth = {
 			Prefix = Settings.Prefix;
-			Commands = {"health", "sethealth"};
+			Commands = {"sethealth"};
 			Args = {"player", "number"};
 			Description = "Set the target player(s)'s health and max health to <number>";
 			AdminLevel = "Moderators";
@@ -4450,7 +3394,7 @@ return function(Vargs, env)
 
 		JumpPower = {
 			Prefix = Settings.Prefix;
-			Commands = {"jpower", "jpow", "jumppower"};
+			Commands = {"jumppower"};
 			Args = {"player", "number"};
 			Description = "Set the target player(s)'s jump power to <number>";
 			AdminLevel = "Moderators";
@@ -4484,7 +3428,7 @@ return function(Vargs, env)
 
 		Speed = {
 			Prefix = Settings.Prefix;
-			Commands = {"speed", "setspeed", "walkspeed", "ws"};
+			Commands = {"speed", "setspeed"};
 			Args = {"player", "number"};
 			Description = "Set the target player(s)'s WalkSpeed to <number>";
 			AdminLevel = "Moderators";
@@ -4506,7 +3450,7 @@ return function(Vargs, env)
 
 		SetTeam = {
 			Prefix = Settings.Prefix;
-			Commands = {"team", "setteam", "changeteam"};
+			Commands = {"team", "setteam"};
 			Args = {"player", "team"};
 			Description = "Set the target player(s)'s team to <team>";
 			AdminLevel = "Moderators";
@@ -4528,9 +3472,9 @@ return function(Vargs, env)
 
 		RandomTeam = {
 			Prefix = Settings.Prefix;
-			Commands = {"rteams", "rteam", "randomizeteams", "randomteams", "randomteam"};
+			Commands = {"randomteam"};
 			Args = {"players", "teams"};
-			Description = "Randomize teams; :rteams or :rteams all or :rteams nonadmins team1,team2,etc";
+			Description = "Randomize teams; :randomteams or :randomteams all or :randomteams nonadmins team1,team2,etc";
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				local tArgs = {}
@@ -4582,8 +3526,6 @@ return function(Vargs, env)
 			end
 		};
 
-
-
 		Unteam = {
 			Prefix = Settings.Prefix;
 			Commands = {"unteam", "removefromteam", "neutral"};
@@ -4612,21 +3554,6 @@ return function(Vargs, env)
 				Remote.MakeGui(plr, "Teams", {
 					CmdPrefix = Functions.GetMainPrefix(); CmdPlayerPrefix = Settings.PlayerPrefix; CmdSpecialPrefix = Settings.SpecialPrefix; CmdSplitKey = Settings.SplitKey;
 				})
-			end
-		};
-
-		SetFOV = {
-			Prefix = Settings.Prefix;
-			Commands = {"fov", "fieldofview", "setfov"};
-			Args = {"player", "number"};
-			Description = "Set the target player(s)'s field of view to <number> (min 1, max 120)";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Missing player name")
-				assert(args[2] and tonumber(args[2]), "Missing or invalid FOV number")
-				for i, v in service.GetPlayers(plr, args[1]) do
-					Remote.LoadCode(v,[[workspace.CurrentCamera.FieldOfView=]].. math.clamp(tonumber(args[2]), 1, 120))
-				end
 			end
 		};
 
@@ -4665,7 +3592,7 @@ return function(Vargs, env)
 
 		MakeServer = {
 			Prefix = Settings.Prefix;
-			Commands = {"makeserver", "reserveserver", "privateserver"};
+			Commands = {"reserveserver"};
 			Args = {"serverName", "(optional) placeId"};
 			Filter = true;
 			NoStudio = true; -- TeleportService does not work in Studio
@@ -4683,7 +3610,7 @@ return function(Vargs, env)
 
 		DeleteServer = {
 			Prefix = Settings.Prefix;
-			Commands = {"delserver", "deleteserver", "removeserver", "rmserver"};
+			Commands = {"deletereservedserver"};
 			Args = {"serverName"};
 			Description = "Deletes a private server from the list.";
 			AdminLevel = "Moderators";
@@ -4703,7 +3630,7 @@ return function(Vargs, env)
 			Prefix = Settings.Prefix;
 			Commands = {"privateservers", "createdservers"};
 			Args = {};
-			Description = "Shows you a list of private servers that were created with :makeserver";
+			Description = "Shows you a list of private servers that were created with :deletereservedserver";
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				local servers = Core.GetData("PrivateServers") or {}
@@ -4715,22 +3642,9 @@ return function(Vargs, env)
 			end
 		};
 
-		GRPlaza = {
-			Prefix = Settings.Prefix;
-			Commands = {"plazaconnect", "grplaza", "grouprecruitingplaza", "groupplaza"};
-			Args = {"player"};
-			Description = "Teleports the target player(s) to Plaza Connect to look for potential group members";
-			NoStudio = true;
-			Hidden = true;
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				Functions.Notification("Teleport", "Click to teleport to Plaza Connect", service.GetPlayers(plr, args[1]), 30, "MatIcon://QR code scanner", Core.Bytecode("service.TeleportService:Teleport(5118029260)"))
-			end
-		};
-
 		Teleport = {
 			Prefix = Settings.Prefix;
-			Commands = {"tp", "teleport", "transport"};
+			Commands = {"tp", "teleport"};
 			Args = {"player1", "player2"};
 			Description = "Teleport player1(s) to player2, a waypoint, or specific coords, use :tp player1 waypoint-WAYPOINTNAME to use waypoints, x,y,z for coords";
 			AdminLevel = "Moderators";
@@ -5249,7 +4163,7 @@ return function(Vargs, env)
 
 		TargetAudio = {
 			Prefix = Settings.Prefix;
-			Commands = {"taudio", "localsound", "localaudio", "localsong", "localmusic", "lsound", "laudio", "lsong", "lmusic"};
+			Commands = {"localsound"};
 			Args = {"player", "audioId", "noLoop", "pitch", "volume"};
 			Description = "Plays an audio on the specified player's client";
 			AdminLevel = "Moderators";
@@ -5303,7 +4217,7 @@ return function(Vargs, env)
 
 		UnTargetAudio = {
 			Prefix = Settings.Prefix;
-			Commands = {"untaudio", "unlocalsound", "unlocalaudio", "unlsound", "unlaudio"};
+			Commands = {"unlocalsound"};
 			Args = {"player"};
 			Description = "Stops audio playing on the specified player's client";
 			AdminLevel = "Moderators";
@@ -5317,7 +4231,7 @@ return function(Vargs, env)
 
 		CharacterAudio = {
 			Prefix = Settings.Prefix;
-			Commands = {"charaudio", "charactermusic", "charmusic"};
+			Commands = {"charactersound"};
 			Args = {"player", "audioId", "volume", "loop(true/false)", "pitch"};
 			Description = "Plays an audio from the target player's character";
 			AdminLevel = "Moderators";
@@ -5938,84 +4852,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Outfit = {
-			Prefix = Settings.Prefix;
-			Commands = {"outfit"};
-			Args = {"player", "outfitid"};
-			Description = "Changes the target player(s)'s character appearence to a specified OutfitID. You can get OutfitID(s) by using Roblox Avatar API.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Missing player name")
-				local success, desc = pcall(service.Players.GetHumanoidDescriptionFromOutfitId, service.Players, assert(tonumber(args[2]), "Missing OutfitId"))
-
-				if success then
-					for _, v in service.GetPlayers(plr, args[1]) do
-						if v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
-							v.Character.Humanoid:ApplyDescription(desc, Enum.AssetTypeVerification.Always)
-						end
-					end
-				else
-					error("Unable to get avatar for target user")
-				end
-			end
-		};
-
-		Char = {
-			Prefix = Settings.Prefix;
-			Commands = {"char", "character", "appearance"};
-			Args = {"player", "username"};
-			Description = "Changes the target player(s)'s character appearence to <ID/Name>.";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				assert(args[1], "Missing player name")
-				local target = service.GetPlayers(plr, assert(args[2], "Missing username or UserId"), {
-					AllowUnknownUsers = true;
-					UseFakePlayer = true
-				})
-				if target then
-					target = target[1]
-					local success, desc = pcall(service.Players.GetHumanoidDescriptionFromUserId, service.Players, target.UserId)
-
-					if success then
-						for _, v in service.GetPlayers(plr, args[1]) do
-							v.CharacterAppearanceId = target.UserId
-
-							if v.Character and v.Character:FindFirstChildOfClass("Humanoid") then
-								v.Character.Humanoid:ApplyDescription(desc, Enum.AssetTypeVerification.Always)
-							end
-						end
-					else
-						error("Unable to get avatar for target user")
-					end
-				end
-			end
-		};
-
-		UnChar = {
-			Prefix = Settings.Prefix;
-			Commands = {"unchar", "uncharacter", "fixappearance"};
-			Args = {"player"};
-			Description = "Put the target player(s)'s character appearence back to normal";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
-						v.CharacterAppearanceId = v.UserId
-
-						local Humanoid = v.Character and v.Character:FindFirstChildOfClass("Humanoid")
-
-						if Humanoid then
-							local success, desc = pcall(service.Players.GetHumanoidDescriptionFromUserId, service.Players, v.UserId)
-
-							if success then
-								Humanoid:ApplyDescription(desc, Enum.AssetTypeVerification.Always)
-							end
-						end
-					end)
-				end
-			end
-		};
-
 		LoopHeal = {
 			Prefix = Settings.Prefix;
 			Commands = {"loopheal"};
@@ -6058,7 +4894,7 @@ return function(Vargs, env)
 
 		ServerLog = {
 			Prefix = Settings.Prefix;
-			Commands = {"serverlog", "serverlogs", "serveroutput"};
+			Commands = {"serverlog", "serverlogs"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "View server log";
 			AdminLevel = "Moderators";
@@ -6099,7 +4935,7 @@ return function(Vargs, env)
 
 		LocalLog = {
 			Prefix = Settings.Prefix;
-			Commands = {"locallog", "clientlog", "locallogs", "localoutput", "clientlogs"};
+			Commands = {"locallog", "locallogs", "clientlog", "clientlogs"};
 			Args = {"player", "autoupdate? (default: false)"};
 			Description = "View local log";
 			AdminLevel = "Moderators";
@@ -6125,7 +4961,7 @@ return function(Vargs, env)
 
 		ErrorLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"errorlogs", "debuglogs", "errorlog", "errors", "debuglog", "scripterrors", "adminerrors"};
+			Commands = {"errorlogs", "errorlog", "errors"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "View script error log";
 			AdminLevel = "Moderators";
@@ -6182,7 +5018,7 @@ return function(Vargs, env)
 
 		JoinLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"joinlogs", "joins", "joinhistory"};
+			Commands = {"joinlogs", "joins"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "Displays the current join logs for the server";
 			AdminLevel = "Moderators";
@@ -6201,7 +5037,7 @@ return function(Vargs, env)
 
 		LeaveLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"leavelogs", "leaves", "leavehistory"};
+			Commands = {"leavelogs", "leaves"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "Displays the current leave logs for the server";
 			AdminLevel = "Moderators";
@@ -6220,7 +5056,7 @@ return function(Vargs, env)
 
 		ChatLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"chatlogs", "chats", "chathistory"};
+			Commands = {"chatlogs", "chats"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "Displays the current chat logs for the server";
 			AdminLevel = "Moderators";
@@ -6241,7 +5077,7 @@ return function(Vargs, env)
 
 		RemoteLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"remotelogs", "remotelog", "rlogs", "remotefires", "remoterequests"};
+			Commands = {"remotelogs", "remotelog"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "View the remote logs for the server";
 			AdminLevel = "Moderators";
@@ -6262,7 +5098,7 @@ return function(Vargs, env)
 
 		ScriptLogs = {
 			Prefix = Settings.Prefix;
-			Commands = {"scriptlogs", "scriptlog", "adminlogs", "adminlog", "scriptlogs"};
+			Commands = {"scriptlogs", "scriptlog"};
 			Args = {"autoupdate? (default: false)"};
 			Description = "View the admin logs for the server";
 			AdminLevel = "Moderators";
@@ -6560,47 +5396,6 @@ return function(Vargs, env)
 			end
 		};
 
-		Bots = {
-			Prefix = Settings.Prefix;
-			Commands = {"bot", "trainingbot"};
-			Args = {"player", "num (max: 50)", "walk", "attack", "friendly", "health", "speed", "damage"};
-			Description = "AI bots made for training; ':bot scel 5 true true'";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				local num = tonumber(args[2]) and math.clamp(tonumber(args[2]), 1, 50) or 1
-				local health = tonumber(args[6]) or 100
-				local speed = tonumber(args[7]) or 16
-				local damage = tonumber(args[8]) or 5
-				local attack = args[4] == "true" and true or false
-				local friendly = args[5] == "true" and true or false
-				local walk
-
-				if args[3] == "false" then
-					walk = false
-				else
-					walk = true
-				end
-
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Functions.makeRobot(v, num, health, speed, damage, walk, attack, friendly)
-				end
-			end
-		};
-
-		TextToSpeech = {
-			Prefix = Settings.Prefix;
-			Commands = {"tell", "tts", "texttospeech"};
-			Args = {"player", "message"};
-			Filter = true;
-			Description = "[Experimental] Says aloud the supplied text";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string})
-				for _, v in service.GetPlayers(plr, args[1]) do
-					Remote.Send(v, "Function", "TextToSpeech", args[2])
-				end
-			end
-		};
-
 		PromptJoinGroup = {
 			Prefix = Settings.Prefix;
 			Commands = {"groupinvite", "invitegroup", "groupprompt", "communityinvite"};
@@ -6613,44 +5408,6 @@ return function(Vargs, env)
 
 				for _, v in service.GetPlayers(plr, args[1]) do
 					Remote.Send(v, "Function", "PromptJoinGroup", args[2])
-				end
-			end
-		};
-
-		Reverb = {
-			Prefix = Settings.Prefix;
-			Commands = {"reverb", "ambientreverb"};
-			Args = {"reverbType", "optional player"};
-			Description = "Lets you change the reverb type with an optional player argument (CASE SENSITTIVE)";
-			AdminLevel = "Moderators";
-			Function = function(plr: Player, args: {string}, data: {})
-				local rev = args[1]
-
-				local ReverbType = Enum.ReverbType
-				local reverbs = ReverbType:GetEnumItems()
-				if not rev or not ReverbType[rev] then
-
-					Functions.Hint("Reverb type was not specified or is invalid. Opening list of valid reverb types", {plr})
-
-					local tab = table.create(#reverbs)
-					table.insert(tab, {Text = "Note: Argument is CASE SENSITIVE"})
-					for _, v in reverbs do
-						table.insert(tab, {Text = v.Name})
-					end
-					Remote.MakeGui(plr, "List", {Title = "Reverbs"; Table = tab;})
-
-					return
-				end
-
-				if args[2] then
-					for _, v in service.GetPlayers(plr, args[2]) do
-						Remote.LoadCode(v, `game:GetService(\"SoundService\").AmbientReverb = Enum.ReverbType[{rev}]`)
-					end
-
-					Functions.Hint("Changed Ambient Reverb of specified player(s)", {plr})
-				else
-					service.SoundService.AmbientReverb = ReverbType[rev]
-					Functions.Hint(`Successfully changed the Ambient Reverb to {rev}`, {plr})
 				end
 			end
 		};
@@ -6751,7 +5508,7 @@ return function(Vargs, env)
 
 		HealthList = {
 			Prefix = Settings.Prefix;
-			Commands = {"healthlist", "healthlogs", "healths", "hlist","hlogs"};
+			Commands = {"healthlist", "healthlogs"};
 			Args = {"autoupdate? (default: true)"};
 			Description = "Shows a list of all players' current and max healths.";
 			AdminLevel = "Moderators";

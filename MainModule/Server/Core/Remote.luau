@@ -1304,10 +1304,6 @@ return function(Vargs, GetEnv)
 			Remote.Send(p, "Function", "SetLighting", prop, value)
 		end;
 
-		SetAtmosphere = function(p: Player, prop: string, value: any)
-			Remote.Send(p, "Function", "SetAtmosphere", prop, value)
-		end;
-
 		FireEvent = function(p: Player, ...)
 			Remote.Send(p, "FireEvent", ...)
 		end;

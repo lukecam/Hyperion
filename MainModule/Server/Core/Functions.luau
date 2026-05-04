@@ -1007,24 +1007,6 @@ return function(Vargs, GetEnv)
 			end
 		end;
 
-		SetAtmosphere = function(prop,value)
-			local atmosphere = service.Lighting:FindFirstChildWhichIsA("Atmosphere")
-
-			if atmosphere then
-				if value == nil and atmosphere[prop] and typeof(atmosphere[prop]) ~= "Instance" then
-					atmosphere:Destroy()
-					table.clear(Variables.AtmosphereSettings)
-				else
-					atmosphere[prop] = value
-					Variables.AtmosphereSettings[prop] = value
-				end
-
-				for _, p in service.GetPlayers() do
-					Remote.SetAtmosphere(p, prop, value)
-				end
-			end
-		end;
-
 		LoadEffects = function(plr)
 			for i, v in Variables.LocalEffects do
 				if (v.Part and v.Part.Parent) or v.NoPart then
