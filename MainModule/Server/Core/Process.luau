@@ -479,7 +479,6 @@ return function(Vargs, GetEnv)
 				local pDat = {
 					Player = opts.Player or p;
 					Level = opts.AdminLevel or Admin.GetLevel(p);
-					isDonor = opts.IsDonor or (Admin.CheckDonor(p) and (Settings.DonorCommands or command.AllowDonors));
 				}
 
 				if opts.isSystem or p == "SYSTEM" then
@@ -545,7 +544,7 @@ return function(Vargs, GetEnv)
 				end
 
 				if (opts.CrossServer or (not isSystem and not opts.DontLog)) and not command.NoLog then
-					local noSave = command.AdminLevel == "Player" or command.Donors or command.AdminLevel == 0
+					local noSave = command.AdminLevel == "Player" or command.AdminLevel == 0
 					AddLog("Commands", {
 						Text = `{((opts.CrossServer and "[CRS_SERVER] ") or "")}{p.Name}`;
 						Desc = `{matched}{Settings.SplitKey}{table.concat(args, Settings.SplitKey)}`;
@@ -1129,8 +1128,6 @@ return function(Vargs, GetEnv)
 						Remote.Send(p, "LaunchAnti", "HumanoidState")
 					end
 				end
-
-				task.spawn(Functions.Donor, p)
 
 				--// Fire added event
 				service.Events.CharacterAdded:Fire(p, char, ...)
