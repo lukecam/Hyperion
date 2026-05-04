@@ -10,3 +10,6 @@ Hyperion is a fork of [Adonis](https://github.com/Epix-Incorporated/Adonis), a R
 
 <h2 id="install"> Installation </h2>
 Currently, installing Hyperion is not advised but if you wish to do so, please read Method 3 for Adonis installs here: https://github.com/Epix-Incorporated/Adonis#--installation-
+
+<h2 id="install"> Contributions </h2>
+I don't know much about programming and especially nothing about stuff like Github, any contributions would be appreciated!
