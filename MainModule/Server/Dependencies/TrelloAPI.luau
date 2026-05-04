@@ -5,16 +5,16 @@
 --																																								 --
 -- Token Link:					/1/connect?name=Trello_API_Module&response_type=token&expires=never&scope=read,write&key=YOUR_APP_KEY_HERE						 --
 -- Replace "YOUR_APP_KEY_HERE" with the App Key from /app-key																									 --
--- Trello API Remade by imskyyc for Kronos and Adonis - original by Sceleratis / Davey_Bones for Adonis.														 --
+-- Trello API Remade by imskyyc for Kronos and Hyperion - original by Sceleratis / Davey_Bones for Hyperion.														 --
 -- It is requested that existing credits remain here.																											 --
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 local print = function(...)
-	print(":: Adonis ::", ...)
+	print(":: Hyperion ::", ...)
 end
 
 local warn = function(...)
-	warn(":: Adonis ::", ...)
+	warn(":: Hyperion ::", ...)
 end
 
 local HttpService = game:GetService("HttpService")

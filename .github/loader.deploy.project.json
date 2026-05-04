@@ -1,5 +1,5 @@
 {
-	"name": "Adonis_Loader",
+	"name": "Hyperion_Loader",
 	"emitLegacyScripts": true,
 	"tree": {
 		"$className": "Model",

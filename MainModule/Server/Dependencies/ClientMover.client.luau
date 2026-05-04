@@ -1,7 +1,7 @@
 --# selene: allow(empty_loop)
---// Adonis Client Loader (Non-ReplicatedFirst Version)
+--// Hyperion Client Loader (Non-ReplicatedFirst Version)
 
-local DebugMode = script.Parent:FindFirstChild("ADONIS_DEBUGMODE_ENABLED", true) ~= nil
+local DebugMode = script.Parent:FindFirstChild("HYPERION_DEBUGMODE_ENABLED", true) ~= nil
 
 local wait = task.wait
 local time = time
@@ -226,7 +226,7 @@ if module and module:IsA("ModuleScript") then
 	print(`Got metatable: {meta}`)
 	if not success then
 		Kill(`[ACLI-0x20D21CEE7]: Loading Error [Module failed to load due to {meta}]`)
-	elseif meta and type(meta) == "userdata" and tostring(meta) == "Adonis" then
+	elseif meta and type(meta) == "userdata" and tostring(meta) == "Hyperion" then
 		local ran, ret = pcall(meta, {
 			Module = module,
 			Start = start,

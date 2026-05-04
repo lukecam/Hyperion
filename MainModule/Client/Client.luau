@@ -1,9 +1,9 @@
 -------------------
--- Adonis Client --
+-- Hyperion Client --
 -------------------
 --!nocheck
 																																																																																						  --[[
-This module is part of Adonis 1.0 and contains lots of old code;
+This module is part of Hyperion 1.0 and contains lots of old code;
 future updates will generally only be made to fix bugs, typos or functionality-affecting problems.
 
 If you find bugs or similar issues, please submit an issue report to us!
@@ -117,12 +117,12 @@ local SERVICES_WE_USE = table.freeze({
 
 local oldPrint = print
 print = function(...)
-	oldPrint(":: Adonis ::", ...)
+	oldPrint(":: Hyperion ::", ...)
 end
 
 local oldWarn = warn
 warn = function(...)
-	oldWarn(":: Adonis ::", ...)
+	oldWarn(":: Hyperion ::", ...)
 end
 
 --// Logging
@@ -142,8 +142,8 @@ end
 local Folder = script.Parent
 local isStudio = game:GetService("RunService"):IsStudio()
 game:GetService("NetworkClient").ChildRemoved:Connect(function(p)
-	if not isStudio or Folder:FindFirstChild("ADONIS_DEBUGMODE_ENABLED") then
-		print("~! PLAYER DISCONNECTED/KICKED! DUMPING ADONIS CLIENT LOG!")
+	if not isStudio or Folder:FindFirstChild("HYPERION_DEBUGMODE_ENABLED") then
+		print("~! PLAYER DISCONNECTED/KICKED! DUMPING HYPERION CLIENT LOG!")
 		dumplog()
 	end
 end)
@@ -246,7 +246,7 @@ GetEnv = function(env, repl)
 			return (locals[ind] or (env or origEnv)[ind])
 		end,
 
-		__metatable = if Folder:FindFirstChild("ADONIS_DEBUGMODE_ENABLED") then nil else unique,
+		__metatable = if Folder:FindFirstChild("HYPERION_DEBUGMODE_ENABLED") then nil else unique,
 	})
 
 	if repl and type(repl) == "table" then
@@ -339,7 +339,7 @@ client = setmetatable({
 			end)
 
 			if not ran or type(func) ~= "function" then
-				service.Players.LocalPlayer:Kick("1x00353 Adonis (PlrClientIndexKlErr)")
+				service.Players.LocalPlayer:Kick("1x00353 Hyperion (PlrClientIndexKlErr)")
 				print("Failed to retrieve Kill function")
 				return function() end
 			end
@@ -537,7 +537,7 @@ return service.NewProxy({
 		local remoteName, depsName = string.match(data.Name, "(.*)\\(.*)")
 		Folder = service.Wrap(data.Folder --[[or folder and folder:Clone()]] or Folder)
 
-		if Folder:FindFirstChild("ADONIS_DEBUGMODE_ENABLED") then
+		if Folder:FindFirstChild("HYPERION_DEBUGMODE_ENABLED") then
 			data.DebugMode = true
 		else
 			data.DebugMode = false
@@ -604,7 +604,7 @@ return service.NewProxy({
 						return self[ind]
 					end
 				end,
-				__metatable = if not data.DebugMode then "Adonis" else unique,
+				__metatable = if not data.DebugMode then "Hyperion" else unique,
 			})
 		end
 
@@ -665,7 +665,7 @@ return service.NewProxy({
 				Variables.LocalContainer = service.New("Folder", {
 					Parent = workspace,
 					Archivable = false,
-					Name = `__ADONIS_LOCALCONTAINER_{service.HttpService:GenerateGUID(false)}`,
+					Name = `__HYPERION_LOCALCONTAINER_{service.HttpService:GenerateGUID(false)}`,
 				})
 			end
 			return Variables.LocalContainer
@@ -793,8 +793,8 @@ return service.NewProxy({
 		log("~! Return success")
 		return "SUCCESS"
 	end,
-	__metatable = if not Folder:FindFirstChild("ADONIS_DEBUGMODE_ENABLED") then "Adonis" else unique,
+	__metatable = if not Folder:FindFirstChild("HYPERION_DEBUGMODE_ENABLED") then "Hyperion" else unique,
 	__tostring = function()
-		return "Adonis"
+		return "Hyperion"
 	end,
 })

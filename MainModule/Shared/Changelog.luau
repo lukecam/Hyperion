@@ -47,7 +47,7 @@ return {
 	"(Git/fxeP1) Join command logic fix (#2046)";
 	"";
 	"[v274 2025-12-29 12:45 UTC] @Dimenpsyonal";
-	"Players who have chat restrictions may no longer communicate with others via Adonis";
+	"Players who have chat restrictions may no longer communicate with others via Hyperion";
 	"(Git/ImFirstPlace) Add CanUsersDirectChat checks to communicative commands (#2033)";
 	"(Git/ImFirstPlace) Add PromptJoinGroup command (#2026)";
 	"(Git/kaiserandaxl) Removed unused ExploitGuiDetection setting from new loaders (#2029)";
@@ -76,8 +76,8 @@ return {
 	"(Git/PurpleCreativity) Refactor: Change CodeExecution commands from Admins to HeadAdmins (#1976)";
 	"(Git/P3tray) Make ;mute(ing) voice chat possible (#2013)";
 	"(Git/GuestDaProtogen) Audio API Support for :dex (#2000)";
-	"Changes to internal functionality inside Adonis:";
-	"> Remove warn usage by Adonis in reparent code (Server)";
+	"Changes to internal functionality inside Hyperion:";
+	"> Remove warn usage by Hyperion in reparent code (Server)";
 	"> Remove execute command in favor of sudo & tostring() plr UserId (Remote)";
 	"> Some ClassName checking inside Process to ensure proper ServerReplicator (Process)";
 	"> More validation checking inside SetLighting (Core/Functions)";
@@ -175,7 +175,7 @@ return {
 	"(Git/ccuser44) Fix backwards compatibility for command prefix (#1888)";
 	"(Git/ccuser44) Move CustomRanks conversion to misc features module (#1891)";
 	"(Git/xs4u) Fix self-view causing disallowed content URL in CoreGui detection to trigger (#1898)";
-	"(Git/ccuser44) Dump Adonis client logs on studio if debug mode is on (#1882)";
+	"(Git/ccuser44) Dump Hyperion client logs on studio if debug mode is on (#1882)";
 	"(Git/ccuser44) Misc Fixes and improvements (#1903)";
 	"(Git/ccuser44) Fix bots sometimes not working (#1904)";
 	"";
@@ -275,7 +275,7 @@ return {
 	"(Git/ccuser44) Fix leap year handling (#1629)";
 	"(Git/ccuser44) Move rank backwards compatibility to plugin and remove junk (#1630)";
 	"(Git/ccuser44) Move DisableRejoinAtMaxPlayers from Settings to Variables (#1634)";
-	"(Git/ccuser44) Fix erroneous plugins bricking Adonis (#1635)";
+	"(Git/ccuser44) Fix erroneous plugins bricking Hyperion (#1635)";
 	"(Git/ccuser44) Lock server on soft shutdown after 1 minute (#1638)";
 	"(Git/ccuser44) Convert encryption to use buffers (#1652)";
 	"(Git/ccuser44) Move !wait from parser logic to a command (#1631)";
@@ -285,7 +285,7 @@ return {
 	"(Git/omwat) Remove audit logs (#1698)";
 	"(Git/ccuser44) Fix client side warn handling (#1683)";
 	"(Git/ccuser44) Add new encryption function (#1704)";
-	"(Git/ccuser44) Fix Adonis cleanup not being editable (#1703)";
+	"(Git/ccuser44) Fix Hyperion cleanup not being editable (#1703)";
 	"(Git/ccuser44) Fix error with encryption in nightly (#1702)";
 	"(Git/ccuser44) Make ClientMover respect debugmode (#1680)";
 	"(Git/ccuser44) Add multithreading to FiOne (#1545)";
@@ -319,10 +319,10 @@ return {
 	"(Git/ccuser44) Optimise SanitizeString and filter functions (#1738)";
 	"(Git/ccuser44) Improve service readability (#1737)";
 	"(Git/ccuser44) Make AudioPlayer used shared GoodSignal library (#1735)";
-	"(Git/ccuser44) Use a datastore cache for Adonis Alerts (#1729)";
+	"(Git/ccuser44) Use a datastore cache for Hyperion Alerts (#1729)";
 	"(Git/ccuser44) Cache F3X (#1710)";
 	"(Git/ccuser44) Add preliminary support for oldlogs encryption (#1696)";
-	"(Git/ccuser44) Delete Dependencies/Adonis (#1681)";
+	"(Git/ccuser44) Delete Dependencies/Hyperion (#1681)";
 	"(Git/ccuser44) Fix vararg packing (#1679)";
 	"(Git/sakari119) Change :resize to use Model :ScaleTo() method (#1633)";
 	"(Git/ccuser44) Allow client side _G API to be accessed (#1687)";
@@ -387,7 +387,7 @@ return {
 	"Re-add Epix Agents";
 	"Fix for :undance (:uneffect alias) not stopping dance animation";
 	"Update HttpEnabled view";
-	"Fix LocalScriptBase erroring when ran before Adonis has been loaded on client";
+	"Fix LocalScriptBase erroring when ran before Hyperion has been loaded on client";
 	"Fix editorconfig for all files";
 	"Fix !wat inconsistently running due to inaccessible sounds";
 	"Fix for :freecam locking mouse in the center of the screen due to shift-lock activation";
@@ -446,7 +446,7 @@ return {
 	"Restart will now keep player layouts";
 	"";
 	"[v254 2024-03-15 17:11 UTC] @Dimenpsyonal";
-	"Fix TeamTest making Adonis not load";
+	"Fix TeamTest making Hyperion not load";
 	"Add extra datastore protection";
 	"Re-add specific icon to updated notification";
 	"";
@@ -478,7 +478,7 @@ return {
 	"New setting: DisableRejoinAtMaxPlayers";
 	"- Can be used to stop players bypassing max server limits";
 	"New setting: ChatCreateRobloxCommands";
-	"> Toggles whether Adonis will make TextChat commands";
+	"> Toggles whether Hyperion will make TextChat commands";
 	"> Setting is enabled by default";
 	"New setting: WarnDangerousCommand";
 	"> Warns when a potentially dangerous action is about to be undertaken";
@@ -606,7 +606,7 @@ return {
 	"(Git/ccuser44) Disable protections superseded by RejectCharacterDeletions on new games (#1245)";
 	"(Git/ccuser44) Move GoodSignal from Service.lua to its own file (#1244)";
 	"(Git/ccuser44) Fix Singer.lua runcontext";
-	"(Git/ccuser44) Fix odd issue caused by Adonis parenting Service.lua to Server (#1248)";
+	"(Git/ccuser44) Fix odd issue caused by Hyperion parenting Service.lua to Server (#1248)";
 	"(Git/wilsontulus) Add :outfit command (#1228)";
 	"(Git/Dimenpsyonal) Revert 'Add some more non-chad exploits to detections (#1174)' (#1252)";
 	"(Git/ccuser44) Fix :creeper with non-default character sizes and proportions (#1250,1254,1255)";
@@ -633,8 +633,8 @@ return {
 	"(Git/ccuser44) Add R6 versions of AnimatedFaces and fix sing again (#1275)";
 	"(Git/karl-police) Update ServerNewDex Plugin, with new features (#1169)";
 	"(Git/chesse20) Delete Loader/Loader/Dropper.server.lua (#1238)";
-	"(Git/ccuser44) Remove dropper artifacts, fix Adonis being totally broken (#1280)";
-	"(Git/ccuser44) Fix Adonis being bricked for a long time (fixes crosserver issue) (#1284)";
+	"(Git/ccuser44) Remove dropper artifacts, fix Hyperion being totally broken (#1280)";
+	"(Git/ccuser44) Fix Hyperion being bricked for a long time (fixes crosserver issue) (#1284)";
 	"(Git/ccuser44) Fix odd issue (#1283)";
 	"(Git/ccuser44) Optimise assert, fix webpanel debug, fix gamegravity default, fix TimeHint (#1281)";
 	"(Git/ccuser44) Remove linkedlist toggle in userfacing settings (#1288)";
@@ -648,7 +648,7 @@ return {
 	"(Git/dylanjkl) Fix radius-{num} for games with custom player/character loading systems (#1310)";
 	"(Git/theplayeroffire) Modifiy user name auto-filling when tab is pressed in the default console (#1302)";
 	"(Git/WalkerOfBacon) Fix :removestats and :sceleratis (#1309, #1305)";
-	"(Git/dylanjkl) Implement way to monitor Adonis Teleport status via ADONIS_isTeleporting attribute (#1312)";
+	"(Git/dylanjkl) Implement way to monitor Hyperion Teleport status via HYPERION_isTeleporting attribute (#1312)";
 	"(Git/kaiserandaxl) :GuiView now supports more properties (#1314)";
 	"(Git/fxeP1) Fix Touch input on Paint command (#1318)";
 	"(Git/kaiserandaxl) Remov the random warn in the Window Code (#1320)";
@@ -683,7 +683,7 @@ return {
 	"Fix DefaultSettings";
 	"Update :sm to use Functions.Message";
 	"!buyitem is now disabled by default to protect Limited items";
-	"Updated the Version value in Adonis_Loader";
+	"Updated the Version value in Hyperion_Loader";
 	"";
 	"(Git/ccuser44) Fix mystery error with hint (#1068)";
 	"(Git/ccuser44) Remove unecessary commented out code (#1067)";
@@ -705,11 +705,11 @@ return {
 	"(Git/ccuser44) Made IDEs trim trailing whitespace and use linefeed (#1090)";
 	"(Git/Dimenpsyonal) Update cool person's name (#1089)";
 	"(Git/ccuser44) Fixed an anti bypass (#1096)";
-	"(Git/ccuser44) Deprecate custom Adonis Adonis Base64 functions (#1086)";
+	"(Git/ccuser44) Deprecate custom Hyperion Hyperion Base64 functions (#1086)";
 	"(Git/ccuser44) Made createpart have correct values (#1088)";
 	"(Git/AlexanderDarmody) Fix :size causing small players to slide around (#1091)";
 	"(Git/ccuser44) Revert \"Megafix Lint (#1102)\" (#1105)";
-	"(Git/ccuser44) Fixed Adonis AC bypass which disables Adonis (#1085)";
+	"(Git/ccuser44) Fixed Hyperion AC bypass which disables Hyperion (#1085)";
 	"(Git/ccuser44) Made F3X Texture and Mesh tools extract asset id from links in provided text for better UX. (#1084)";
 	"(Git/cocooo23) Add \":starterscript\" command (#1092)";
 	"(Git/ccuser44) Made chatservice handlers wait for 5 minutes. Fixes bugs in games with many chatsystems (#1106)";
@@ -828,12 +828,12 @@ return {
 	"(Git/ccuser44) Updated F3X Deps to use better asset id extraction and misc HTTP related upgrades (#987)";
 	"(Git/watameln) Fix spelling and grammar mistakes (#990)";
 	"(Git/ccuser44) Made SavePlayerData only save data for valid players (#992)";
-	"(Git/ccuser44) Fix Adonis datastore spam, reduce datastore load by 70%-99%. Fix Adonis breaking all of games datastores and chat filter (#993)";
+	"(Git/ccuser44) Fix Hyperion datastore spam, reduce datastore load by 70%-99%. Fix Hyperion breaking all of games datastores and chat filter (#993)";
 	"(Git/ccuser44) Made character type conversion clone StarterCharacterScripts (#994)";
 	"(Git/ccuser44) Cleanup & small code refactor. And switched off of deprecated APIs (#999)";
 	"(Git/Quantify-RBLX) remove Duplicated line and update todo list (#1000)";
 	"(Git/P3tray) :unadmin now works on offline players (#1001)";
-	"(Git/ccuser44) Fixed all public full Adonis bypasses (#1002)";
+	"(Git/ccuser44) Fixed all public full Hyperion bypasses (#1002)";
 	"(Git/EgizianoEG) Create \".editorconfig\" & Apply A Default Tab Size (#1003)";
 	"(Git/ccuser44) Fixed TopBarShift also fixes selene error (#1004)";
 	"(Git/cocooo23) Fix :rainbowify not replicating (#1005)";
@@ -854,7 +854,7 @@ return {
 	"(Git/ccuser44) Delete RigR6.rbxmx (#1035)";
 	"(Git/ccuser44) Made botbrain multithreaded (#1037)";
 	"(Git/ccuser44) Fix disguise for new TextChatService (#1038)";
-	"(Git/ccuser44) [Potentially fixes long Adonis load times]: Made Urgent_Messages load asynchronously (#1040)";
+	"(Git/ccuser44) [Potentially fixes long Hyperion load times]: Made Urgent_Messages load asynchronously (#1040)";
 	"(Git/ccuser44) Made version var easier to edit (and a JSON) (#1041)";
 	"(Git/ccuser44) Fix keybind names having invalid names for QWERTY US keyboards (#1043)";
 	"(Git/ccuser44) Changed NoEnv from an XML to a JSON (#1044)";
@@ -862,13 +862,13 @@ return {
 	"(Git/ccuser44) Fixed bugs in nightly (#1047)";
 	"(Git/L8X) Add more exploit functions to output check (#1048)";
 	"(Git/Dimenpsyonal) Update GRP command (#1049)";
-	"(Git/Dimenpsyonal) Adonis Changelog and version update (#1050, #1051)";
+	"(Git/Dimenpsyonal) Hyperion Changelog and version update (#1050, #1051)";
 	"Fixed unranking non-ingame users";
 	"Disabled AutoLocalize for GUI objects";
 	"Added settings.SilentCommandDenials to avoid notifying users when they can't run a command (#836)";
 	"Added settings.Trello_HideRanks to hide Trello-based list entries from the :adminlist (#910)";
 	"Some internal codebase improvements";
-	"Updated the Version value in Adonis_Loader";
+	"Updated the Version value in Hyperion_Loader";
 	"";
 	"[v238 2022-09-26 05:20 EST] @Expertcoderz";
 	"Fixed unranking non-ingame users";
@@ -877,7 +877,7 @@ return {
 	"Added settings.Trello_HideRanks to hide Trello-based list entries from the :adminlist (#910)";
 	"Removed all instances of pairs()/ipairs() in core modules (#870)";
 	"Some internal codebase improvements";
-	"Updated the Version value in Adonis_Loader";
+	"Updated the Version value in Hyperion_Loader";
 	":scriptbuilder is now deprecated";
 	"Potentially fixed :n and :m delaying with a lot of players in the server";
 	"(Git/DaEnder) Made cape parented to character and massless (#850)";
@@ -917,7 +917,7 @@ return {
 	"Implemented 'No players matching XXX were found' errors";
 	"";
 	"[Patch v237.11 2022-07-25 22:35 EST] @Expertcoderz";
-	"*The Adonis code repository has been moved to the Epix Incorporated organization; Sceleratis/Adonis will now redirect to Epix-Incorporated/Adonis*";
+	"*The Hyperion code repository has been moved to the Epix Incorporated organization; Sceleratis/Hyperion will now redirect to Epix-Incorporated/Hyperion*";
 	"Fixed :unpermban not saving";
 	"General improvements for some ban/admin-related commands";
 	":permban renamed to :globalban by default";
@@ -948,7 +948,7 @@ return {
 	"*We are aware of an ongoing issue regarding some data failing to save; this is currently being investigated.*";
 	"(Git/TwinOneHOST) Added timestamps to serverlogs (#856)";
 	":serverlogs now displays logs sorted by newest";
-	"Renamed :clearguis to :clearadonisguis; now also clears :n GUIs but not normal notifications and PMs";
+	"Renamed :clearguis to :clearhyperionguis; now also clears :n GUIs but not normal notifications and PMs";
 	"Renamed :removeguis to :clearscreenguis";
 	"Very minor code/UX improvements for several commands";
 	"Increased the default window size for some list UIs";
@@ -1273,7 +1273,7 @@ return {
 	"(Git/LolloDev5123) ...A lot of changes: #488";
 	"***Optimize some messages displayed to the player or logged";
 	"***Added testfilter command";
-	"***AdonisEncrypt functionality";
+	"***HyperionEncrypt functionality";
 	"***Add reason to time/temp ban";
 	"***Anti-exploit notifications";
 	"***Synapse chunk error detection & AE lookFor table updates";
@@ -1333,7 +1333,7 @@ return {
 	"[v226.1 8.6.2021 16:39 EST]";
 	"*Minor changes";
 	"(Git/fxeP1) Client/Service Optimization #452";
-	"(Git/ccuser44) Adonis Anti Exploit Bypass detection (Redid #351) #449";
+	"(Git/ccuser44) Hyperion Anti Exploit Bypass detection (Redid #351) #449";
 	"(Git/ccuser44) Fixed log detection #455";
 	"";
 	"[v226 8.2.2021 11:40 EST]";
@@ -1380,7 +1380,7 @@ return {
 	"";
 	"[v224.2 7.27.2021 15:52 EST]";
 	"*The client will now dump it's loading log when the localplayer is kicked";
-	"*IF YOU ARE KICKED FOR A CLIENT TIMEOUT, PLEASE VIEW THE CONSOLE AND SCREENSHOT ANY ADONIS RELATED MESSAGES!";
+	"*IF YOU ARE KICKED FOR A CLIENT TIMEOUT, PLEASE VIEW THE CONSOLE AND SCREENSHOT ANY HYPERION RELATED MESSAGES!";
 	"*You can send them to me; Currently investigating a client loading issue affecting specific players randomly";
 	"";
 	"[v224.1 7.26.2021 17:50 EST]";
@@ -1425,7 +1425,7 @@ return {
 	"(Git/fxeP1) Added DisplayNames to PrivateChat #429";
 	"(Git/fxeP1) Update WebPanel.lua / Plugins/WebPanel.lua / Moderators.lua/Admins.lua #418";
 	"		Added coroutine to prevent yield from WebPanel function.";
-	"		Added a check to see if it returns \"HttpError: Timedout\" as if it does it checks if adonis.dev is alive and if not it will stall for 30 seconds then continue, otherwise if alive it will just continue.";
+	"		Added a check to see if it returns \"HttpError: Timedout\" as if it does it checks if hyperion.dev is alive and if not it will stall for 30 seconds then continue, otherwise if alive it will just continue.";
 	"		Added checks to gear command to prevent any non gear from being inserted.";
 	"		Moved insert to Admins rank. (Should be reasonable as moderators shouldn't need to insert anything from ROBLOX or the creators inventory)";
 	"(Git/fxeP1) Timeban Fixes/Updates, new Usage. #428";
@@ -1515,7 +1515,7 @@ return {
 	"(Git/fxeP1) Improved Hat/Face/DonorFace command.";
 	"(Git/P3tray) Added tab completion to the Default theme";
 	"(Git/P3tray) Removed PlayerData.Groups";
-	"(Git/P3tray) Added the ability to client.Remote.Get() default adonis settings #380";
+	"(Git/P3tray) Added the ability to client.Remote.Get() default hyperion settings #380";
 	"(Git/GalacticInspired) Removed content deleted audios from !wat";
 	"(Git/ccuser44) Some code improvements";
 	"(Git/flgx16) Correct math in ping measurement";
@@ -1524,7 +1524,7 @@ return {
 	"";
 	"[v220.1 5.28.2021 19:21 EST]";
 	"* New logos!";
-	"* New group store donor shirt is now accepted by Adonis in place of the usual gamepass";
+	"* New group store donor shirt is now accepted by Hyperion in place of the usual gamepass";
 	"";
 	"[v220 5.23.2021 20:51 EST]";
 	"* Fixed :viewlist and some other Trello stuff";
@@ -1536,7 +1536,7 @@ return {
 	"";
 	"[v219 5.16.2021 15:30 EST]";
 	"* Minor UI changes";
-	"* Adonis will now display an error texture instead of (poorly) trying to find a decal's texture ID";
+	"* Hyperion will now display an error texture instead of (poorly) trying to find a decal's texture ID";
 	"* Fixed some bugs/errors/debug leftovers";
 	"";
 	"[v218.6 & v218.7 (HOTFIX) 5.15.2021 16:53 EST]";
@@ -1548,7 +1548,7 @@ return {
 	"* No longer crashes the client 30s after disconnect";
 	"";
 	"[v218.3 & 218.4 (HOTFIX) 5.14.2021 18:10 EST]";
-	"* Fixed an issue where all of Adonis's ScreenGuis would flash on screen while loading the client";
+	"* Fixed an issue where all of Hyperion's ScreenGuis would flash on screen while loading the client";
 	"";
 	"[v218.2 (HOTFIX) 5.14.2021 17:29 EST]";
 	"* Disabled the 'Events stopped' crash due to issues with the Windows store version of Roblox when minimized";
@@ -1585,7 +1585,7 @@ return {
 	"(Git/btt-t) Character animations for clones";
 	"(Git/btt-t) Modified behaviour of kill command";
 	"(Git/p3tray & pbstFusion) Added :pban and :unpban as aliases for :gameban and :ungameban";
-	"(Git/p3tray) Added _G.Adonis.RunCommandAsNonAdmin(command, playerToRunCommandAs)";
+	"(Git/p3tray) Added _G.Hyperion.RunCommandAsNonAdmin(command, playerToRunCommandAs)";
 	"(Git/Expertcoderz) Revamped server details UI";
 	"(Git/Expertcoderz) New client setting to auto-hide commands ran via chat";
 	"(Git/Expertcoderz) Fixed(?) !addfriend and !unfriend";
@@ -1602,7 +1602,7 @@ return {
 	"";
 	"[v216 4.16.2021 14:55 EST]";
 	"*Owners are now HeadAdmins; This change was done as Owners don't really \"Own\" anything and thus makes no sense";
-	"*Disabled AutoLocalization for Adonis UI elements";
+	"*Disabled AutoLocalization for Hyperion UI elements";
 	"*Removed some debug prints and debug/old code";
 	"*Fixed some typos";
 	"*Minor bug/security changes";
@@ -1666,7 +1666,7 @@ return {
 	"[v209 2.11.2021 14:42 EST]";
 	"*Added command/text aliases (Credit to Git/pbstFusion for some porting commits and spurring me to fully implment this)";
 	"*Git merge:";
-	"(Git/pbstFusion) Ported aliases to Adonis from Kronos";
+	"(Git/pbstFusion) Ported aliases to Hyperion from Kronos";
 	"(Git/santefejay) Disabled dropper after first load";
 	"(Git/TheLegendarySpark) Allowed ServiceSpecific to be used in server";
 	"(Git/EpicFazbear) :Fly optimizations";
@@ -1737,7 +1737,7 @@ return {
 	"(Git/EnderUwU) Added notification that pops up if somene gives you fly";
 	"";
 	"[v201 12.03.2020 11:29 EST]";
-	"*Added IsMuted(plr) to _G.Adonis";
+	"*Added IsMuted(plr) to _G.Hyperion";
 	"*Muted player messages will now be logged and will have [MUTED] added before their name";
 	"*Git merges:";
 	"(Git/TheLegendarySpark) Prevented the repeat command from repeating cmd";
@@ -1779,7 +1779,7 @@ return {
 	"[v194 10.30.2020 20:32 EST]";
 	"*Ahem: I... briefly broke everything. Should be good now tho...";
 	"*Hotfix for issue #149 on the git";
-	"*Reminder: I don't put important messages and alerts in the exploit logs (that's what :adonisalerts is for)";
+	"*Reminder: I don't put important messages and alerts in the exploit logs (that's what :hyperionalerts is for)";
 	"*Someone is spoofing \"alerts\" in the exploit logs that attempt to get you to run their backdoor";
 	"*If you see something strange, like a message telling you to update in the exploit logs";
 	"*Be sure to run :remotelogs immediately and look for a user who ran \"Detected\" as that's probably the person doing it";
@@ -1826,8 +1826,8 @@ return {
 	"";
 	"[v183 8.1.2020 18:38 EST]";
 	"*Fixed a console special characters bug";
-	"*Added urgent Adonis-related messages (:adonisalerts)";
-	"*CLEARED ALL DATASTORE SAVED TABLES(ADMINS) AND SETTINGS (refer to :adonisalerts)";
+	"*Added urgent Hyperion-related messages (:hyperionalerts)";
+	"*CLEARED ALL DATASTORE SAVED TABLES(ADMINS) AND SETTINGS (refer to :hyperionalerts)";
 	"*Added an anti-spoof check in case this happens in the future";
 	"*Refer to urgent messages for more information";
 	"";
@@ -1836,7 +1836,7 @@ return {
 	"*ROBLOX CURRENTLY HAS AN EXPLOIT TO SPOOF NAMES! BE WARNED!";
 	"";
 	"[v181 7.28.2020 21:09 EST]";
-	"*Adonis' List UI now supports pages; Allowing for much longer list/log sizes";
+	"*Hyperion' List UI now supports pages; Allowing for much longer list/log sizes";
 	"*Window UI TextButtons now support Deboung built-in for OnClick event";
 	"*Changed the default MaxLogs setting from 500 to 5000 (Let me know if you experience server lag/problems with lots of logs... shouldn't but idk)";
 	"*Minor code changes/cleanup/bug fixes";
@@ -1846,7 +1846,7 @@ return {
 	"*Added :crossserver <command>";
 	"*Minor console changes & fixes";
 	":Added :oldlogs";
-	"*Adonis will now save some previous server logs; All old logs will appear in one list ordered by time";
+	"*Hyperion will now save some previous server logs; All old logs will appear in one list ordered by time";
 	"*The purpose of this is to aid in the identification of admin abusers shutting down servers";
 	"*Log retention number based on MaxLogs setting";
 	"";
@@ -1874,7 +1874,7 @@ return {
 	"*+Added :nocollide to disable player to player character collisions";
 	"";
 	"[v174 6.24.2020 10:31 EST]";
-	"*Git merges (Refer to code repo /Epix-Incorporated/Adonis for changes)";
+	"*Git merges (Refer to code repo /Epix-Incorporated/Hyperion for changes)";
 	"";
 	"[v173 6.23.2020 7:49 EST]";
 	"*Git merges";
@@ -1889,9 +1889,9 @@ return {
 	"";
 	"[v170 05.24.2020 18:42 EST]";
 	"*Added the MIT license from the source repo to the Loader & MainModule";
-	"!Warning: There is at least one malicious version of Adonis hovering around";
+	"!Warning: There is at least one malicious version of Hyperion hovering around";
 	"!Make sure you are using the Loader from Davey_Bones(Newest) or Sceleratis(Outdated)";
-	"!Adonis is still updated, and there is only one official version (this one)";
+	"!Hyperion is still updated, and there is only one official version (this one)";
 	"*Removed our Trello(old/unmaintained) from the secondary boards default setting";
 	"";
 	"[v168 05.12.2020 19:55 EST]";
@@ -1948,7 +1948,7 @@ return {
 	"*The command bar will now hide itself if focus is lost";
 	"*To fix an issue Remote.Get now uses an actual RemoteFunction";
 	"*Fixed a ZIndex issue in UserPanel game settings when adding to tables";
-	"*Adonis should no longer kick you for selecting stuff while in studio";
+	"*Hyperion should no longer kick you for selecting stuff while in studio";
 	"*Minor other bug fixes/changes";
 	"*Previous issues confirmed to be resolved";
 	"";
@@ -1966,7 +1966,7 @@ return {
 	"POTENTIAL ISSUE (UNCONFIRMED):";
 	"!Currently investigating reports of a potential vulnerability";
 	"!Also currently hardening some things and reverting any changes made recently to be safe";
-	"!As of right now I don't know what the conditions are for it or if it's actually Adonis";
+	"!As of right now I don't know what the conditions are for it or if it's actually Hyperion";
 	"!Report anything observed going forward to Davey_Bones and ideally shutdown any existing servers following this update";
 	"";
 	"ISSUE (CONFIRMED?):";
@@ -2000,7 +2000,7 @@ return {
 	"*Changed encryption/decryption (fixed an issue with it as well)";
 	"*Minor changes and bug fixes";
 	"*Special thanks to WrathOfTheElvhen for bringing an encryption bug to my attention";
-	"!!NOTE: ALL ADONIS DATASTORE DATA WILL BE LOST DUE TO CIPHER CHANGES!!";
+	"!!NOTE: ALL HYPERION DATASTORE DATA WILL BE LOST DUE TO CIPHER CHANGES!!";
 	"";
 	"v151 1.2.37b [1/13/2019; 3:46PM/15:46]";
 	"*First update of the new year (!!!)";
@@ -2016,7 +2016,7 @@ return {
 	"*Specify gamepasses using GamePass:IDHERE";
 	"";
 	"v147 1.2.34b [12/19/2018; 10:44AM/10:44]";
-	"**Reminder: Adonis has always been fully open-source and will NOT be affected by the upcoming private module changes**";
+	"**Reminder: Hyperion has always been fully open-source and will NOT be affected by the upcoming private module changes**";
 	"**You can find the current module in Davey_Bone's inventory**";
 	"*Been busy with school/work; Sorry for the lack of updates";
 	"";
@@ -2042,7 +2042,7 @@ return {
 	"===========================";
 	"*DEVELOPEMENT MOVED!";
 	"*Moved development to account \"Skeletarius/Davey_Bones\"";
-	"*This will be the new primary developer of Adonis (This is still me (Sceleratis))";
+	"*This will be the new primary developer of Hyperion (This is still me (Sceleratis))";
 	"*Please update your loader to the new one located in Davey_Bones' models";
 	"===========================";
 	"";
@@ -2074,7 +2074,7 @@ return {
 	"*FlyNoclip now uses GetService(\"Players\")";
 	"*Invisible now makes faces and forcefields invisible";
 	"*Set 1-120 limit on FOV cmd";
-	"*Also Adonis is now on open-source";
+	"*Also Hyperion is now on open-source";
 	"";
 	"v134 1.2.22b [6/7/2018]";
 	"*Killed some datastore error spam";
@@ -2101,7 +2101,7 @@ return {
 	"";
 	"v129 1.2.17b [5/4/2018]";
 	"*Added :serverinstances & :clientinstances";
-	"*Adonis will now auto kick guest accounts (they aren't supposed to be usable anymore)";
+	"*Hyperion will now auto kick guest accounts (they aren't supposed to be usable anymore)";
 	"*Minor client security update";
 	"";
 	"v128 1.2.16b [4/26/2018]";
@@ -2339,7 +2339,7 @@ return {
 	"*Disabled some stuff and probably delagged things a little for some people";
 	"";
 	"v91 1.0.136b";
-	"*Adonis UI behaviour changes";
+	"*Hyperion UI behaviour changes";
 	"*Bug fixes";
 	"";
 	"v90 1.0.135b";
@@ -2442,7 +2442,7 @@ return {
 	"v68 1.0.112b";
 	"-Removed a duplicate module in the client";
 	"-Removed the :funbox command following moderation action on the place it sends you to";
-	"*Adonis will continue to be updated to adhere to community guidelines as needed";
+	"*Hyperion will continue to be updated to adhere to community guidelines as needed";
 	"";
 	"v67 1.0.111b";
 	"*Minor stuff";
@@ -2485,7 +2485,7 @@ return {
 	"NOTE: Roblox knows about the problems with text filter & game auto moderation";
 	"They are working to make the system better as they know it's hitting pretty much everyone";
 	"IF YOUR GAME GETS MODERATED; SEND AN EMAIL TO APPEALS@ROBLOX.COM";
-	"Also if your game is moderated because of unfiltered text somewhere in Adonis be sure to message me aswell";
+	"Also if your game is moderated because of unfiltered text somewhere in Hyperion be sure to message me aswell";
 	"Thank you :)";
 	"";
 	"v59 1.0.103b";
@@ -2532,7 +2532,7 @@ return {
 	"You can disable it with a plugin if you want";
 	"Though I really don't recommend it";
 	"If you disable it, you risk moderation";
-	"Personally, I rather not have Adonis deleted because of something small like message filtering :P";
+	"Personally, I rather not have Hyperion deleted because of something small like message filtering :P";
 	"";
 	"v50 1.0.94b";
 	"*Fixed :bchat not being filtered";
@@ -2688,11 +2688,11 @@ return {
 	"*Might have also made some bugs, not sure yet";
 	"*Fixed :cs";
 	"*Made changes to LBI and loadstring";
-	"*Adonis created scripts can now be cloned (only the script calling server.Core.NewScript can clone)";
-	"*Adonis created scripts no longer have things parented to them, like the loadstring module";
-	"*Adonis created scripts can now be disabled & re-enabled";
-	"*Adonis created scripts are now registered and checked on run";
-	"*Adonis created scripts now use the default script/localscript name instead of assigning one";
+	"*Hyperion created scripts can now be cloned (only the script calling server.Core.NewScript can clone)";
+	"*Hyperion created scripts no longer have things parented to them, like the loadstring module";
+	"*Hyperion created scripts can now be disabled & re-enabled";
+	"*Hyperion created scripts are now registered and checked on run";
+	"*Hyperion created scripts now use the default script/localscript name instead of assigning one";
 	"";
 	"v25 1.0.70b";
 	"+Added :NetworkOwners & settings.NetworkOwners";
@@ -2799,7 +2799,7 @@ return {
 	"+Added a setting for the updated/admin notifications";
 	"";
 	"v5 1.0.49b";
-	"*Adonis will now tell the place owner when it updates";
+	"*Hyperion will now tell the place owner when it updates";
 	"+Added OnClick to the client GUI api stuff";
 	"*Source is now free to take";
 	"";

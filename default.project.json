@@ -1,5 +1,5 @@
 {
-	"name": "Adonis",
+	"name": "Hyperion",
 	"emitLegacyScripts": true,
 	"tree": {
 		"$className": "DataModel",
@@ -7,7 +7,7 @@
 		"ServerScriptService": {
 			"$className": "ServerScriptService",
 
-			"Adonis_Rojo": {
+			"Hyperion_Rojo": {
 				"$className": "Folder",
 				"MainModule": {
 					"$path": "MainModule"
@@ -17,7 +17,7 @@
 					"$path": "LICENSE.luau"
 				},
 				
-				"Adonis_Loader": {
+				"Hyperion_Loader": {
 					"$className": "Model",
 					"$path": "Loader",
 

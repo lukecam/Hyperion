@@ -592,7 +592,7 @@ return function(Vargs, env)
 					if v.Character then
 						Routine(function()
 							for _, c in v.Character:GetChildren() do
-								if c:IsA("ForceField") and c.Name ~= "ADONIS_FULLGOD" then
+								if c:IsA("ForceField") and c.Name ~= "HYPERION_FULLGOD" then
 									c:Destroy()
 								end
 							end
@@ -631,12 +631,12 @@ return function(Vargs, env)
 				for _, v in service.GetPlayers(plr, args[1]) do
 					Routine(function()
 						if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-							local ice = v.Character:FindFirstChild("Adonis_Ice")
+							local ice = v.Character:FindFirstChild("Hyperion_Ice")
 							local plate
 							if ice then
 								plate = service.New("Part", {
 									Parent = v.Character;
-									Name = "Adonis_Water";
+									Name = "Hyperion_Water";
 									Anchored = true;
 									CanCollide = false;
 									TopSurface = "Smooth";
@@ -651,7 +651,7 @@ return function(Vargs, env)
 									ice.Size = Vector3.new(5, ice.Size.Y - i, 5)
 									ice.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, -i, 0)
 									plate.Size = Vector3.new(i + 5, 0.2, i + 5)
-									wait()
+									task.wait()
 								end
 								ice:Destroy()
 							end
@@ -661,7 +661,7 @@ return function(Vargs, env)
 									obj.Anchored = false
 								end
 							end
-							wait(3)
+							task.wait(3)
 							pcall(function() plate:Destroy() end)
 						end
 					end)
@@ -717,7 +717,7 @@ return function(Vargs, env)
 					if hum then
 						hum.MaxHealth = 100
 						hum.Health = hum.MaxHealth
-						local fullGodFF = v.Character:FindFirstChild("ADONIS_FULLGOD")
+						local fullGodFF = v.Character:FindFirstChild("HYPERION_FULLGOD")
 						if fullGodFF and fullGodFF:IsA("ForceField") then
 							fullGodFF:Destroy()
 						end
@@ -743,7 +743,7 @@ return function(Vargs, env)
 						hum.Health = 9e9
 						service.New("ForceField", {
 							Parent = hum.Parent;
-							Name = "ADONIS_FULLGOD";
+							Name = "HYPERION_FULLGOD";
 							Visible = false;
 						})
 						if Settings.CommandFeedback then
@@ -1457,7 +1457,7 @@ return function(Vargs, env)
 				})
 
 				service.TeleportService:TeleportAsync(game.PlaceId, players, teleportOptions)
-				Functions.Message("Adonis", `Teleporting to server "{args[2]}"\nPlease wait...`, players, false, 10)
+				Functions.Message("Hyperion", `Teleporting to server "{args[2]}"\nPlease wait...`, players, false, 10)
 			end
 		};
 
@@ -1621,7 +1621,7 @@ return function(Vargs, env)
 				local answers = args[2]
 				local anstab = {}
 				local responses = {}
-				local voteKey = `ADONISVOTE{service.HttpService:GenerateGUID(false)}`;
+				local voteKey = `HYPERIONVOTE{service.HttpService:GenerateGUID(false)}`;
 				local players = service.GetPlayers(plr, args[1])
 				local startTime = os.clock();
 
@@ -1706,7 +1706,7 @@ return function(Vargs, env)
 				local answers = args[2]
 				local anstab = {}
 				local responses = {}
-				local voteKey = `ADONISVOTE{service.GenerateGUID(false)}`;
+				local voteKey = `HYPERIONVOTE{service.GenerateGUID(false)}`;
 				local players = service.GetPlayers(plr, args[1])
 				local startTime = os.clock();
 
@@ -1892,10 +1892,10 @@ return function(Vargs, env)
 			Prefix = Settings.Prefix;
 			Commands = {"serverinstances"};
 			Args = {};
-			Description = "Shows all instances created server-side by Adonis";
+			Description = "Shows all instances created server-side by Hyperion";
 			AdminLevel = "Moderators";
 			ListUpdater = function(plr: Player, updateArgs)
-				local objects = service.GetAdonisObjects()
+				local objects = service.GetHyperionObjects()
 				local tab = table.create(#objects)
 				for _, v in objects do
 					table.insert(tab, {
@@ -1907,7 +1907,7 @@ return function(Vargs, env)
 			end;
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "List", {
-					Title = "Adonis Instances";
+					Title = "Hyperion Instances";
 					Table = Logs.ListUpdaters.ShowServerInstances(plr);
 					Stacking = false;
 					Update = "ShowServerInstances";
@@ -1919,7 +1919,7 @@ return function(Vargs, env)
 			Prefix = Settings.Prefix;
 			Commands = {"clientinstances"};
 			Args = {"player"};
-			Description = "Shows all instances created client-side by Adonis";
+			Description = "Shows all instances created client-side by Hyperion";
 			AdminLevel = "Moderators";
 			ListUpdater = function(plr: Player, target: Player)
 				if target then
@@ -1929,7 +1929,7 @@ return function(Vargs, env)
 					end
 					return temp
 				else
-					local objects = service.GetAdonisObjects()
+					local objects = service.GetHyperionObjects()
 					local temp = table.create(#objects)
 					for _, v in objects do
 						table.insert(temp, {
@@ -1955,9 +1955,9 @@ return function(Vargs, env)
 
 		ClearGUIs = {
 			Prefix = Settings.Prefix;
-			Commands = {"clearadonisguis", "clearguis", "clearmessages", "clearhints", "clrguis"};
+			Commands = {"clearhyperionguis", "clearguis", "clearmessages", "clearhints", "clrguis"};
 			Args = {"player", "delete all? (default: false)"};
-			Description = `Removes Adonis on-screen GUIs for the target player(s); if <delete all> is false, wil, only clear {Settings.Prefix}m, {Settings.Prefix}n, {Settings.Prefix}h, {Settings.Prefix}alert and screen effect GUIs`;
+			Description = `Removes Hyperion on-screen GUIs for the target player(s); if <delete all> is false, wil, only clear {Settings.Prefix}m, {Settings.Prefix}n, {Settings.Prefix}h, {Settings.Prefix}alert and screen effect GUIs`;
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				local deleteAll = args[2] and (args[2]:lower() == "true" or args[2]:lower() == "yes")
@@ -2074,7 +2074,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				local clipper = Deps.Assets.Clipper:Clone()
-				clipper.Name = "ADONIS_NoClip"
+				clipper.Name = "HYPERION_NoClip"
 
 				for i, p in service.GetPlayers(plr, args[1]) do
 					Admin.RunCommand(`{Settings.Prefix}clip`, p.Name)
@@ -2097,7 +2097,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for i, p in service.GetPlayers(plr, args[1]) do
-					local old = p.Character.Humanoid:FindFirstChild("ADONIS_NoClip")
+					local old = p.Character.Humanoid:FindFirstChild("HYPERION_NoClip")
 					if old then
 						if old.Clip.Value then
 							old.Clip.Value = false
@@ -2144,7 +2144,7 @@ return function(Vargs, env)
 						local OrigPos = cHumanoidRootPart.Position
 
 						local Model = service.New("Model", {
-							Name = `{v.Name}_ADONISJAIL`,
+							Name = `{v.Name}_HYPERIONJAIL`,
 							Archivable = false,
 							ModelStreamingMode = Enum.ModelStreamingMode.Persistent
 						})
@@ -2929,7 +2929,7 @@ return function(Vargs, env)
 							elseif obj:IsA("Tool") then
 								for _, Descendant in obj:GetDescendants() do
 									if Descendant:IsA("BasePart") or Descendant:IsA("Decal") or Descendant:IsA("UnionOperation") then
-										Descendant:SetAttribute('ADONIS_OriginalTransparency',Descendant.Transparency)
+										Descendant:SetAttribute('HYPERION_OriginalTransparency',Descendant.Transparency)
 										Descendant.Transparency = 1
 									end
 								end
@@ -2974,12 +2974,12 @@ return function(Vargs, env)
 							elseif obj:IsA("Tool") then
 								for _, Descendant in obj:GetDescendants() do
 									if Descendant:IsA("BasePart") or Descendant:IsA("Decal") or Descendant:IsA("UnionOperation") then
-										local Transparency = Descendant:GetAttribute('ADONIS_OriginalTransparency') or 0
+										local Transparency = Descendant:GetAttribute('HYPERION_OriginalTransparency') or 0
 										Descendant.Transparency = Transparency
-										Descendant:SetAttribute('ADONIS_OriginalTransparency',nil)
+										Descendant:SetAttribute('HYPERION_OriginalTransparency',nil)
 									end
 								end
-							elseif obj:IsA("ForceField") and obj.Name ~="ADONIS_FULLGOD" then
+							elseif obj:IsA("ForceField") and obj.Name ~="HYPERION_FULLGOD" then
 								obj.Visible = true
 							elseif obj:IsA("BillboardGui") then
 								obj.Enabled = true
@@ -3082,7 +3082,7 @@ return function(Vargs, env)
 				for _, v in service.GetPlayers(plr, args[1]) do
 					if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
 						Functions.NewParticle(v.Character.HumanoidRootPart, "PointLight", {
-							Name = "ADONIS_LIGHT";
+							Name = "HYPERION_LIGHT";
 							Color = color;
 							Brightness = 5;
 							Range = 15;
@@ -3101,7 +3101,7 @@ return function(Vargs, env)
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
 					if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-						Functions.RemoveParticle(v.Character.HumanoidRootPart, "ADONIS_LIGHT")
+						Functions.RemoveParticle(v.Character.HumanoidRootPart, "HYPERION_LIGHT")
 					end
 				end
 			end
@@ -3277,7 +3277,7 @@ return function(Vargs, env)
 			Prefix = Settings.Prefix;
 			Commands = {"clearscreenguis", "clrscreenguis", "removeguis", "noguis"};
 			Args = {"player"};
-			Description = "Removes all of the target player(s)'s on-screen GUIs except Adonis GUIs";
+			Description = "Removes all of the target player(s)'s on-screen GUIs except Hyperion GUIs";
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
@@ -3668,8 +3668,8 @@ return function(Vargs, env)
 								continue
 							end
 
-							Character:SetAttribute("ADONIS_isTeleporting", true)
-							task.delay(0.5, function() if Character then Character:SetAttribute("ADONIS_isTeleporting", nil) end end)
+							Character:SetAttribute("HYPERION_isTeleporting", true)
+							task.delay(0.5, function() if Character then Character:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 							if workspace.StreamingEnabled == true then
 								v:RequestStreamAroundAsync(point)
@@ -3677,8 +3677,8 @@ return function(Vargs, env)
 
 							local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 							local root = (Humanoid and Humanoid.RootPart or Character.PrimaryPart or Character:FindFirstChild("HumanoidRootPart"))
-							local FlightPos = root:FindFirstChild("ADONIS_FLIGHT_POSITION")
-							local FlightGyro = root:FindFirstChild("ADONIS_FLIGHT_GYRO")
+							local FlightPos = root:FindFirstChild("HYPERION_FLIGHT_POSITION")
+							local FlightGyro = root:FindFirstChild("HYPERION_FLIGHT_GYRO")
 
 							if Humanoid then
 								if Humanoid.SeatPart~=nil then
@@ -3718,16 +3718,16 @@ return function(Vargs, env)
 
 						if not root then continue end
 
-						Character:SetAttribute("ADONIS_isTeleporting", true)
-						task.delay(0.5, function() if Character then Character:SetAttribute("ADONIS_isTeleporting", nil) end end)
+						Character:SetAttribute("HYPERION_isTeleporting", true)
+						task.delay(0.5, function() if Character then Character:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 						if workspace.StreamingEnabled == true then
 							v:RequestStreamAroundAsync(Vector3.new(x,y,z))
 						end
 
 						local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-						local FlightPos = root:FindFirstChild("ADONIS_FLIGHT_POSITION")
-						local FlightGyro = root:FindFirstChild("ADONIS_FLIGHT_GYRO")
+						local FlightPos = root:FindFirstChild("HYPERION_FLIGHT_POSITION")
+						local FlightGyro = root:FindFirstChild("HYPERION_FLIGHT_GYRO")
 
 						if Humanoid then
 							if Humanoid.SeatPart~=nil then
@@ -3766,11 +3766,11 @@ return function(Vargs, env)
 
 						if root and target.Character:FindFirstChild("HumanoidRootPart") then
 							local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-							local FlightPos = root:FindFirstChild("ADONIS_FLIGHT_POSITION")
-							local FlightGyro = root:FindFirstChild("ADONIS_FLIGHT_GYRO")
+							local FlightPos = root:FindFirstChild("HYPERION_FLIGHT_POSITION")
+							local FlightGyro = root:FindFirstChild("HYPERION_FLIGHT_GYRO")
 
-							Character:SetAttribute("ADONIS_isTeleporting", true)
-							task.delay(0.5, function() if Character then Character:SetAttribute("ADONIS_isTeleporting", nil) end end)
+							Character:SetAttribute("HYPERION_isTeleporting", true)
+							task.delay(0.5, function() if Character then Character:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 							if workspace.StreamingEnabled == true then
 								v:RequestStreamAroundAsync((target.Character.HumanoidRootPart.CFrame*CFrame.Angles(0, math.rad(90/#players*1), 0)*CFrame.new(5+.2*#players, 0, 0))*CFrame.Angles(0, math.rad(90), 0).Position)
@@ -3814,8 +3814,8 @@ return function(Vargs, env)
 										continue
 									end
 
-									Character:SetAttribute("ADONIS_isTeleporting", true)
-									task.delay(0.5, function() if Character then Character:SetAttribute("ADONIS_isTeleporting", nil) end end)
+									Character:SetAttribute("HYPERION_isTeleporting", true)
+									task.delay(0.5, function() if Character then Character:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 									if workspace.StreamingEnabled == true then
 										v:RequestStreamAroundAsync((targ_root.CFrame*CFrame.Angles(0, math.rad(90/#players*k), 0)*CFrame.new(5+.2*#players, 0, 0))*CFrame.Angles(0, math.rad(90), 0).Position)
@@ -3823,8 +3823,8 @@ return function(Vargs, env)
 
 									local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 									local root = Character:FindFirstChild('HumanoidRootPart')
-									local FlightPos = root:FindFirstChild("ADONIS_FLIGHT_POSITION")
-									local FlightGyro = root:FindFirstChild("ADONIS_FLIGHT_GYRO")
+									local FlightPos = root:FindFirstChild("HYPERION_FLIGHT_POSITION")
+									local FlightGyro = root:FindFirstChild("HYPERION_FLIGHT_GYRO")
 									if Humanoid then
 										if Humanoid.SeatPart ~= nil then
 											Functions.RemoveSeatWelds(Humanoid.SeatPart)
@@ -3937,8 +3937,8 @@ return function(Vargs, env)
 						local char = players[i].Character
 						if not char then continue end
 
-						char:SetAttribute("ADONIS_isTeleporting", true)
-						task.delay(0.5, function() if char then char:SetAttribute("ADONIS_isTeleporting", nil) end end)
+						char:SetAttribute("HYPERION_isTeleporting", true)
+						task.delay(0.5, function() if char then char:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 						local hum = char:FindFirstChildOfClass("Humanoid")
 						if hum then
@@ -3970,8 +3970,8 @@ return function(Vargs, env)
 						local char = players[i].Character
 						if not char then continue end
 
-						char:SetAttribute("ADONIS_isTeleporting", true)
-						task.delay(0.5, function() if char then char:SetAttribute("ADONIS_isTeleporting", nil) end end)
+						char:SetAttribute("HYPERION_isTeleporting", true)
+						task.delay(0.5, function() if char then char:SetAttribute("HYPERION_isTeleporting", nil) end end)
 
 						local r = i % (lines*math.floor(numPlayers/lines))
 						local offsetX = if r == 1 then 0
@@ -3980,7 +3980,7 @@ return function(Vargs, env)
 
 						--[[if n.Character.Humanoid.Sit then
 							n.Character.Humanoid.Sit = false
-							wait(0.5)
+							task.wait(0.5)
 						end]]
 
 						local hum = char:FindFirstChildOfClass("Humanoid")
@@ -4257,7 +4257,7 @@ return function(Vargs, env)
 					Volume = volume;
 					Looped = looped;
 					Pitch = pitch;
-					Name = "ADONIS_AUDIO";
+					Name = "HYPERION_AUDIO";
 					SoundId = `rbxassetid://{args[2]}`;
 				})
 
@@ -4291,7 +4291,7 @@ return function(Vargs, env)
 					local char = v.Character
 					local rootPart = char and char:FindFirstChild("HumanoidRootPart")
 					if rootPart then
-						local found = rootPart:FindFirstChild("ADONIS_AUDIO")
+						local found = rootPart:FindFirstChild("HYPERION_AUDIO")
 						if found then
 							found:Stop()
 							found:Destroy()
@@ -4309,7 +4309,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string}, data: {})
 				for i, v in service.SoundService:GetChildren() do
-					if v.Name=="ADONIS_SOUND" then
+					if v.Name=="HYPERION_SOUND" then
 						if v.IsPaused == false then
 							v:Pause()
 							Functions.Hint(`Music is now paused | Run {Settings.Prefix}resume to resume playback`, {plr})
@@ -4330,7 +4330,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string}, data: {})
 				for i, v in service.SoundService:GetChildren() do
-					if v.Name=="ADONIS_SOUND" then
+					if v.Name=="HYPERION_SOUND" then
 						if v.IsPaused == true then
 							v:Resume()
 							Functions.Hint("Resuming Playback...", {plr})
@@ -4352,7 +4352,7 @@ return function(Vargs, env)
 			Function = function(plr: Player, args: {string})
 				local pitch = args[1]
 				for i, v in service.SoundService:GetChildren() do
-					if v.Name=="ADONIS_SOUND" then
+					if v.Name=="HYPERION_SOUND" then
 						if string.sub(args[1], 1, 1) == "+" then
 							v.Pitch=v.Pitch+tonumber(string.sub(args[1], 2))
 						elseif string.sub(args[1], 1, 1) == "-" then
@@ -4376,7 +4376,7 @@ return function(Vargs, env)
 				local volume = assert(tonumber(args[1]), "Volume must be a valid number")
 
 				for i, v in service.SoundService:GetChildren() do
-					if v.Name=="ADONIS_SOUND" then
+					if v.Name=="HYPERION_SOUND" then
 						if string.sub(args[1], 1, 1) == "+" then
 							v.Volume=v.Volume+tonumber(string.sub(args[1], 2))
 						elseif string.sub(args[1], 1, 1) == "-" then
@@ -4422,7 +4422,7 @@ return function(Vargs, env)
 					end
 
 					local s = service.New("Sound")
-					s.Name = "ADONIS_SOUND"
+					s.Name = "HYPERION_SOUND"
 					s.Parent = service.SoundService
 					s.Looped = false
 					s.Archivable = false
@@ -4432,9 +4432,9 @@ return function(Vargs, env)
 						s.SoundId = `http://www.roblox.com/asset/?id={ind.ID}`
 						s.Pitch = ind.Pitch
 						s:Play()
-						wait(0.5)
-						wait(s.TimeLength+1)
-						wait(1)
+						task.wait(0.5)
+						task.wait(s.TimeLength+1)
+						task.wait(1)
 					end)
 
 					s:Stop()
@@ -4510,7 +4510,7 @@ return function(Vargs, env)
 					end
 
 					for i, v in service.SoundService:GetChildren() do
-						if v.ClassName == "Sound" and v.Name == "ADONIS_SOUND" then
+						if v.ClassName == "Sound" and v.Name == "HYPERION_SOUND" then
 							if v.IsPaused == true then
 								local ans,event = Remote.GetGui(plr, "YesNoPrompt", {
 									Title = "Override paused track?";
@@ -4527,18 +4527,18 @@ return function(Vargs, env)
 					end
 
 					local s = service.New("Sound")
-					s.Name = "ADONIS_SOUND"
+					s.Name = "HYPERION_SOUND"
 					s.SoundId = `http://www.roblox.com/asset/?id={id}`
 					s.Volume = volume
 					s.Pitch = pitch
 					s.Looped = looped
 					s.Archivable = false
 					s.Parent = service.SoundService
-					wait(0.5)
+					task.wait(0.5)
 					s:Play()
 				elseif id == "off" or id == "0" then
 					for i, v in service.SoundService:GetChildren() do
-						if v.ClassName == "Sound" and v.Name == "ADONIS_SOUND" then
+						if v.ClassName == "Sound" and v.Name == "HYPERION_SOUND" then
 							v:Destroy()
 						end
 					end
@@ -4554,7 +4554,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for i, v in service.SoundService:GetChildren() do
-					if v.Name=="ADONIS_SOUND" then
+					if v.Name=="HYPERION_SOUND" then
 						v:Destroy()
 					end
 				end
@@ -4598,16 +4598,16 @@ return function(Vargs, env)
 					Parent = scr;
 				})
 
-				scr.Name = "ADONIS_FLIGHT"
+				scr.Name = "HYPERION_FLIGHT"
 
 				for i, v in service.GetPlayers(plr, args[1]) do
 					local part = v.Character and v.Character:FindFirstChild("HumanoidRootPart")
 					if part then
-						local oldp = part:FindFirstChild("ADONIS_FLIGHT_POSITION")
-						local oldpa = part:FindFirstChild("ADONIS_FLIGHT_POSITION_ATTACHMENT")
-						local oldg = part:FindFirstChild("ADONIS_FLIGHT_GYRO")
-						local oldga = part:FindFirstChild("ADONIS_FLIGHT_GYRO_ATTACHMENT")
-						local olds = part:FindFirstChild("ADONIS_FLIGHT")
+						local oldp = part:FindFirstChild("HYPERION_FLIGHT_POSITION")
+						local oldpa = part:FindFirstChild("HYPERION_FLIGHT_POSITION_ATTACHMENT")
+						local oldg = part:FindFirstChild("HYPERION_FLIGHT_GYRO")
+						local oldga = part:FindFirstChild("HYPERION_FLIGHT_GYRO_ATTACHMENT")
+						local olds = part:FindFirstChild("HYPERION_FLIGHT")
 						if oldp then oldp:Destroy() end
 						if oldpa then oldpa:Destroy() end
 						if oldg then oldg:Destroy() end
@@ -4616,15 +4616,15 @@ return function(Vargs, env)
 
                         local new = scr:Clone()
 						local flightPositionAttachment: Attachment = service.New("Attachment", {
-							Name = "ADONIS_FLIGHT_POSITION_ATTACHMENT",
+							Name = "HYPERION_FLIGHT_POSITION_ATTACHMENT",
 							Parent = part
 						})
 						local flightGyroAttachment: Attachment = service.New("Attachment", {
-							Name = "ADONIS_FLIGHT_GYRO_ATTACHMENT",
+							Name = "HYPERION_FLIGHT_GYRO_ATTACHMENT",
 							Parent = part
 						})
 						local flightPosition: AlignPosition = service.New("AlignPosition", {
-							Name = "ADONIS_FLIGHT_POSITION",
+							Name = "HYPERION_FLIGHT_POSITION",
 							MaxForce = 0,
 							Position = part.Position,
 							Attachment0 = flightPositionAttachment,
@@ -4632,7 +4632,7 @@ return function(Vargs, env)
 							Parent = part
 						})
 						local flightGyro: AlignOrientation = service.New("AlignOrientation", {
-							Name = "ADONIS_FLIGHT_GYRO",
+							Name = "HYPERION_FLIGHT_GYRO",
 							MaxTorque = 0,
 							CFrame = part.CFrame,
 							Attachment0 = flightGyroAttachment,
@@ -4662,7 +4662,7 @@ return function(Vargs, env)
 				for i, v in service.GetPlayers(plr, args[1]) do
 					local part = v.Character:FindFirstChild("HumanoidRootPart")
 					if part then
-						local scr = part:FindFirstChild("ADONIS_FLIGHT")
+						local scr = part:FindFirstChild("HYPERION_FLIGHT")
 						if scr then
 							local sVal = scr:FindFirstChild("Speed")
 							if sVal then
@@ -4687,11 +4687,11 @@ return function(Vargs, env)
 				for _, v in service.GetPlayers(plr, args[1]) do
 					local part = v.Character and v.Character:FindFirstChild("HumanoidRootPart")
 					if part then
-						local oldp = part:FindFirstChild("ADONIS_FLIGHT_POSITION")
-						local oldpa = part:FindFirstChild("ADONIS_FLIGHT_POSITION_ATTACHMENT")
-						local oldg = part:FindFirstChild("ADONIS_FLIGHT_GYRO")
-						local oldga = part:FindFirstChild("ADONIS_FLIGHT_GYRO_ATTACHMENT")
-						local olds = part:FindFirstChild("ADONIS_FLIGHT")
+						local oldp = part:FindFirstChild("HYPERION_FLIGHT_POSITION")
+						local oldpa = part:FindFirstChild("HYPERION_FLIGHT_POSITION_ATTACHMENT")
+						local oldg = part:FindFirstChild("HYPERION_FLIGHT_GYRO")
+						local oldga = part:FindFirstChild("HYPERION_FLIGHT_GYRO_ATTACHMENT")
+						local olds = part:FindFirstChild("HYPERION_FLIGHT")
 						if oldp then oldp:Destroy() end
 						if oldpa then oldpa:Destroy() end
 						if oldg then oldg:Destroy() end

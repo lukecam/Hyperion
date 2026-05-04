@@ -130,7 +130,7 @@ return function(Vargs, GetEnv)
 					events.ProcessRemote = event.OnClientEvent:Connect(Process.Remote)
 					events.ParentChildRemoved = remoteParent.ChildRemoved:Connect(function(child)
 						if (Core.RemoteEvent == eventData) and child == event and task.wait() then
-							warn("::ADONIS:: REMOTE EVENT REMOVED? RE-GRABBING");
+							warn("::HYPERION:: REMOTE EVENT REMOVED? RE-GRABBING");
 							log("~! REMOTEEVENT WAS REMOVED?")
 							Core.GetEvent();
 						end
@@ -322,9 +322,9 @@ return function(Vargs, GetEnv)
 					end
 				end
 
-				local AdonisDebugAPIBindable = ReplicatedStorage:FindFirstChild("Adonis_Debug_API")
-				if AdonisDebugAPIBindable then
-					AdonisDebugAPIBindable.OnInvoke = function(DebugCommand, ...)
+				local HyperionDebugAPIBindable = ReplicatedStorage:FindFirstChild("Hyperion_Debug_API")
+				if HyperionDebugAPIBindable then
+					HyperionDebugAPIBindable.OnInvoke = function(DebugCommand, ...)
 						local args = table.unpack(...)
 						if DebugCommand == "RunEnvFunc" then
 							local FunctionInEnvToRunPath = args[1]
@@ -357,7 +357,7 @@ return function(Vargs, GetEnv)
 				end
 			end
 
-			local AdonisGTable = NewProxy({
+			local HyperionGTable = NewProxy({
 				__index = function(tab,ind)
 					if ind == "Scripts" then
 						return API.Scripts
@@ -377,20 +377,20 @@ return function(Vargs, GetEnv)
 				__metatable = "API";
 			})
 
-			if not rawget(_G, "Adonis") then
+			if not rawget(_G, "Hyperion") then
 				if not table.isfrozen(_G) then
-					rawset(_G, "Adonis", AdonisGTable)
+					rawset(_G, "Hyperion", HyperionGTable)
 					StartLoop("APICheck", 1, function()
-						if rawget(_G, "Adonis") ~= AdonisGTable then
+						if rawget(_G, "Hyperion") ~= HyperionGTable then
 							if not table.isfrozen(_G) then
-								rawset(_G, "Adonis", AdonisGTable)
+								rawset(_G, "Hyperion", HyperionGTable)
 							else
-								warn("⚠️ ADONIS CRITICAL WARNING! MALICIOUS CODE IS TRYING TO CHANGE THE ADONIS _G API AND IT CAN'T BE SET BACK! PLEASE SHUTDOWN THE SERVER AND REMOVE THE MALICIOUS CODE IF POSSIBLE! 0x02412")
+								warn("⚠️ HYPERION CRITICAL WARNING! MALICIOUS CODE IS TRYING TO CHANGE THE HYPERION _G API AND IT CAN'T BE SET BACK! PLEASE SHUTDOWN THE SERVER AND REMOVE THE MALICIOUS CODE IF POSSIBLE! 0x02412")
 							end
 						end
 					end, true)
 				else
-					warn("The _G table was locked and the Adonis _G API could not be loaded. Error code 0x02417")
+					warn("The _G table was locked and the Hyperion _G API could not be loaded. Error code 0x02417")
 				end
 			end
 		end;

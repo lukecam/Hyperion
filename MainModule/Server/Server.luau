@@ -1,9 +1,9 @@
 -------------------
--- Adonis Server --
+-- Hyperion Server --
 -------------------
 --!nocheck
 																																																																																						  --[[
-This module is part of Adonis 1.0 and contains lots of old code;
+This module is part of Hyperion 1.0 and contains lots of old code;
 future updates will generally only be made to fix bugs, typos or functionality-affecting problems.
 
 If you find bugs or similar issues, please submit an issue report
@@ -114,7 +114,7 @@ local logError = function(plr, err)
 	end
 
 	if server.Core and server.Core.DebugMode then
-		warn(`:: Adonis :: Error: {plr}: {err}`)
+		warn(`:: Hyperion :: Error: {plr}: {err}`)
 	end
 
 	if server and server.Logs then
@@ -127,11 +127,11 @@ local logError = function(plr, err)
 end
 
 local print = function(...)
-	print(":: Adonis ::", ...)
+	print(":: Hyperion ::", ...)
 end
 
 local warn = function(...)
-	warn(":: Adonis ::", ...)
+	warn(":: Hyperion ::", ...)
 end
 
 local function Pcall(func, ...)
@@ -213,7 +213,7 @@ local function LoadModule(module, yield, envVars, noEnv, isCore)
 	if server.Logs then
 		server.Logs.AddLog(server.Logs.Script,{
 			Text = `Loaded Module: {module}`;
-			Desc = "Adonis loaded a core module or plugin";
+			Desc = "Hyperion loaded a core module or plugin";
 		})
 	end
 end
@@ -247,7 +247,7 @@ end;
 
 local function CleanUp(reason)
 	if not server.Data or not server.Data.SilentStartup then
-		print(`Beginning Adonis cleanup & shutdown process due to {reason}...`)
+		print(`Beginning Hyperion cleanup & shutdown process due to {reason}...`)
 	end
 
 	local data = service.UnWrap(server.Data)
@@ -260,7 +260,7 @@ local function CleanUp(reason)
 		end
 	end
 
-	server.Model.Name = "Adonis_Loader"
+	server.Model.Name = "Hyperion_Loader"
 	server.Model.Parent = service.ServerScriptService
 	server.Running = false
 
@@ -452,15 +452,15 @@ end
 --// Init
 return service.NewProxy({
 	__call = function(tab, data)
-		local mutex = service.RunService:FindFirstChild("__Adonis_MODULE_MUTEX")
+		local mutex = service.RunService:FindFirstChild("__Hyperion_MODULE_MUTEX")
 		if mutex then
 			warn("\n-----------------------------------------------"
-				.."\nAdonis server-side is already running! Aborting..."
+				.."\nHyperion server-side is already running! Aborting..."
 				.."\n-----------------------------------------------")
 			script:Destroy()
 			return "FAILED"
 		else
-			mutex = service.New("StringValue", {Name = "__Adonis_MODULE_MUTEX", Value = "Running"})
+			mutex = service.New("StringValue", {Name = "__Hyperion_MODULE_MUTEX", Value = "Running"})
 			local mutexBackup = mutex:Clone()
 			local function makePersistent(m)
 				local connection1, connection2 = nil, nil
@@ -468,7 +468,7 @@ return service.NewProxy({
 					if not m or m.Parent ~= service.RunService then
 						connection1:Disconnect()
 						connection2:Disconnect()
-						--warn("Adonis module mutex removed; Regenerating...")
+						--warn("Hyperion module mutex removed; Regenerating...")
 						mutex = mutexBackup:Clone()
 						mutex.Archivable = false
 						mutex.Parent = service.RunService
@@ -477,8 +477,8 @@ return service.NewProxy({
 				end)
 				connection2 = m:GetPropertyChangedSignal("Name"):Connect(function()
 					pcall(function()
-						if m and m.Name ~= "__Adonis_MODULE_MUTEX" then
-							m.Name = "__Adonis_MODULE_MUTEX"
+						if m and m.Name ~= "__Hyperion_MODULE_MUTEX" then
+							m.Name = "__Hyperion_MODULE_MUTEX"
 						end
 					end)
 				end)
@@ -502,7 +502,7 @@ return service.NewProxy({
 			data.NightlyMode = true
 
 			if not silentStartup then
-				warn("Currently using Adonis Nightly MainModule; intended for testing & development only!")
+				warn("Currently using Hyperion Nightly MainModule; intended for testing & development only!")
 			end
 		end
 
@@ -515,13 +515,13 @@ return service.NewProxy({
 
 		if data.DebugMode == true then
 			if not silentStartup then
-				warn("Adonis was loaded with DebugMode enabled; This is intended for development use only, certain debug features intended for development use will be enabled, which can weaken Adonis's security in a production environment.")
+				warn("Hyperion was loaded with DebugMode enabled; This is intended for development use only, certain debug features intended for development use will be enabled, which can weaken Hyperion's security in a production environment.")
 			end
 
-			local AdonisDebugEnabled = service.New("BoolValue")
-			AdonisDebugEnabled.Name = "ADONIS_DEBUGMODE_ENABLED"
-			AdonisDebugEnabled.Value = true
-			AdonisDebugEnabled.Parent = Folder.Parent.Client
+			local HyperionDebugEnabled = service.New("BoolValue")
+			HyperionDebugEnabled.Name = "HYPERION_DEBUGMODE_ENABLED"
+			HyperionDebugEnabled.Value = true
+			HyperionDebugEnabled.Parent = Folder.Parent.Client
 		end
 
 		setfenv(1, setmetatable({}, {__metatable = unique}))
@@ -660,7 +660,7 @@ return service.NewProxy({
 					end
 					return ""
 				end,
-				__metatable = if data.DebugMode then unique else "Adonis_MatIcons"
+				__metatable = if data.DebugMode then unique else "Hyperion_MatIcons"
 			})
 		end
 
@@ -777,7 +777,7 @@ return service.NewProxy({
 		if server.Logs then
 			server.Logs.AddLog(server.Logs.Script, {
 				Text = `Finished loading version {data.NightlyMode and "Nightly" or server.Version}`;
-				Desc = `Adonis has finished loading version {data.NightlyMode and "Nightly" or server.Version} by {data.Loader and data.Loader:GetFullName() or "UNKNOWN"}{data.LoaderVersion and (" version: "..data.LoaderVersion) or ""}`;
+				Desc = `Hyperion has finished loading version {data.NightlyMode and "Nightly" or server.Version} by {data.Loader and data.Loader:GetFullName() or "UNKNOWN"}{data.LoaderVersion and (" version: "..data.LoaderVersion) or ""}`;
 			})
 		else
 			warn("CRITICAL ERROR! SERVER.LOGS TABLE IS MISSING. THIS SHOULDN'T HAPPEN! SOMETHING WENT WRONG WHILE LOADING CORE MODULES(?)");
@@ -787,7 +787,7 @@ return service.NewProxy({
 		return "SUCCESS"
 	end;
 	__tostring = function()
-		return "Adonis"
+		return "Hyperion"
 	end;
 	__metatable = nil; -- This is now set in __call if DebugMode isn't enabled.
 })

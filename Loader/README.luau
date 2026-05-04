@@ -1,12 +1,12 @@
 --[[
 	--------------------------------------------
-	--                 Adonis                 --
+	--                 Hyperion                 --
 	--          By Epix Incorporated          --
 	--------------------------------------------
 	--  Not Everything is so Black and White  --
 	--------------------------------------------
 
-	A lot of time goes into maintaining and updating Adonis. If you enjoy using Adonis,
+	A lot of time goes into maintaining and updating Hyperion. If you enjoy using Hyperion,
 	please consider leaving us a review, as your feedback means a lot:
 	https://create.roblox.com/store/asset/7510622625/
 
@@ -15,7 +15,7 @@
 	-- Getting started --
 	---------------------
 
-	- It's recommend you store Adonis_Loader in 'ServerScriptService'.
+	- It's recommend you store Hyperion_Loader in 'ServerScriptService'.
 	- Configure Ranks in Config -> Settings -> Ranks module.
 	- Configure general settings like prefixes, command settings, etc in Config -> Settings -> General module.
 	- You can find the rest of the settings modules at Config -> Settings. They are sorted by categories.

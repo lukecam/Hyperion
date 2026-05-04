@@ -910,7 +910,7 @@ local function run_lua_func(state, env, upvals)
 								pc = pc + nups
 							end
 
-							memory[inst.A] = (sub.source and string.sub(sub.source, 1, 39) == "SUPER_SECRET_ADONIS_MULTITHREAD_PREFIX_") and new_threaded_closure(sub, env, uvlist) or lua_wrap_state(sub, env, uvlist)
+							memory[inst.A] = (sub.source and string.sub(sub.source, 1, 39) == "SUPER_SECRET_HYPERION_MULTITHREAD_PREFIX_") and new_threaded_closure(sub, env, uvlist) or lua_wrap_state(sub, env, uvlist)
 						else
 							--[[TESTSET]]
 							local A = inst.A

@@ -43,7 +43,7 @@ jobs:
             echo "Is pre-release: $GITHUB_IS_PRE_RELEASE"
             exit 1
           fi
-          echo "output_name=Adonis_${BUILD_TYPE}_${GITHUB_REF#refs/*/}_$CUR_DATE_TIME" >> "$GITHUB_OUTPUT"
+          echo "output_name=Hyperion_${BUILD_TYPE}_${GITHUB_REF#refs/*/}_$CUR_DATE_TIME" >> "$GITHUB_OUTPUT"
       - uses: ok-nick/setup-aftman@v0.4.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -63,13 +63,13 @@ jobs:
           path: ${{ steps.naming.outputs.output_name }}.rbxm
         
       - name: Build Loader
-        run: rojo build -o Adonis_Loader.rbxm .github/loader.deploy.project.json
+        run: rojo build -o Hyperion_Loader.rbxm .github/loader.deploy.project.json
         
       - name: Build MainModule
-        run: rojo build -o Adonis_MainModule.rbxm .github/module.deploy.project.json
+        run: rojo build -o Hyperion_MainModule.rbxm .github/module.deploy.project.json
         
       - name: Build Alerts Module
-        run: rojo build -o Adonis_AlertsModule.rbxm .github/alerts.deploy.project.json
+        run: rojo build -o Hyperion_AlertsModule.rbxm .github/alerts.deploy.project.json
         
       - name: Send Standalone Release to Discord channel
         uses: tsickert/discord-webhook@v7.0.0
@@ -89,7 +89,7 @@ jobs:
             "assetType": "Model",
             "assetId": "${{ secrets.LOADER_ID }}"
           }' \
-          --form 'fileContent=@Adonis_Loader.rbxm;type=model/x-rbxm'
+          --form 'fileContent=@Hyperion_Loader.rbxm;type=model/x-rbxm'
 
       - name: Publish Module
         run: |
@@ -99,7 +99,7 @@ jobs:
             "assetType": "Model",
             "assetId": "${{ secrets.MODULE_ID }}"
           }' \
-          --form 'fileContent=@Adonis_MainModule.rbxm;type=model/x-rbxm'
+          --form 'fileContent=@Hyperion_MainModule.rbxm;type=model/x-rbxm'
 
       - name: Publish Alerts Module
         run: |
@@ -109,4 +109,4 @@ jobs:
             "assetType": "Model",
             "assetId": "${{ secrets.ALERTS_MODULE_ID }}"
           }' \
-          --form 'fileContent=@Adonis_AlertsModule.rbxm;type=model/x-rbxm'
+          --form 'fileContent=@Hyperion_AlertsModule.rbxm;type=model/x-rbxm'

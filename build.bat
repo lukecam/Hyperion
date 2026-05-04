@@ -21,7 +21,7 @@ echo Updating Roblox standard library with %SELENE_COMMAND%
 echo Checking for lint errors with %SELENE_COMMAND% from ./Loader and ./MainModule 
 %SELENE_COMMAND% ./MainModule ./Loader
 
-echo Running %ROJO_COMMAND% build -o Adonis.rbxl
-%ROJO_COMMAND% build -o Adonis.rbxl
+echo Running %ROJO_COMMAND% build -o Hyperion.rbxl
+%ROJO_COMMAND% build -o Hyperion.rbxl
 
 ENDLOCAL

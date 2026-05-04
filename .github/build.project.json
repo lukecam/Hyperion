@@ -1,12 +1,12 @@
 {
-	"name": "Adonis_Rojo",
+	"name": "Hyperion_Rojo",
 	"emitLegacyScripts": true,
 	"tree": {
 		"$className": "Folder",
 		"MainModule": {
 			"$path": "../MainModule"
 		},
-		"Adonis_Loader": {
+		"Hyperion_Loader": {
 			"$className": "Model",
 			"$path": "../Loader"
 		}

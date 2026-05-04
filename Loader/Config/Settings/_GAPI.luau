@@ -3,8 +3,8 @@
 ---------------------
 
 return {
-	G_API = true;					-- If true, allows other server scripts to access certain functions described in the API module through _G.Adonis
-	G_Access = false;				-- If enabled, allows other scripts to access Adonis using _G.Adonis.Access; Scripts will still be able to do things like _G.Adonis.CheckAdmin(player)
+	G_API = true;					-- If true, allows other server scripts to access certain functions described in the API module through _G.Hyperion
+	G_Access = false;				-- If enabled, allows other scripts to access Hyperion using _G.Hyperion.Access; Scripts will still be able to do things like _G.Hyperion.CheckAdmin(player)
 	G_Access_Key = "Example_Key";	-- Key required to use the _G access API; Example_Key will not work for obvious reasons
 	G_Access_Perms = "Read";		-- Access perms
 	Allowed_API_Calls = {

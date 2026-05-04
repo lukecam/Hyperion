@@ -166,7 +166,7 @@ return function(data, env)
 		sound.SoundId = 'rbxassetid://203785584'--client.NotificationSound
 		sound.Volume = 0.2
 		sound:Play()
-		wait(0.5)
+		task.wait(0.5)
 		sound:Destroy()
 	end)
 	
@@ -174,7 +174,7 @@ return function(data, env)
 		timer.Visible = true
 		repeat
 			timer.Text = math.floor(time*100)/100
-			wait(1)
+			task.wait(1)
 			time = time-1
 		until time<=0 or not frame or not frame.Parent
 		

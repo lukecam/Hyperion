@@ -13,8 +13,8 @@ local player = Players.LocalPlayer
 local char = player.Character
 
 local human = char:FindFirstChildOfClass("Humanoid")
-local bPos: AlignPosition = part:WaitForChild("ADONIS_FLIGHT_POSITION")
-local bGyro: AlignOrientation = part:WaitForChild("ADONIS_FLIGHT_GYRO")
+local bPos: AlignPosition = part:WaitForChild("HYPERION_FLIGHT_POSITION")
+local bGyro: AlignOrientation = part:WaitForChild("HYPERION_FLIGHT_GYRO")
 
 local speedVal: NumberValue = script:WaitForChild("Speed")
 local noclip: BoolValue = script:WaitForChild("Noclip")

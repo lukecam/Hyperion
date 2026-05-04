@@ -51,12 +51,12 @@ return function(Vargs, GetEnv)
 			info = tostring(info) or "No Reason Given"
 			
 			if service.RunService:IsStudio() then
-				warn(`:: Adonis Anti Cheat :: Anticheat triggered for {p.Name}, not kicking because in studio; {info}`)
+				warn(`:: Hyperion Anti Cheat :: Anticheat triggered for {p.Name}, not kicking because in studio; {info}`)
 				return;
 			end
 			
 			pcall(function()
-				service.UnWrap(p):Kick(`:: Adonis Anti Cheat :: {info}`)
+				service.UnWrap(p):Kick(`:: Hyperion Anti Cheat :: {info}`)
 			end)
 
 			task.wait(1)
@@ -134,7 +134,7 @@ return function(Vargs, GetEnv)
 			local info = string.sub(string.gsub(tostring(info), "\n", ""), 1, 50)
 
 			if Anti.KickedPlayers[player] then
-				player:Kick(`:: Adonis Anti Cheat ::\n{info}`)
+				player:Kick(`:: Hyperion Anti Cheat ::\n{info}`)
 				return
 			elseif service.RunService:IsStudio() then
 				warn(`ANTI-EXPLOIT: {player.Name} {action} {info}`)

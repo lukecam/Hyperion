@@ -1,12 +1,12 @@
 <div align="center">
 
-# 📜 Adonis Contribution Policy
+# 📜 Hyperion Contribution Policy
 
 ![Logo of Epix Incorporated](https://user-images.githubusercontent.com/81153405/175760639-fc3b2352-8066-48cc-b2e6-2ea0ad69e33e.png)
 
-Adonis is an ever-expanding, frequently updated, and sometimes complex system.
-To keep Adonis functional and somewhat readable rather than a tangled mess, this document sets out the policies governing contributions to consider before submitting a pull request:
-(A very abridged version is available [here](https://github.com/Epix-Incorporated/Adonis/blob/master/.github/pull_request_template.md))
+Hyperion is an ever-expanding, frequently updated, and sometimes complex system.
+To keep Hyperion functional and somewhat readable rather than a tangled mess, this document sets out the policies governing contributions to consider before submitting a pull request:
+(A very abridged version is available [here](https://github.com/Epix-Incorporated/Hyperion/blob/master/.github/pull_request_template.md))
 
 ## 1. Governance
 
@@ -18,13 +18,13 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 ## 2. Scope of Contributions
 
 - **Permitted Contributions:**  
-  - Additions or modifications to Adonis features, commands, or systems.
+  - Additions or modifications to Hyperion features, commands, or systems.
   - Bug fixes and stability improvements.
   - Documentation and wiki improvements.
   - Tutorials or technical references to support users and plugin developers.
 
 - **Prohibited Contributions:**  
-  - Code or features that violate Roblox’s rules or could endanger games using Adonis.
+  - Code or features that violate Roblox’s rules or could endanger games using Hyperion.
   - Any form of obfuscated code, either intentional or unintentional.
   - **Note**: There is a very clear/obvious difference between unavoidably complex code and intentionally complicated code. Maintainers will check all file changes before merging and can usually spot something abnormal quickly.
   - Contributions that add unnecessary complexity without clear benefit.
@@ -37,7 +37,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
     - `Add :somenewcommand`  
     - `Fix :somecommand not accounting for XXX`  
     - `Add confirmation prompt for :somecommand to prevent misuse`  
-  - Adonis commands must be referenced by their usage form (e.g. `:somecommand`), not the internal identifier (e.g. SomeCommand).
+  - Hyperion commands must be referenced by their usage form (e.g. `:somecommand`), not the internal identifier (e.g. SomeCommand).
 
 - **Descriptions:**  
   - Must provide a comprehensive list of changes.
@@ -53,7 +53,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 
 ## 4. Code Quality and Style
 
-- There is no set styleguide for Adonis code, however contributions should match the style of surrounding code.
+- There is no set styleguide for Hyperion code, however contributions should match the style of surrounding code.
 - The [Roblox Luau Style Guide](https://roblox.github.io/lua-style-guide/) should be followed where applicable.
 - English must be the language used for variable names and user-facing text.
 - Contributors must ensure code is tested prior to submission.
@@ -61,7 +61,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 ## 5. Changelog Policy
 
 - The changelog is the record of all notable changes.
-- Each release of Adonis is documented within the changelog. Adonis uses two forms of releases:
+- Each release of Hyperion is documented within the changelog. Hyperion uses two forms of releases:
 	- Full releases: most PRs are released in full releases.
 	- Patch releases: denoted by adding a decimal version. Maintainers may choose to include your PR in a patch release if it is related to a non-trivial and/or uncommon bug.
 - Releases are delineated by:
@@ -69,7 +69,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 	- the ISO 8601 date (YYYY–MM–DD) and the time (usually in UTC, some old releases in EST),
 	- and the name of the maintainer responsible for that release.
 - The version number uses decimal versioning (e.g. v1.2 is an older version than v1.12), older releases use semantic versioning.
-- Entries should be concise, in the present tense, and reference Adonis commands by their usage name (e.g. `:somecommand`).
+- Entries should be concise, in the present tense, and reference Hyperion commands by their usage name (e.g. `:somecommand`).
 - Maintainers will base the changelog entry off the title of your PR and may copyedit it for clarity.
 - Maintainers may edit or reorganise entries before release publication.
 
@@ -90,7 +90,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 ## 8. Documentation and Wiki
 
 - Wiki contributions should focus on:  
-  - Technical documentation of Adonis functions and variables.
+  - Technical documentation of Hyperion functions and variables.
   - Guidance for plugin developers.
   - Tutorials for new or inexperienced users.
 - To contribute, contact a maintainer with your proposed addition for review.
@@ -106,7 +106,7 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 ## 10. Contributor Recognition
 
 - Accepted contributors may request the "GitHub Contributor" role in the [Discord server](https://discord.com/invite/H5RvTP3) and the "Contributors" rank in the [Roblox group](https://www.roblox.com/groups/886423).
-- To request recognition, post your GitHub, Discord, and Roblox usernames in the [discussion thread](https://github.com/Epix-Incorporated/Adonis/discussions/433).
+- To request recognition, post your GitHub, Discord, and Roblox usernames in the [discussion thread](https://github.com/Epix-Incorporated/Hyperion/discussions/433).
 - Recognition is **not** granted for non-code contributions (e.g. .github changes, typo fixes), a maintainer will usually let you know if this is the case.
 
 ## 11. Communication
@@ -116,6 +116,6 @@ To keep Adonis functional and somewhat readable rather than a tangled mess, this
 
 <div align="center">
 
-<sub>Adonis Contribution Policy 2025</sub>
+<sub>Hyperion Contribution Policy 2025</sub>
 
 </div>

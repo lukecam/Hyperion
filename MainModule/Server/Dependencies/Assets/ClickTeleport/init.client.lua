@@ -21,7 +21,7 @@ local function onButton1Down(mouse)
 	elseif mode == "Teleport" then
 		local rootPart = humanoid.RootPart
 		if not rootPart then return end
-		local FlightPos, FlightGyro = rootPart:FindFirstChild("ADONIS_FLIGHT_POSITION"), rootPart:FindFirstChild("ADONIS_FLIGHT_GYRO")
+		local FlightPos, FlightGyro = rootPart:FindFirstChild("HYPERION_FLIGHT_POSITION"), rootPart:FindFirstChild("HYPERION_FLIGHT_GYRO")
 		local pos = mouse.Hit.Position
 
 		if FlightPos and FlightGyro then  

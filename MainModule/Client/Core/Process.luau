@@ -125,7 +125,7 @@ return function(Vargs, GetEnv)
 
 		ErrorMessage = function(Message, Trace, Script)
 			--service.FireEvent("ErrorMessage", Message, Trace, Script)
-			if Message and Message ~= "nil" and Message ~= "" and (string.find(Message,":: Adonis ::") or string.find(Message,script.Name) or Script == script) then
+			if Message and Message ~= "nil" and Message ~= "" and (string.find(Message,":: Hyperion ::") or string.find(Message,script.Name) or Script == script) then
 				logError(`{Message} - {Trace}`)
 			end
 		end;
@@ -188,7 +188,7 @@ return function(Vargs, GetEnv)
 				local function onCommandAdded(command)
 					if not command:IsA("TextChatCommand") then
 						return
-					elseif string.sub(command.Name, 1, 7) ~= "Adonis_" then
+					elseif string.sub(command.Name, 1, 7) ~= "Hyperion_" then
 						return
 					elseif not Process.TextChatCommands[command.Name] then
 						Process.TextChatCommands[command.Name] = command

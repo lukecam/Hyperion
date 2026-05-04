@@ -10,7 +10,7 @@ return function(Vargs, GetEnv)
 
 	local thisJobId = game.JobId;
 	local messagingService = service.MessagingService;
-	local encryptedSubKey = Core.DataStoreEncode("Adonis_CrossServerMessaging");
+	local encryptedSubKey = Core.DataStoreEncode("Hyperion_CrossServerMessaging");
 
 	local messagesSent = 0;
 	local lastMessageSent = os.clock();
@@ -30,7 +30,7 @@ return function(Vargs, GetEnv)
 	--// Cross Server Commands
 	Core.CrossServerCommands = {
 		ServerChat = function(jobId, data)
-			-- This function does not appear to be used in the Adonis codebase.
+			-- This function does not appear to be used in the Hyperion codebase.
 			-- There is also a duplicate function of this named "CrossServerChat"
 			-- in MainModule/Server/Core/Process.luau which is not used.
 			if data then
@@ -110,11 +110,11 @@ return function(Vargs, GetEnv)
 			Logs:AddLog("Script", `Global restart {if typeof(countdown) == "number" then `in {countdown} seconds` else ``} requested for "{reason}"`)
 			if typeof(countdown) == "number" then
 				Functions.Hint(`Global restart happening in {if countdown < 60 then countdown..` seconds` else math.floor(countdown / 60)..` minute{if countdown > 119 then "s" else ""}`}. Reason: {reason}`, service.GetPlayers())
-				local resumeTask, adonisTask
-				resumeTask, adonisTask = service.Threads.NewTask("Global Restart Countdown", function()
+				local resumeTask, hyperionTask
+				resumeTask, hyperionTask = service.Threads.NewTask("Global Restart Countdown", function()
 					while countdown > 0 do
 						countdown = math.ceil(countdown - task.wait(1))
-						if adonisTask.R_Status ~= "Running" then
+						if hyperionTask.R_Status ~= "Running" then
 							-- The thread was killed. Do not continue.
 							return
 						end
@@ -128,7 +128,7 @@ return function(Vargs, GetEnv)
 					Functions.Hint(`This server is now restarting. Reason: {reason}`, service.GetPlayers(), 1000)
 					Admin.RunCommand(`{Settings.Prefix}restart`, reason)
 				end)
-				adonisTask.abortable = abortable
+				hyperionTask.abortable = abortable
 				resumeTask()
 			else
 				Functions.Hint(`This server is now restarting. Reason: {reason}`, service.GetPlayers(), 1000)
@@ -137,11 +137,11 @@ return function(Vargs, GetEnv)
 		end;
 
 		GlobalRestartAbort = function(jobId)
-			for index, adonisTask in service.Threads.Tasks do
-				if adonisTask.Name == "Global Restart Countdown" then
-					if not adonisTask.abortable then return false, "This global restart is not abortable." end
-					pcall(coroutine.close, adonisTask.Thread) -- Would use task.Kill() however that appears to call coroutine.yield instead of coroutine.close?
-					adonisTask.Remove()
+			for index, hyperionTask in service.Threads.Tasks do
+				if hyperionTask.Name == "Global Restart Countdown" then
+					if not hyperionTask.abortable then return false, "This global restart is not abortable." end
+					pcall(coroutine.close, hyperionTask.Thread) -- Would use task.Kill() however that appears to call coroutine.yield instead of coroutine.close?
+					hyperionTask.Remove()
 					Functions.Hint("Global restart aborted. This server will no longer restart.", service.GetPlayers())
 					return true, "Restart aborted for this server."
 				end
@@ -285,7 +285,7 @@ return function(Vargs, GetEnv)
 			local answers = args[1]
 			local anstab = {}
 			local responses = {}
-			local voteKey = `ADONISVOTE{math.random()}`
+			local voteKey = `HYPERIONVOTE{math.random()}`
 			local startTime = os.clock()
 
 			local msgSub = messagingService:SubscribeAsync(voteKey, function(data)

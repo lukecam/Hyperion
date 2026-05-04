@@ -64,15 +64,15 @@ return function(Vargs, GetEnv)
 									return false
 								elseif Admin.IsMuted(SenderPlayer) then -- // Mute handler
 									if IsOriginalSender then
-										Remote.Send(SenderPlayer, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Adonis Chat]: </font><b>You are muted!</b> Other players cannot see your messages.`)
+										Remote.Send(SenderPlayer, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Hyperion Chat]: </font><b>You are muted!</b> Other players cannot see your messages.`)
 									end
 
 									return false
 								elseif Admin.SlowMode and not Admin.CheckAdmin(SenderPlayer) and slowCache[SenderPlayer] and os.time() - slowCache[SenderPlayer] < Admin.SlowMode then
 									if IsOriginalSender then --// Only show this for the person sending! Hide for others, however
-										--Functions.Notification("You are chatting too fast!", string.format("[Adonis] :: Slow mode enabled! (%g second(s) remaining)", Admin.SlowMode - (os.time() - slowCache[SenderPlayer])), {SenderPlayer}, 10)
+										--Functions.Notification("You are chatting too fast!", string.format("[Hyperion] :: Slow mode enabled! (%g second(s) remaining)", Admin.SlowMode - (os.time() - slowCache[SenderPlayer])), {SenderPlayer}, 10)
 
-										Remote.Send(SenderPlayer, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Adonis Chat]: </font><b>You are sending messages too fast! {string.format("(%g second(s) remaining)", Admin.SlowMode - (os.time() - slowCache[SenderPlayer]))}</b>`)
+										Remote.Send(SenderPlayer, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Hyperion Chat]: </font><b>You are sending messages too fast! {string.format("(%g second(s) remaining)", Admin.SlowMode - (os.time() - slowCache[SenderPlayer]))}</b>`)
 									end
 
 									return false
@@ -182,7 +182,7 @@ return function(Vargs, GetEnv)
 						end
 					end)
 					service.Events.MutedPlayerChat_UnFiltered:Connect(function(p, ...)
-						Remote.Send(p, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Adonis Chat]: </font><b>You are muted!</b> Other players cannot see your messages.`)
+						Remote.Send(p, "Function", "DisplaySystemMessageInTextChat", nil, `<font color="rgb(130, 100, 130)">[Hyperion Chat]: </font><b>You are muted!</b> Other players cannot see your messages.`)
 					end)
 				end
 
@@ -903,7 +903,7 @@ return function(Vargs, GetEnv)
 						ran, ret = pcall(service.MarketPlace.PlayerOwnsAsset, service.MarketPlace, p, tonumber(pass))
 					end
 
-					if (ran and ret) or (pGroup and pGroup.Rank >= 10) then --// Complimentary donor access is given to Adonis contributors & developers.
+					if (ran and ret) or (pGroup and pGroup.Rank >= 10) then --// Complimentary donor access is given to Hyperion contributors & developers.
 						Variables.CachedDonors[key] = os.time()
 						return true
 					end
@@ -1178,7 +1178,7 @@ return function(Vargs, GetEnv)
 
 					if container and container:IsA("Folder") then
 						for _, v in container:GetChildren() do
-							if string.sub(v.Name, 1, 7) == "Adonis_" then
+							if string.sub(v.Name, 1, 7) == "Hyperion_" then
 								v:Destroy()
 							end
 						end
@@ -1223,7 +1223,7 @@ return function(Vargs, GetEnv)
 
 							if command1 then
 								local command = service.New("TextChatCommand", {
-									Name = `Adonis_{name}`,
+									Name = `Hyperion_{name}`,
 									PrimaryAlias = command1,
 									SecondaryAlias = command2 or "",
 									Archivable = false,
@@ -1363,7 +1363,7 @@ return function(Vargs, GetEnv)
 				[`{playerPrefix}removealias`] = true;
 				[`{playerPrefix}client`] = true;
 				[`{playerPrefix}userpanel`] = true;
-				[":adonissettings"] = true;
+				[":hyperionsettings"] = true;
 			}
 			--return Admin.CommandCache[alias:lower()] --// Alternatively, we could make it so you can't overwrite ANY existing commands...
 			return blacklist[alias];
@@ -1393,7 +1393,7 @@ return function(Vargs, GetEnv)
 							continue
 						end
 						local trimmedMsg = Functions.Trim(msg)
-						--// Use Adonis split to better support various characters that string.split can't handle properly
+						--// Use Hyperion split to better support various characters that string.split can't handle properly
 						local aliasCharacters = Functions.Split(trimmedMsg, Settings.SplitKey)
 						--// Matching an alias can result in an infinite loop like running !fire with the alias !f, it will infinitely run the !f alias
 						--// If you have an alias !f

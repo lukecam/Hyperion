@@ -103,7 +103,7 @@ return function(str, env)
 	local name = (env and type(env.script) == "userdata") and env.script:GetFullName()
 	local ran, error = xpcall(function()
 		local zio = assert(luaZ:init(luaZ:make_getS(str), nil), "Failed to get buffered stream")
-		local func = luaY:parser(LuaState, zio, nil, name or "::Adonis::Loadstring::")
+		local func = luaY:parser(LuaState, zio, nil, name or "::Hyperion::Loadstring::")
 
 		if PROTO_CONVERT and env ~= "LuaC" then
 			protoConvert(func, fiOne.OPCODE_RM, fiOne.OPCODE_T, fiOne.OPCODE_M)

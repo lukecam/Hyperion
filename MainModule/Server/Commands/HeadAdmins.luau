@@ -247,10 +247,10 @@ return function(Vargs, env)
 			Prefix = Settings.Prefix;
 			Commands = {"fullclear", "clearinstances", "fullclr"};
 			Args = {};
-			Description = "Removes any instance created server-side by Adonis; May break things";
+			Description = "Removes any instance created server-side by Hyperion; May break things";
 			AdminLevel = "HeadAdmins";
 			Function = function(plr: Player, args: {string})
-				local objects = service.GetAdonisObjects()
+				local objects = service.GetHyperionObjects()
 				for i, v in objects do
 					v:Destroy()
 				end
@@ -543,7 +543,7 @@ return function(Vargs, env)
 					local ans = Remote.GetGui(plr, "YesNoPrompt", {
 						Icon = server.MatIcons.Warning;
 						Question = "Are you sure you want to load this script onto the server? (Once confirmed, you will not be asked again)";
-						Title = "Adonis Loadstring";
+						Title = "Hyperion Loadstring";
 						Delay = 3;
 					})
 
@@ -557,7 +557,7 @@ return function(Vargs, env)
 				assert(string.find(bytecode, "\27Lua"), `Script unable to be created: {string.gsub(bytecode, "Loadstring%.LuaX:%d+:", "")}`)
 
 				local cl = Core.NewScript("Script", args[1], true)
-				cl.Name = "[Adonis] Script"
+				cl.Name = "[Hyperion] Script"
 				cl.Disabled = false
 				cl.Parent = service.ServerScriptService
 				Functions.Hint("Ran Script", {plr})
@@ -606,7 +606,7 @@ return function(Vargs, env)
 					end
 
 					local cl = new:Clone()
-					cl.Name = "[Adonis] LocalScript"
+					cl.Name = "[Hyperion] LocalScript"
 					cl.Disabled = false
 					cl.Parent = PlayerGui
 
@@ -637,7 +637,7 @@ return function(Vargs, env)
 					local ans = Remote.GetGui(plr, "YesNoPrompt", {
 						Icon = server.MatIcons.Warning;
 						Question = "Are you sure you want to use the starterscript command? (Once confirmed, you will not be asked again)";
-						Title = "Adonis StarterScript";
+						Title = "Hyperion StarterScript";
 						Delay = 3;
 					})
 
@@ -655,7 +655,7 @@ return function(Vargs, env)
 				assert(string.find(bytecode, "\27Lua"), `LocalScript unable to be created: {string.gsub(bytecode, "Loadstring%.LuaX:%d+:", "")}`)
 
 				local new = Core.NewScript("LocalScript", args[2], true)
-				new.Name = `[Adonis] {args[1]}`
+				new.Name = `[Hyperion] {args[1]}`
 				new.Parent = service.StarterGui
 				new.Disabled = false
 				Functions.Hint("Created starter script", {plr})
@@ -673,8 +673,8 @@ return function(Vargs, env)
 
 				local result = {}
 				for _,v : Instance in service.StarterGui:GetChildren() do
-					if v:IsA("LocalScript") and v.Name:find("[Adonis]") then
-						table.insert(result, (v.Name:gsub("%[Adonis%] ", "")))
+					if v:IsA("LocalScript") and v.Name:find("[Hyperion]") then
+						table.insert(result, (v.Name:gsub("%[Hyperion%] ", "")))
 					end
 				end
 
@@ -697,8 +697,8 @@ return function(Vargs, env)
 				assert(args[1], "No starterscript name provided!")
 
 				for _,v : Instance in service.StarterGui:GetChildren() do
-					if v:IsA("LocalScript") and v.Name:find("[Adonis]") then
-						if v.Name:gsub("%[Adonis%] ", ""):lower() == args[1]:lower() or args[1]:lower() == "all" then
+					if v:IsA("LocalScript") and v.Name:find("[Hyperion]") then
+						if v.Name:gsub("%[Hyperion%] ", ""):lower() == args[1]:lower() or args[1]:lower() == "all" then
 							service.Delete(v)
 							Functions.Hint("Removed starter script "..v.Name, {plr})
 						end

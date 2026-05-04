@@ -409,18 +409,18 @@ return function(data, env)
 				c.ChildAdded:Connect(populate)
 			end
 		end)
-		wait(0.5)
+		task.wait(0.5)
 		populate()
 	end)
 	
 	service.Teams.ChildAdded:Connect(populate)
 	service.Teams.ChildRemoved:Connect(populate)
 	
-	wait(0.5)
+	task.wait(0.5)
 	populate()
 	--]]
 	
-	while wait(0.5) do
+	while task.wait(0.5) do
 		populate()
 	end
 end]]></ProtectedString>

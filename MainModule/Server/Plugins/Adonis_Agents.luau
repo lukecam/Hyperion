@@ -13,7 +13,7 @@ return function(Vargs, GetEnv)
 
 	Commands.Agents = {
 		Prefix = Settings.PlayerPrefix;
-		Commands = {"agents"; "trelloagents"; "showagents"; "adonisagents"; "epixagents";};
+		Commands = {"agents"; "trelloagents"; "showagents"; "hyperionagents"; "epixagents";};
 		Args = {};
 		Hidden = true;
 		Description = "Shows a list of Trello agents pulled from the configured boards";
@@ -52,5 +52,5 @@ return function(Vargs, GetEnv)
 		end
 	end
 
-	Logs:AddLog("Script", "Adonis Agents module loaded")
+	Logs:AddLog("Script", "Hyperion Agents module loaded")
 end

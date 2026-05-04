@@ -14,7 +14,7 @@
 	     /_/                                       /_/                                        
 
 	-----------------------
-	-- Adonis MainModule --
+	-- Hyperion MainModule --
 	-----------------------
 
 	Distributed under the MIT license.

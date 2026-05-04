@@ -702,7 +702,7 @@ return function(data, env)
 		frame.Position = UDim2.new()
 		text:CaptureFocus()
 		text.Text = ""
-		wait()
+		task.wait()
 		text.Text = ""
 		debounce = false
 		opened = true

@@ -1,6 +1,6 @@
 return {
 	Main = {
-		{Text = "Sceleratis/Davey_Bones",	Desc = "Made Adonis & EISS"};
+		{Text = "Sceleratis/Davey_Bones",	Desc = "Made Hyperion & EISS"};
 		{Text = "Kohltastrophe (Scripth)",	Desc = "For his help with various things and some code"};
 		{Text = "einsteinK",				Desc = "Helped me with some scripting problems early in development and put together the LoadstringParser; Best programmer I know"};
 		{Text = "Rerumu (Shining_Diamando)",Desc = "Numerous contributions (Endless stairs, FiOne, Parser, Steampunk theme)"};
@@ -99,7 +99,7 @@ return {
 	};
 
 	Misc = {
-		{Text = "Kein-Hong Man",			Desc = "Creator of the Yueliang (Lua bytecode compiler in loadstring module). Also created LuLu VM, the first Lua bytecode interpreter used in Adonis (no longer used)"};
+		{Text = "Kein-Hong Man",			Desc = "Creator of the Yueliang (Lua bytecode compiler in loadstring module). Also created LuLu VM, the first Lua bytecode interpreter used in Hyperion (no longer used)"};
 		{Text = "Stravant/JustAPerson",		Desc = "Wrote LBI (no longer used) and GoodSignal"};
 		{Text = "darkelementallord",		Desc = "Updated some guis"};
 		{Text = "TheFurryFish",				Desc = "Gave me some dank ideas like local particles and some loading related things; and helped debug"};

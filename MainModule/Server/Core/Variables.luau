@@ -70,7 +70,7 @@ return function(Vargs, GetEnv)
 		RunAfterInit = AfterInit,
 		ZaWarudo = false,
 		CodeName = service.HttpService:GenerateGUID(false),
-		IsStudio = service.RunService:IsStudio(), -- Used to check if Adonis is running inside Roblox Studio as things like TeleportService and DataStores (if API Access is disabled) do not work in Studio
+		IsStudio = service.RunService:IsStudio(), -- Used to check if Hyperion is running inside Roblox Studio as things like TeleportService and DataStores (if API Access is disabled) do not work in Studio
 		AuthorizedToReply = {},
 		FrozenObjects = {},
 		ScriptBuilder = {},
@@ -105,7 +105,7 @@ return function(Vargs, GetEnv)
 			-- R6
 			14366393007, 18446596298,
 			-- R15 custom UGC heads are not supported currently! (And probably never will be lol)
-			-- If there are any heads with baked in faces made by Roblox that are not here tell Adonis maintainers immediatly!
+			-- If there are any heads with baked in faces made by Roblox that are not here tell Hyperion maintainers immediatly!
 		},
 
 		LightingSettings = {

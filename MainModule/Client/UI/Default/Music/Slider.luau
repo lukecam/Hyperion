@@ -1,7 +1,7 @@
 --!native
 --------------------------------------------------------------------------------------------
 -------------------------------------- Slider Module ---------------------------------------
--- [Adonis Maintainer]: P3tray
+-- [Hyperion Maintainer]: P3tray
 -- [Author]: Krypt
 -- [Description]: Creates a slider based on a start, end and incremental value. Allows ...
 -- ... sliders to be moved, tracked/untracked, reset, and have specific properties such ...

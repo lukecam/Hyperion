@@ -137,7 +137,7 @@ return function(Vargs, env)
 			Prefix = Settings.PlayerPrefix;
 			Commands = {"notifications", "commspanel"};
 			Args = {};
-			Description = "Opens the communications panel, showing you all the Adonis messages you have recieved in a timeline";
+			Description = "Opens the communications panel, showing you all the Hyperion messages you have recieved in a timeline";
 			AdminLevel = "Players";
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "CommsPanel")
@@ -273,7 +273,7 @@ return function(Vargs, env)
 			Prefix = Settings.PlayerPrefix;
 			Commands = {"credits"};
 			Args = {};
-			Description = "Shows you Adonis development credits";
+			Description = "Shows you Hyperion development credits";
 			AdminLevel = "Players";
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "Credits")
@@ -361,7 +361,7 @@ return function(Vargs, env)
 			Commands = {"theme"};
 			Args = {"theme name (leave blank to reset to default)"};
 			Hidden = true;
-			Description = "Changes the Adonis client UI theme";
+			Description = "Changes the Hyperion client UI theme";
 			AdminLevel = "Players";
 			Function = function(plr: Player, args: {string})
 				local playerData = Core.GetPlayer(plr)
@@ -383,7 +383,7 @@ return function(Vargs, env)
 			Prefix = Settings.PlayerPrefix;
 			Commands = {"info", "about", "userpanel"};
 			Args = {};
-			Description = "Shows info about the admin system (Adonis)";
+			Description = "Shows info about the admin system (Hyperion)";
 			AdminLevel = "Players";
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "UserPanel", {Tab = "Info";})

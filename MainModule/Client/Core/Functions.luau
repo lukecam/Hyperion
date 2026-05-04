@@ -71,12 +71,12 @@ return function(Vargs, GetEnv)
 
 			for i, part in obj:GetChildren() do
 				if part:IsA("BasePart") then
-					if part.Name == "Head" and not part:FindFirstChild("__ADONIS_NAMETAG") then
+					if part.Name == "Head" and not part:FindFirstChild("__HYPERION_NAMETAG") then
 						local player = service.Players:GetPlayerFromCharacter(part.Parent)
 
 						if player then
 							local bb = New("BillboardGui", {
-								Name = "__ADONIS_NAMETAG",
+								Name = "__HYPERION_NAMETAG",
 								AlwaysOnTop = true,
 								StudsOffset = Vector3.new(0,2,0),
 								Size = UDim2.new(0,100,0,40),
@@ -160,9 +160,9 @@ return function(Vargs, GetEnv)
 
 			for obj in Variables.ESPObjects do
 				if not mode or not target or (target and obj:IsDescendantOf(target)) then
-					local __ADONIS_NAMETAG = obj.Parent and obj.Parent:FindFirstChild("__ADONIS_NAMETAG")
-					if __ADONIS_NAMETAG then
-						__ADONIS_NAMETAG:Destroy()
+					local __HYPERION_NAMETAG = obj.Parent and obj.Parent:FindFirstChild("__HYPERION_NAMETAG")
+					if __HYPERION_NAMETAG then
+						__HYPERION_NAMETAG:Destroy()
 					end
 
 					Debris:AddItem(obj,0)
@@ -825,7 +825,7 @@ return function(Vargs, GetEnv)
 
 			local p = service.New("Part", {
 				Parent = char;
-				Name = "ADONIS_CAPE";
+				Name = "HYPERION_CAPE";
 				Anchored = false;
 				CanCollide = false;
 				Massless = true;
@@ -991,7 +991,7 @@ return function(Vargs, GetEnv)
 		end;
 
 		ClearAllInstances = function()
-			local objects = service.GetAdonisObjects()
+			local objects = service.GetHyperionObjects()
 			for i in objects do
 				i:Destroy()
 			end
@@ -1009,7 +1009,7 @@ return function(Vargs, GetEnv)
 			for _, v in animator:GetPlayingAnimationTracks() do v:Stop() end
 			local anim = service.New('Animation', {
 				AnimationId = `rbxassetid://{animId}`,
-				Name = "ADONIS_Animation"
+				Name = "HYPERION_Animation"
 			})
 			local track = animator:LoadAnimation(anim)
 			track:Play()
@@ -1021,7 +1021,7 @@ return function(Vargs, GetEnv)
 			local animator = human and human:FindFirstChildOfClass("Animator") or human and human:WaitForChild("Animator", 9e9)
 			if not animator then return end
 			for _, v in animator:GetPlayingAnimationTracks() do
-				if v.Name == "ADONIS_Animation" then v:Stop() end
+				if v.Name == "HYPERION_Animation" then v:Stop() end
 			end
 		end;
 
@@ -1056,7 +1056,7 @@ return function(Vargs, GetEnv)
 			service.StarterGui:SetCore("ChatMakeSystemMessage",tab)
 
 			if Functions.SendToChat then
-				Functions.SendToChat({Name = "::Adonis::"},msg,"Private")
+				Functions.SendToChat({Name = "::Hyperion::"},msg,"Private")
 			end
 		end;
 
@@ -1299,11 +1299,11 @@ return function(Vargs, GetEnv)
 		end;
 
 		BrickBlur = function(on, trans, color)
-			local exists = service.LocalContainer():FindFirstChild("ADONIS_WINDOW_FUNC_BLUR")
+			local exists = service.LocalContainer():FindFirstChild("HYPERION_WINDOW_FUNC_BLUR")
 			if exists then exists:Destroy() end
 			if on then
 				local pa = Instance.new("Part",workspace.CurrentCamera)
-				pa.Name = "ADONIS_WINDOW_FUNC_BLUR"
+				pa.Name = "HYPERION_WINDOW_FUNC_BLUR"
 				pa.Material = "Neon"
 				pa.BrickColor = color or BrickColor.Black()
 				pa.Transparency = trans or 0.5
@@ -1315,7 +1315,7 @@ return function(Vargs, GetEnv)
 				end
 			else
 				for _, v in workspace.CurrentCamera:GetChildren() do
-					if v.Name == "ADONIS_WINDOW_FUNC_BLUR" then
+					if v.Name == "HYPERION_WINDOW_FUNC_BLUR" then
 						v:Destroy()
 					end
 				end
@@ -1329,7 +1329,7 @@ return function(Vargs, GetEnv)
 			if looped then sound.Looped = true end
 			if volume then sound.Volume = volume end
 			if pitch then sound.Pitch = pitch end
-			sound.Name = `ADONIS_LOCAL_SOUND {audioId}`
+			sound.Name = `HYPERION_LOCAL_SOUND {audioId}`
 			sound.Parent = service.LocalContainer()
 			Variables.localSounds[tostring(audioId)] = sound
 			sound:Play()
@@ -1414,7 +1414,7 @@ return function(Vargs, GetEnv)
 		end;
 
 		UnCape = function()
-			local cape = service.LocalContainer():FindFirstChild("::Adonis::Cape")
+			local cape = service.LocalContainer():FindFirstChild("::Hyperion::Cape")
 			if cape then cape:Destroy() end
 		end;
 
@@ -1422,7 +1422,7 @@ return function(Vargs, GetEnv)
 			local torso = service.Player.Character and service.Player.Character:FindFirstChild("HumanoidRootPart")
 			if torso then
 				local p = service.New("Part",service.LocalContainer())
-				p.Name = "::Adonis::Cape"
+				p.Name = "::Hyperion::Cape"
 				p.Anchored = true
 				p.Transparency=0.1
 				p.Material=material

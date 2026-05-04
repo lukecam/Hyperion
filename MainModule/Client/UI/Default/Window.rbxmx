@@ -821,8 +821,8 @@
 --//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////--
 --//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////--
 
-	Window is a special UI object that can be used to easily make new Adonis UI windows.
-	Refer to modules in the Default theme for examples of how Adonis windows work.
+	Window is a special UI object that can be used to easily make new Hyperion UI windows.
+	Refer to modules in the Default theme for examples of how Hyperion windows work.
 
 	Window Data Table Properties: [Supplied when creating] [{Name = "Window", Size = {120,70}, Title = "Some Window"}]
 		[String] 	Name 		 - Name of the UI object being created [Used when finding duplicates or removing the window via client.UI.Remove()]
@@ -1111,7 +1111,7 @@ return function(data, env)
 
 	function BringToFront()
 		for i,v in ipairs(Player.PlayerGui:GetChildren()) do
-			if v:FindFirstChild("__ADONIS_WINDOW") then
+			if v:FindFirstChild("__HYPERION_WINDOW") then
 				v.DisplayOrder = 100
 			end
 		end
@@ -1805,9 +1805,9 @@ return function(data, env)
 
 					if data.Delay then
 						if type(data.Delay) == "number" then
-							wait(data.Delay)
+							task.wait(data.Delay)
 						elseif i%100 == 0 then
-							wait(0.1)
+							task.wait(0.1)
 						end
 					end
 				end
@@ -1843,7 +1843,7 @@ return function(data, env)
 						newX = math.max(newX, xLower)
 						if modBreak then
 							if i%modBreak == 0 then
-								wait(1/60)
+								task.wait(1/60)
 							end
 						end
 					end
@@ -2117,13 +2117,13 @@ return function(data, env)
 					while gTable.Active and not done do
 						for i = 0,180,10 do
 							rSpinner.Rotation = -i
-							wait(1/60)
+							task.wait(1/60)
 						end
 					end
 				end)
 
 				onRefresh()
-				wait(1)
+				task.wait(1)
 				done = true
 				Refreshing = false
 			end
@@ -2426,7 +2426,7 @@ return function(data, env)
 		local dragOffset
 		local inFrame
 
-		windowValue.Name = "__ADONIS_WINDOW"
+		windowValue.Name = "__HYPERION_WINDOW"
 
 		Event(Main.InputBegan, function(input)
 			if gTable.Active and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then

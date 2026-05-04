@@ -1,5 +1,5 @@
 --[[
-	Description: Searches the place for existing Adonis items and registers them.
+	Description: Searches the place for existing Hyperion items and registers them.
 	Author: Sceleratis
 	Date: 4/3/2022
 --]]
@@ -12,7 +12,7 @@ return function(Vargs, GetEnv)
 	local Functions, Commands, Admin, Anti, Core, HTTP, Logs, Remote, Process, Variables, Deps =
 		server.Functions, server.Commands, server.Admin, server.Anti, server.Core, server.HTTP, server.Logs, server.Remote, server.Process, server.Variables, server.Deps
 
-	local OBJ_NAME_PREFIX = "Adonis_"
+	local OBJ_NAME_PREFIX = "Hyperion_"
 
 	for _, child in workspace:GetDescendants() do
 		local objType, name = string.match(child.Name, `{OBJ_NAME_PREFIX}(.*): (.*)`)
@@ -31,5 +31,5 @@ return function(Vargs, GetEnv)
 		end
 	end
 
-	Logs:AddLog("Script", "Current Adonis objects successfully loaded in to instance lists");
+	Logs:AddLog("Script", "Current Hyperion objects successfully loaded in to instance lists");
 end

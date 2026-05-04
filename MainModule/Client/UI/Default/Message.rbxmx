@@ -334,7 +334,7 @@ return function(data, env)
 				if frame.BackgroundTransparency>frameFade then
 					frame.BackgroundTransparency = frame.BackgroundTransparency-frameStep
 				end
-				wait(1/60)
+				task.wait(1/60)
 			end
 		end
 	end
@@ -356,7 +356,7 @@ return function(data, env)
 				if frame.BackgroundTransparency<1 then
 					frame.BackgroundTransparency = frame.BackgroundTransparency+frameStep
 				end
-				wait(1/60)
+				task.wait(1/60)
 			end
 			blur.Enabled = false
 			blur:Destroy()
@@ -380,16 +380,16 @@ return function(data, env)
 		msg.Text = message
 	else
 		Routine(function()
-			wait(0.5)
+			task.wait(0.5)
 			for i = 1, #message do 
 				msg.Text = `{msg.Text}{message:sub(i,i)}` 
-				wait(0.05) 
+				task.wait(0.05) 
 			end 
 		end)
 	end--]] -- For now?
 	
 	fadeIn()
-	wait(tim or 5)
+	task.wait(tim or 5)
 	if not gone then
 		fadeOut()
 	end
@@ -404,19 +404,19 @@ return function(data, env)
 	
 	if not scroll then
 		msg.Text = message
-		wait(tim or 10)
+		task.wait(tim or 10)
 	else
-		wait(0.5)
+		task.wait(0.5)
 		for i = 1, #message do 
 			msg.Text = `{msg.Text}{message:sub(i,i)}`
-			wait(0.05) 
+			task.wait(0.05) 
 		end 
-		wait(tim or 5) 
+		task.wait(tim or 5) 
 	end
 	
 	if frame then
 		frame:TweenPosition(UDim2.new(0.5,-175,-1.5,0),nil,nil,0.5)
-		wait(1)
+		task.wait(1)
 		gui:Destroy()
 	end
 	--]]

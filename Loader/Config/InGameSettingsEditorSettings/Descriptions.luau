@@ -5,7 +5,7 @@
 ------------------------------------------------
 
 return {
-	HideScript = [[ Disable if your game saves; When the game starts the Adonis_Loader model will be hidden so other scripts cannot access the settings module ]];
+	HideScript = [[ Disable if your game saves; When the game starts the Hyperion_Loader model will be hidden so other scripts cannot access the settings module ]];
 	DataStore = [[ DataStore the script will use for saving data; Changing this will lose any saved data ]];
 	DataStoreKey = [[ Key used to encode all datastore entries; Changing this will lose any saved data ]];
 	DataStoreEnabled = [[ Disable if you don't want settings and admins to be saveable in-game; PlayerData will still save ]];
@@ -61,8 +61,8 @@ return {
 	Trello_Token = [[ Trello token (DON'T SHARE WITH ANYONE!) ]];
 	Trello_HideRanks = [[ If true, Trello-assigned ranks won't be shown in the admins list UI (accessed via :admins) ]];
 
-	G_API = [[ If true, allows other server scripts to access certain functions described in the API module through _G.Adonis ]];
-	G_Access = [[ If enabled, allows other scripts to access Adonis using _G.Adonis.Access; Scripts will still be able to do things like _G.Adonis.CheckAdmin(player) ]];
+	G_API = [[ If true, allows other server scripts to access certain functions described in the API module through _G.Hyperion ]];
+	G_Access = [[ If enabled, allows other scripts to access Hyperion using _G.Hyperion.Access; Scripts will still be able to do things like _G.Hyperion.CheckAdmin(player) ]];
 	G_Access_Key = [[ Key required to use the _G access API; Example_Key will not work for obvious reasons ]];
 	G_Access_Perms = [[ Access perms level ]];
 	Allowed_API_Calls = [[ Allowed calls ]];
@@ -75,7 +75,7 @@ return {
 	CrossServerCommands = [[ Are commands which affect more than one server enabled? ]];
 	ChatCommands = [[ If false you will not be able to run commands via the chat; Instead, you MUST use the console or you will be unable to run commands ]];
 	SilentCommandDenials = [[ If true, there will be no differences between the error messages shown when a user enters an invalid command and when they have insufficient permissions for the command ]];
-	OverrideChatCallbacks = [[ If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Adonis on load. Required for muting ]];
+	OverrideChatCallbacks = [[ If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Hyperion on load. Required for muting ]];
 
 	BanMessage = [[ Message shown to banned users ]];
 	LockMessage = [[ Message shown to people when they are kicked while the game is :slocked ]];
@@ -84,7 +84,7 @@ return {
 	MaxLogs = [[ Maximum logs to save before deleting the oldest; Too high can lag the game ]];
 	SaveCommandLogs = [[ If command logs are saved to the datastores ]];
 	Notification = [[ Whether or not to show the "You're an admin" and "Updated" notifications ]];
-	CodeExecution = [[ Enables the use of code execution in Adonis; Scripting related and a few other commands require this ]];
+	CodeExecution = [[ Enables the use of code execution in Hyperion; Scripting related and a few other commands require this ]];
 	SongHint = [[ Display a hint with the current song name and ID when a song is played via :music ]];
 	TopBarShift = [[ By default hints and notifs will appear from the top edge of the window. Set this to true if you don't want hints/notifications to appear in that region. ]];
 	DefaultTheme = [[ Theme to be used as a replacement for "Default". The new replacement theme can still use "Default" as its Base_Theme however any other theme that references "Default" as its redirects to this theme. ]];
@@ -111,7 +111,7 @@ return {
 
 	AllowClientAntiExploit = [[ Enables client-sided anti-exploit functionality ]];
 	Detection = [[ (Extremely important, makes all protection systems work) A global toggle for all the other protection settings ]];
-	CheckClients = [[ (Important, makes sure Adonis clients are connected to the server) Checks clients every minute or two to make sure they are still active ]];
+	CheckClients = [[ (Important, makes sure Hyperion clients are connected to the server) Checks clients every minute or two to make sure they are still active ]];
 
 	ExploitNotifications = [[ Notify all moderators and higher-ups when a player is kicked or crashed from the AntiExploit ]];
 	CharacterCheckLogs = [[If the character checks appear in exploit logs and exploit notifications]];

@@ -83,7 +83,7 @@ return function(Vargs, GetEnv)
 				Logs:AddLog("Script", `Attempting to pool data from Trello board {v}.`)
 				local ran, err = pcall(grabData, v)
 				if not ran then
-					warn("Unable to reach Trello. Ensure your board IDs, Trello key, and token are all correct. If issue persists, try increasing HttpWait in your Adonis settings.")
+					warn("Unable to reach Trello. Ensure your board IDs, Trello key, and token are all correct. If issue persists, try increasing HttpWait in your Hyperion settings.")
 					Logs:AddLog("Script", `Failed to pool data from Trello board {v} due to {err}.`)
 					success = false
 					break

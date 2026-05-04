@@ -16,8 +16,8 @@ return function(Vargs, GetEnv)
 	local teleportedPlayers = setmetatable({}, {__mode = "k"})
 	local isReservedServer = #game.PrivateServerId > 0 and game.PrivateServerOwnerId == 0
 
-	local PARAMETER_NAME = "ADONIS_SOFTSHUTDOWN"
-	local PARAMETER_2_NAME = "ADONIS_SHUTDOWN_REJOIN"
+	local PARAMETER_NAME = "HYPERION_SOFTSHUTDOWN"
+	local PARAMETER_2_NAME = "HYPERION_SHUTDOWN_REJOIN"
 	local MAX_RETRIES = 4
 	local RETRY_WAIT = 1.5
 
@@ -51,7 +51,7 @@ return function(Vargs, GetEnv)
 			local function sendMessage(player)
 				task.defer(function()
 					repeat task.wait(0.25) until not player or not player.Parent or teleportedPlayers[player] or Remote.Clients[tostring(player.UserId)] and Remote.Clients[tostring(player.UserId)].FinishedLoading
-					Functions.Message("Adonis", Settings.SystemTitle, "Teleporting back to main game...", "MatIcon://Hourglass empty", {player}, false, 1000)
+					Functions.Message("Hyperion", Settings.SystemTitle, "Teleporting back to main game...", "MatIcon://Hourglass empty", {player}, false, 1000)
 				end)
 			end
 
@@ -117,7 +117,7 @@ return function(Vargs, GetEnv)
 			if #Players:GetPlayers() == 0 then return end
 
 			local newserver = TeleportService:ReserveServer(game.PlaceId)
-			Functions.Message("Adonis", Settings.SystemTitle, "The server is restarting, please wait...", "MatIcon://Hourglass empty", service.GetPlayers(), false, 1000)
+			Functions.Message("Hyperion", Settings.SystemTitle, "The server is restarting, please wait...", "MatIcon://Hourglass empty", service.GetPlayers(), false, 1000)
 		
 			task.wait(2)
 

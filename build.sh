@@ -6,5 +6,5 @@ selene generate-roblox-std
 echo "Checking for lint errors from ./Loader and ./MainModule"
 selene ./Loader ./MainModule
 
-echo "Running rojo build -o Adonis.rbxl"
-rojo build -o Adonis.rbxl
+echo "Running rojo build -o Hyperion.rbxl"
+rojo build -o Hyperion.rbxl

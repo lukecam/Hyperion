@@ -2,32 +2,32 @@
 --[[
 
 	CURRENT LOADER:
-	https://www.roblox.com/library/7510622625/Adonis-Admin-Loader-Epix-Incorporated
+	https://www.roblox.com/library/7510622625/Hyperion-Admin-Loader-Epix-Incorporated
 
 	CURRENT MODULE:
-	https://www.roblox.com/library/7510592873/Adonis-MainModule
+	https://www.roblox.com/library/7510592873/Hyperion-MainModule
 
 	NIGHTLY MODULE:
-	https://www.roblox.com/library/8612978896/Nightlies-Adonis-MainModule
+	https://www.roblox.com/library/8612978896/Nightlies-Hyperion-MainModule
 
 --]]
 
 ----------------------------------------------------------------------------------
---                                Adonis Loader                                 --
+--                                Hyperion Loader                                 --
 --                            By Epix Incorporated                              --
 ----------------------------------------------------------------------------------
 --              Edit settings inside the Config -> Settings folder              --
 ----------------------------------------------------------------------------------
---       This script loads the Adonis source (MainModule) into the game.        --
+--       This script loads the Hyperion source (MainModule) into the game.        --
 --            Only edit this script if you know what you're doing!              --
 ----------------------------------------------------------------------------------
 
 local warn = function(...)
-	warn(":: Adonis ::", ...)
+	warn(":: Hyperion ::", ...)
 end
 
 local print = function(...)
-	print(":: Adonis ::", ...)
+	print(":: Hyperion ::", ...)
 end
 
 local ServerScriptService = game:GetService("ServerScriptService")
@@ -65,16 +65,16 @@ local function loadModuleAsset(moduleId: number)
 	error(`Failed to find any matching ModuleScripts for {moduleId}.`)
 end
 
-local mutex = RunService:FindFirstChild("__Adonis_MUTEX")
+local mutex = RunService:FindFirstChild("__Hyperion_MUTEX")
 if mutex then
 	if mutex:IsA("StringValue") then
-		warn("Adonis is already running! Aborting...; Running Location:", mutex.Value, "This Location:", script:GetFullName())
+		warn("Hyperion is already running! Aborting...; Running Location:", mutex.Value, "This Location:", script:GetFullName())
 	else
-		warn("Adonis mutex detected but is not a StringValue! Aborting anyway...; This Location:", script:GetFullName())
+		warn("Hyperion mutex detected but is not a StringValue! Aborting anyway...; This Location:", script:GetFullName())
 	end
 else
 	mutex = Instance.new("StringValue")
-	mutex.Name = "__Adonis_MUTEX"
+	mutex.Name = "__Hyperion_MUTEX"
 	mutex.Archivable = false
 	mutex.Value = script:GetFullName()
 	mutex.Parent = RunService
@@ -111,13 +111,13 @@ else
 		Runner = runner;
 		LoaderVersion = (model and model:FindFirstChild("Version")) and tonumber(model.Version.Value);
 
-		ModuleID = 7510592873;  		--// https://www.roblox.com/library/7510592873/Adonis-MainModule
-		LoaderID = 7510622625;			--// https://www.roblox.com/library/7510622625/Adonis-Loader-Sceleratis-Davey-Bones-Epix
+		ModuleID = 7510592873;  		--// https://www.roblox.com/library/7510592873/Hyperion-MainModule
+		LoaderID = 7510622625;			--// https://www.roblox.com/library/7510622625/Hyperion-Loader-Sceleratis-Davey-Bones-Epix
 
-		--// Note: The nightly module is updated frequently with every commit merged to the master branch on the Adonis repo.
+		--// Note: The nightly module is updated frequently with every commit merged to the master branch on the Hyperion repo.
 		--// It is prone to breaking, unstable, untested, and should not be used for anything other than testing/feature preview.
 		NightlyMode = true;			--// If true, uses the nightly module instead of the current release module.
-		NightlyModuleID = 8612978896; 	--// https://www.roblox.com/library/8612978896/Nightlies-Adonis-MainModule
+		NightlyModuleID = 8612978896; 	--// https://www.roblox.com/library/8612978896/Nightlies-Hyperion-MainModule
 
 		--// Module used in case MainModule is unavailable, containing only essential commands
 		Backup = 17438792001; 	--// https://create.roblox.com/store/asset/17438792001/
@@ -151,7 +151,7 @@ else
 		end
 
 		if not found and not data.NightlyMode then
-			warn(`Adonis DebugMode is enabled but no ModuleScript named 'MainModule' is found in {model.Parent and model.Parent:GetFullName()}`)
+			warn(`Hyperion DebugMode is enabled but no ModuleScript named 'MainModule' is found in {model.Parent and model.Parent:GetFullName()}`)
 		end
 	end
 
@@ -256,36 +256,36 @@ else
 	end
 
 	if tonumber(moduleId) and not data.SilentStartup then
-		print(`Requiring Adonis MainModule; Model URL: https://www.roblox.com/library/{moduleId}`)
+		print(`Requiring Hyperion MainModule; Model URL: https://www.roblox.com/library/{moduleId}`)
 	end
 
 	local success, module = pcall(require, moduleId)
 
-	--// Backup method for loading Adonis
+	--// Backup method for loading Hyperion
 	if not success and type(moduleId) == "number" then
-		warn(`Failed to load Adonis MainModule {moduleId} due to {module}! If this does not work please purchase the Adonis MainModule to your inventory. Using backup method...`)
+		warn(`Failed to load Hyperion MainModule {moduleId} due to {module}! If this does not work please purchase the Hyperion MainModule to your inventory. Using backup method...`)
 		yxpcall(function()
 			module = loadModuleAsset(moduleId)
 			success = true
 		end, function(reason)
-			warn(`Failed to load Adonis mainmodule {moduleId} via :LoadAsset() method due to {reason}! Loading the backup MainModule...`)
+			warn(`Failed to load Hyperion mainmodule {moduleId} via :LoadAsset() method due to {reason}! Loading the backup MainModule...`)
 			yxpcall(function()
 				module = assert(require(data.Backup), "Backup module returned invalid values!")
 				success = true
 			end, function(reason)
-				warn(`Failed to load Adonis backup MainModule {data.Backup} due to {reason}! If this does not work please purchase the Adonis backup MainModule to your inventory. Using backup method...`)
+				warn(`Failed to load Hyperion backup MainModule {data.Backup} due to {reason}! If this does not work please purchase the Hyperion backup MainModule to your inventory. Using backup method...`)
 				yxpcall(function()
 					module = loadModuleAsset(data.Backup)
 					success = true
 				end, function(reason)
 					module = nil
-					warn(`FATAL ERROR! Failed to load Adonis backup MainModule {moduleId} via :LoadAsset() method due to {reason}! Adonis can't be booted up! Please contact the Adonis helpers immediately and add both the regular MainModule and the backup MainModule to your user&group inventory!`)
+					warn(`FATAL ERROR! Failed to load Hyperion backup MainModule {moduleId} via :LoadAsset() method due to {reason}! Hyperion can't be booted up! Please contact the Hyperion helpers immediately and add both the regular MainModule and the backup MainModule to your user&group inventory!`)
 				end)
 			end)
 		end)
 	end
 
-	local response = assert(success and module, "FATAL ERROR! Adonis bootstrap function is missing!")(data)
+	local response = assert(success and module, "FATAL ERROR! Hyperion bootstrap function is missing!")(data)
 
 	if response == "SUCCESS" then
 		if data.Settings and data.Settings.HideScript and not data.DebugMode and not RunService:IsStudio() then
@@ -296,14 +296,14 @@ else
 				local clone = script:Clone()
 				clone.Archivable = oldArchivable
 				clone.Parent = loaderFolder
-				model.Name = "Adonis_Loader"
+				model.Name = "Hyperion_Loader"
 				model.Parent = ServerScriptService
 			end)
 		end
 
-		model.Name = "Adonis_Loader"
+		model.Name = "Hyperion_Loader"
 	else
-		error(" !! Adonis MainModule failed to load !! ")
+		error(" !! Hyperion MainModule failed to load !! ")
 	end
 end
 

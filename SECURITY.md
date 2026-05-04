@@ -1,27 +1,27 @@
-# 🛡️ Adonis Repository Security Policy
+# 🛡️ Hyperion Repository Security Policy
 
 ## Supported Versions
 
-Only the *live* (release) version of Adonis is officially supported and given security updates when necessary.
+Only the *live* (release) version of Hyperion is officially supported and given security updates when necessary.
 
 [Supported Loader *(use this)*](https://www.roblox.com/library/7510622625) | [Supported MainModule (source)](https://www.roblox.com/library/7510592873)
 
-* Older versions of Adonis are not maintained/updated; hence, we do *not* recommend using those versions as they may contain a larger number of unpatched vulnerabilities (and bugs).
-* Additionally, we do not offer security patches or updates for forks of Adonis. If you wish to continue to receive feature and security updates, we recommend using the supported versions.
+* Older versions of Hyperion are not maintained/updated; hence, we do *not* recommend using those versions as they may contain a larger number of unpatched vulnerabilities (and bugs).
+* Additionally, we do not offer security patches or updates for forks of Hyperion. If you wish to continue to receive feature and security updates, we recommend using the supported versions.
 
-## Reporting a Vulnerability in Adonis
+## Reporting a Vulnerability in Hyperion
 
 👉 **If the vulnerability is *severe* or highly damaging**, join the [Epix Incorporated Discord server](https://discord.gg/H5RvTP3) and DM a *Moderator*, *Developer*, or *Maintainer*.
 
-👉 **If the vulnerability is relatively minor and can be safely discussed in public**, create a bug report [on GitHub](https://github.com/Epix-Incorporated/Adonis/issues/new/choose) or in our Discord server.
+👉 **If the vulnerability is relatively minor and can be safely discussed in public**, create a bug report [on GitHub](https://github.com/Epix-Incorporated/Hyperion/issues/new/choose) or in our Discord server.
 
 Be sure to include the following info in your report:
 * When the vulnerability was discovered or first known;
 * What is the potential impact (consequence) of the vulnerability; and
 * How the vulnerability may be exploited.
 
-Adonis Maintainers will investigate each vulnerability report and provide a fix at the earliest possible opportunity where necessary.
+Hyperion Maintainers will investigate each vulnerability report and provide a fix at the earliest possible opportunity where necessary.
 
 ---
 
-<sub>Notice anything wrong with this page? [Submit an issue](https://github.com/Epix-Incorporated/Adonis/issues/new/choose) or discuss it in our official [Discord server](https://discord.com/invite/H5RvTP3).</sub>
+<sub>Notice anything wrong with this page? [Submit an issue](https://github.com/Epix-Incorporated/Hyperion/issues/new/choose) or discuss it in our official [Discord server](https://discord.com/invite/H5RvTP3).</sub>

@@ -27,9 +27,9 @@ if script.Parent then
 		warn("CLEANING")
 
 		if not table.isfrozen(_G) then
-			rawset(_G, "Adonis", nil)
-			rawset(_G, "__Adonis_MODULE_MUTEX", nil)
-			rawset(_G, "__Adonis_MUTEX", nil)
+			rawset(_G, "Hyperion", nil)
+			rawset(_G, "__Hyperion_MODULE_MUTEX", nil)
+			rawset(_G, "__Hyperion_MUTEX", nil)
 		end
 
 		warn("_G VARIABLES CLEARED")
@@ -39,7 +39,7 @@ if script.Parent then
 	end
 
 	if mode == "REBOOT" then
-		warn("ATTEMPTING TO RELOAD ADONIS")
+		warn("ATTEMPTING TO RELOAD HYPERION")
 		CleanUp()
 		task.wait()
 
@@ -51,7 +51,7 @@ if script.Parent then
 		dTarget.Disabled = false
 		warn("RUNNING")
 	elseif mode == "STOP" then
-		warn("ATTEMPTING TO STOP ADONIS")
+		warn("ATTEMPTING TO STOP HYPERION")
 		CleanUp()
 	end
 

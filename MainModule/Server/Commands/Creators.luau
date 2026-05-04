@@ -111,9 +111,9 @@ return function(Vargs, env)
 
 		Settings = {
 			Prefix = "";
-			Commands = {":adonissettings", `{Settings.Prefix}settings`, `{Settings.Prefix}adonissettings`};
+			Commands = {":hyperionsettings", `{Settings.Prefix}settings`, `{Settings.Prefix}hyperionsettings`};
 			Args = {};
-			Description = "Opens the Adonis settings management interface";
+			Description = "Opens the Hyperion settings management interface";
 			AdminLevel = "Creators";
 			Function = function(plr: Player, args: {string})
 				Remote.MakeGui(plr, "UserPanel", {Tab = "Settings"})

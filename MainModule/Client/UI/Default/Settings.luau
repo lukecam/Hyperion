@@ -40,7 +40,7 @@ return function(data, env)
 		};
 		{
 			Text = "UI Keep Alive: ";
-			Desc = "- Prevents Adonis UI deletion on death";
+			Desc = "- Prevents Hyperion UI deletion on death";
 			Entry = "Boolean";
 			Value = Variables.UIKeepAlive;
 			Function = function(enabled, toggle)
@@ -53,7 +53,7 @@ return function(data, env)
 		};
 		{
 			Text = "Particle Effects: ";
-			Desc = "- Enables/Disables certain Adonis made effects like sparkles";
+			Desc = "- Enables/Disables certain Hyperion made effects like sparkles";
 			Entry = "Boolean";
 			Value = Variables.ParticlesEnabled;
 			Function = function(enabled, toggle)
@@ -131,7 +131,7 @@ return function(data, env)
 		};
 		{
 			Text = "Theme: ";
-			Desc = "- Allows you to set the Adonis UI theme";
+			Desc = "- Allows you to set the Hyperion UI theme";
 			Entry = "DropDown";
 			Setting = "CustomTheme";
 			Function = function(clone)

@@ -145,7 +145,7 @@ return function(data, env)
 								end
 							end)
 							client.Remote.Send("ProcessCommand", `{data.Prefix}clearaddedtools`)
-							wait(1)
+							task.wait(1)
 							if not refreshed then
 								refreshed = true
 								data = client.Remote.Get("UpdateList", "ToolList")
@@ -161,7 +161,7 @@ return function(data, env)
 		generateAdded()
 	end
 
-	spawn(function()
+	task.spawn(function()
 		local tab = tabFrame:NewTab("Inventories", {
 			Text = "Inventory Monitor";
 		})

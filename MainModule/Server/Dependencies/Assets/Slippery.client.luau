@@ -1,5 +1,5 @@
 task.wait(0.5)
-local vel = script.Parent:WaitForChild("ADONIS_IceVelocity")
+local vel = script.Parent:WaitForChild("HYPERION_IceVelocity")
 
 while script.Parent ~= nil and vel and vel.Parent  ~= nil do 
 	vel.Velocity = Vector3.new(script.Parent.AssemblyLinearVelocity.X, 0, script.Parent.AssemblyLinearVelocity.Z)

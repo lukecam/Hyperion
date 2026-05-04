@@ -40,16 +40,16 @@
 		   how to add a secret (not local secret).
 
 		2. Steps for the first secret: Trello_AppKey
-		3. Set the Name of the first secret to: Adonis_Trello_AppKey
+		3. Set the Name of the first secret to: Hyperion_Trello_AppKey
 		4. Set the Domain of the first secret to the trello domain
 		5. Set the Value of the first secret to: your trello AppKey
-		6. Set the Trello_AppKey variable to: game:GetService("HttpService"):GetSecret("Adonis_Trello_AppKey")
+		6. Set the Trello_AppKey variable to: game:GetService("HttpService"):GetSecret("Hyperion_Trello_AppKey")
 
 		7. Steps for the second secret: Trello_Token
-		8. Set the Name of the second secret to: Adonis_Trello_Token
+		8. Set the Name of the second secret to: Hyperion_Trello_Token
 		9. Set the Domain of the second secret to the trello domain
 		10. Set the Value of the second secret to: your trello Token
-		11. Set the Trello_AppKey variable to: game:GetService("HttpService"):GetSecret("Adonis_Trello_Token")
+		11. Set the Trello_AppKey variable to: game:GetService("HttpService"):GetSecret("Hyperion_Trello_Token")
 
 	You can get your trello token at: /1/connect?name=Trello_API_Module&response_type=token&expires=never&scope=read,write&key=YOUR_APP_KEY_HERE
 --]]

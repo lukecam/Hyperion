@@ -136,12 +136,12 @@ return function(data, env)
 		local c = 0
 		for _, v in ipairs({
 			{data.IsServerOwner, "Private Server Owner", client.MatIcons.Grade, "User owns the current private server"},
-			{data.IsDonor, "Adonis Donor", "rbxassetid://6877822142", "User has purchased the Adonis donation pass/shirt"},
-			{player:GetRankInGroupAsync(886423) == 10, "Adonis Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Adonis admin system (see credit list)"},
-			{player:GetRankInGroupAsync(886423) >= 12, "Adonis Developer", "rbxassetid://6878433601", "User is an official developer of the Adonis admin system (see credit list)"},
-			{player:GetRankInGroupAsync(886423) == 10, "Adonis Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Adonis admin system (see credit list)"},
-			{player:GetRankInGroupAsync(886423) >= 12, "Adonis Developer", "rbxassetid://6878433601", "User is an official developer of the Adonis admin system (see credit list)"},
-			{player.UserId == 1237666 or player.UserId == 698712377, "Adonis Creator [Sceleratis/Davey_Bones]", "rbxassetid://6878433601", "You're looking at the creator of the Adonis admin system!"},
+			{data.IsDonor, "Hyperion Donor", "rbxassetid://6877822142", "User has purchased the Hyperion donation pass/shirt"},
+			{player:GetRankInGroupAsync(886423) == 10, "Hyperion Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Hyperion admin system (see credit list)"},
+			{player:GetRankInGroupAsync(886423) >= 12, "Hyperion Developer", "rbxassetid://6878433601", "User is an official developer of the Hyperion admin system (see credit list)"},
+			{player:GetRankInGroupAsync(886423) == 10, "Hyperion Open-Source Contributor", "rbxassetid://6878433601", "User has contributed to the Hyperion admin system (see credit list)"},
+			{player:GetRankInGroupAsync(886423) >= 12, "Hyperion Developer", "rbxassetid://6878433601", "User is an official developer of the Hyperion admin system (see credit list)"},
+			{player.UserId == 1237666 or player.UserId == 698712377, "Hyperion Creator [Sceleratis/Davey_Bones]", "rbxassetid://6878433601", "You're looking at the creator of the Hyperion admin system!"},
 			{player:IsInGroupAsync(1200769) or player:IsInGroupAsync(2868472), "Roblox Staff", "rbxassetid://6811962259", "User is an official Roblox employee (!)"},
 			{player:IsInGroupAsync(3514227), "DevForum Member", "rbxassetid://6383940476", "User is a member of the Roblox Developer Forum"},
 			}) do
@@ -424,7 +424,7 @@ return function(data, env)
 
 	if data.GameData then --// Game Tab
 		local gameplayDataToDisplay = {
-			{"Admin Level", data.GameData.AdminLevel, "The player's Adonis rank"},
+			{"Admin Level", data.GameData.AdminLevel, "The player's Hyperion rank"},
 			{"Muted", boolToStr(data.GameData.IsMuted), "Is the player muted? (IGNORES TRELLO MUTELIST)"},
 			{"Auto Jump Enabled", boolToStr(player.AutoJumpEnabled), "Does the player have auto jump enabled?"},
 			{"Camera Max Zoom Distance", player.CameraMaxZoomDistance, "How far in studs the player can zoom out their camera"},

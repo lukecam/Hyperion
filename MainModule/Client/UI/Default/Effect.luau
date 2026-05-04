@@ -91,7 +91,7 @@ return function(data, env)
 			Position = UDim2.new(-1, 0, -1, 0);
 		}), TweenInfo.new((1 / 0.01) * 0.1), { BackgroundTransparency = 0 }):Play()
 		service.TweenService:Create(service.New("BlurEffect", {
-			Name = "Adonis_FadeOut_Blur";
+			Name = "Hyperion_FadeOut_Blur";
 			Parent = service.Lighting;
 			Size = 0;
 		}), TweenInfo.new((1 / 0.01) * 0.1), { Size = (1 / 0.01) * 5.6 }):Play()

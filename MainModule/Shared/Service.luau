@@ -409,7 +409,7 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 			end
 		end;
 		Wrapped = function(object)
-			if type(getmetatable(object)) == "table" and rawget(getmetatable(object), "__ADONIS_WRAPPED") or getmetatable(object) == "Adonis_Proxy" then
+			if type(getmetatable(object)) == "table" and rawget(getmetatable(object), "__HYPERION_WRAPPED") or getmetatable(object) == "Hyperion_Proxy" then
 				return true
 			elseif (type(object) == "table" or typeof(object) == "userdata") and object.IsProxy and object:IsProxy() then
 				return true
@@ -546,8 +546,8 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 				--newMeta.__gc = function(tab)
 				--	custom:RemoveFromCache()
 				--end
-				newMeta.__metatable = if main.Core and main.Core.DebugMode then nil else "Adonis_Proxy"
-				newMeta.__ADONIS_WRAPPED = true
+				newMeta.__metatable = if main.Core and main.Core.DebugMode then nil else "Hyperion_Proxy"
+				newMeta.__HYPERION_WRAPPED = true
 				custom:AddToCache()
 				return newObj
 			else
@@ -690,8 +690,8 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 		NewProxy = function(meta)
 			local newProxy = newproxy(true)
 			local metatable = getmetatable(newProxy)
-			metatable.__metatable = if main.Core and main.Core.DebugMode then nil else "Adonis_Proxy"
-			metatable.__ADONIS_WRAPPED = true
+			metatable.__metatable = if main.Core and main.Core.DebugMode then nil else "Hyperion_Proxy"
+			metatable.__HYPERION_WRAPPED = true
 			for k, v in meta do metatable[k] = v end
 			return newProxy
 		end;
@@ -718,10 +718,10 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 
 		Debounce = function(key, func)
 			local env = getfenv(2) -- TODO: Remove env thing
-			local Debounces = env and env._ADONIS_DEBOUNCES or Debounces or {}
+			local Debounces = env and env._HYPERION_DEBOUNCES or Debounces or {}
 
 			if env then
-				env._ADONIS_DEBOUNCES = env and env._ADONIS_DEBOUNCES or {}
+				env._HYPERION_DEBOUNCES = env and env._HYPERION_DEBOUNCES or {}
 			end
 
 			if Debounces[key] then
@@ -1389,7 +1389,7 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 			if not item:IsA("Accoutrement") then return reject() end
 			if not item:FindFirstChild("Handle") then return reject() end
 			if #item:GetDescendants() > 250 then return reject() end
-			item.Name = "CustomAdonisAccessory"
+			item.Name = "CustomHyperionAccessory"
 			item:SetAttribute("AssetId", itemId)
 
 			-- No classes except those in whitelistedClasses are allowed
@@ -1433,8 +1433,8 @@ return function(errorHandler, eventChecker, fenceSpecific, env)
 			plr.Character.Humanoid:AddAccessory(item)
 		end,
 		GetPlayers = function() return service.Players:GetPlayers() end;
-		IsAdonisObject = function(obj) for _, v in CreatedItems do if v == obj then return true end end end;
-		GetAdonisObjects = function() return CreatedItems end;
+		IsHyperionObject = function(obj) for _, v in CreatedItems do if v == obj then return true end end end;
+		GetHyperionObjects = function() return CreatedItems end;
 	}
 
 	service = setmetatable({

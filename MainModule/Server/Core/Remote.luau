@@ -525,10 +525,10 @@ return function(Vargs, GetEnv)
 					local audioLib = Functions.AudioLib
 
 					if not Functions.AudioLib then
-						local audioLibFolder = service.SoundService:FindFirstChild("ADONIS_AUDIOLIB")
+						local audioLibFolder = service.SoundService:FindFirstChild("HYPERION_AUDIOLIB")
 						if not audioLibFolder then
 							audioLibFolder = service.New("Folder")
-							audioLibFolder.Name = "ADONIS_AUDIOLIB"
+							audioLibFolder.Name = "HYPERION_AUDIOLIB"
 							audioLibFolder.Parent = service.SoundService
 						end
 						audioLib = require(server.Shared.AudioLib).new(service.UnWrap(audioLibFolder))
@@ -612,7 +612,7 @@ return function(Vargs, GetEnv)
 								end
 
 								Remote.Terminal.LiveOutput(p, `LUA_DEMAND_ERROR: {reason}`)
-								oError(`Adonis terminal error: {reason}`, (level or 1) + 1)
+								oError(`Hyperion terminal error: {reason}`, (level or 1) + 1)
 							end;
 						})
 
@@ -620,7 +620,7 @@ return function(Vargs, GetEnv)
 							local ans = Remote.GetGui(p, "YesNoPrompt", {
 								Icon = server.MatIcons.Warning;
 								Question = "Are you sure you want to load this script into the server env?";
-								Title = "Adonis DebugLoadstring";
+								Title = "Hyperion DebugLoadstring";
 								Delay = 3;
 							})
 
@@ -737,7 +737,7 @@ return function(Vargs, GetEnv)
 				local retable = retfunc and table.pack(pcall(retfunc, p, parms)) or {}
 				if retable[1] ~= true then
 					logError(p, retable[2])
-					Remote.Send(p, "GiveReturn", key, "__ADONIS_RETURN_ERROR", retable[2])
+					Remote.Send(p, "GiveReturn", key, "__HYPERION_RETURN_ERROR", retable[2])
 				else
 					Remote.Send(p, "GiveReturn", key, table.unpack(retable, 2, retable.n))
 				end
@@ -1008,7 +1008,7 @@ return function(Vargs, GetEnv)
 							end
 
 							Remote.MakeGui(p, "Output", {Title = 'LUA_DEMAND_ERROR'; Message = `{reason}`})
-							oError(`Adonis ScriptEditor error: {reason}`, (level or 1) + 1)
+							oError(`Hyperion ScriptEditor error: {reason}`, (level or 1) + 1)
 						end;
 					})
 
@@ -1195,7 +1195,7 @@ return function(Vargs, GetEnv)
 				event = nil
 
 				if returns then
-					if returns[1] == "__ADONIS_RETURN_ERROR" then
+					if returns[1] == "__HYPERION_RETURN_ERROR" then
 						error(returns[2])
 					else
 						return table.unpack(returns)

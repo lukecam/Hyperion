@@ -71,11 +71,11 @@ return function(data, env)
 				--textbox.Text = "Enter command"
 			end
 			
-			wait(0.1)
+			task.wait(0.1)
 		end)
 	end)
 
-	out(string.format("Adonis Terminal [%s]", string.match(client.Changelog[5], "%[(.+)%].+")), termLines)
+	out(string.format("Hyperion Terminal [%s]", string.match(client.Changelog[5], "%[(.+)%].+")), termLines)
 	
 	gTable = window.gTable
 	window:Ready()

@@ -190,7 +190,7 @@ return function(Vargs, GetEnv)
 			end;
 
 			InstanceList = function(args)
-				local objects = service.GetAdonisObjects()
+				local objects = service.GetHyperionObjects()
 				local temp = {}
 				for _, v in objects do
 					table.insert(temp, {
@@ -245,7 +245,7 @@ return function(Vargs, GetEnv)
 				local retable = retfunc and table.pack(pcall(retfunc, parms)) or {}
 				if retable[1] ~= true then
 					logError(retable[2])
-					Remote.Send("GiveReturn", key, "__ADONIS_RETURN_ERROR", retable[2])
+					Remote.Send("GiveReturn", key, "__HYPERION_RETURN_ERROR", retable[2])
 				else
 					print("SENT RETURN");
 					Remote.Send("GiveReturn", key, table.unpack(retable, 2))
@@ -457,7 +457,7 @@ return function(Vargs, GetEnv)
 			event:Disconnect()
 
 			if returns then
-				if returns[1] == "__ADONIS_RETURN_ERROR" then
+				if returns[1] == "__HYPERION_RETURN_ERROR" then
 					error(returns[2])
 				else
 					return table.unpack(returns)

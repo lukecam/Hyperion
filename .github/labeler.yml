@@ -1,21 +1,21 @@
 '⚡ command':
-  - '### What part of Adonis is this related to\?\s+Command'
+  - '### What part of Hyperion is this related to\?\s+Command'
 '📱 UI':
-  - '### What part of Adonis is this related to\?\s+User Interface'
+  - '### What part of Hyperion is this related to\?\s+User Interface'
 '📄 documentation':
-  - '### What part of Adonis is this related to\?\s+Documentation'
+  - '### What part of Hyperion is this related to\?\s+Documentation'
 '🛡️ anti-exploit':
-  - '### What part of Adonis is this related to\?\s+Anti-Exploit'
+  - '### What part of Hyperion is this related to\?\s+Anti-Exploit'
 'github':
-  - '### What part of Adonis is this related to\?\s+GitHub Repository'
+  - '### What part of Hyperion is this related to\?\s+GitHub Repository'
 '🖇️ loader':
-  - '### What part of Adonis is this related to\?\s+Loader/Settings'
+  - '### What part of Hyperion is this related to\?\s+Loader/Settings'
 'trello':
-  - '### What part of Adonis is this related to\?\s+Trello'
+  - '### What part of Hyperion is this related to\?\s+Trello'
 '❌ invalid':
-  - '### What part of Adonis is this related to\?\s+F3X/Building Tools'
+  - '### What part of Hyperion is this related to\?\s+F3X/Building Tools'
 '🎏 miscellaneous':
-  - '### What part of Adonis is this related to\?\s+Other'
+  - '### What part of Hyperion is this related to\?\s+Other'
 '⌛needs PoF':
-  - '^(?!.*What part of Adonis is this related to)(?!.*([Pp]\-?[Oo]\-?[Ff]|[Pp][Rr][Oo]+[Ff][\-_\s]*[Oo][Ff][\-_\s]*[Ww][Oo][Rr][Kk])).*$'
+  - '^(?!.*What part of Hyperion is this related to)(?!.*([Pp]\-?[Oo]\-?[Ff]|[Pp][Rr][Oo]+[Ff][\-_\s]*[Oo][Ff][\-_\s]*[Ww][Oo][Rr][Kk])).*$'
   

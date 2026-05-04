@@ -116,7 +116,7 @@ return function(Vargs, GetEnv)
 			table.insert(server.Messages, {
 				Level = 301;
 				Title = "Debug Mode Enabled";
-				Message = "Adonis is currently running in Debug Mode.";
+				Message = "Hyperion is currently running in Debug Mode.";
 				Time = 10;
 				Icon = "MatIcon://Bug report";
 				onClick = Core.Bytecode(`client.Remote.Send("ProcessCommand","{Settings.Prefix}debugcmds")`);
@@ -315,7 +315,7 @@ return function(Vargs, GetEnv)
 		newRateLimit = newRateLimit;
 		MsgStringLimit = 500; --// Max message string length to prevent long length chat spam server crashing (chat & command bar); Anything over will be truncated;
 		MaxChatCharacterLimit = 250; --// Roblox chat character limit; The actual limit of the Roblox chat's textbox is 200 characters; I'm paranoid so I added 50 characters; Users should not be able to send a message larger than that;
-		RemoteMaxArgCount = 5; --// The maximum argument count Adonis will take from Remote (alter if your script requires more arguments)
+		RemoteMaxArgCount = 5; --// The maximum argument count Hyperion will take from Remote (alter if your script requires more arguments)
 		RateLimits = {
 			Remote = 0.01;
 			Command = 0.1;
@@ -326,7 +326,7 @@ return function(Vargs, GetEnv)
 		Remote = function(p, cliData, com, ...)
 			if p and p:IsA("Player") then
 				if Anti.KickedPlayers[p] then
-					p:Kick(":: Adonis :: Communication following disconnect.")
+					p:Kick(":: Hyperion :: Communication following disconnect.")
 				elseif not com or type(com) ~= "string" or #com > 50 or cliData == "BadMemes" or com == "BadMemes" then
 					Anti.Detected(p, "Kick", service.MaxLen((tostring(com) ~= "BadMemes" and tostring(com)) or tostring(select(1, ...)), 150))
 				elseif cliData and type(cliData) ~= "table" then
@@ -401,7 +401,7 @@ return function(Vargs, GetEnv)
 								end
 							elseif rateLimitCheck and RateLimit(p, "RateLog") then
 								Anti.Detected(p, "Log", string.format("Firing RemoteEvent too quickly (>Rate: %s/sec)", curRemoteRate))
-								warn(string.format("%s is firing Adonis's RemoteEvent too quickly (>Rate: %s/sec)", p.Name, curRemoteRate))
+								warn(string.format("%s is firing Hyperion's RemoteEvent too quickly (>Rate: %s/sec)", p.Name, curRemoteRate))
 							end
 						else
 							Anti.Detected(p, "Log", "Out of Sync (r10005)")
@@ -689,7 +689,7 @@ return function(Vargs, GetEnv)
 				ErrorMessage = function(Message, Trace, Script)
 					--[[if Running then
 						service.Events.ErrorMessage:Fire(Message, Trace, Script)
-						if Message:lower():find("adonis") or Message:find(script.Name) then
+						if Message:lower():find("hyperion") or Message:find(script.Name) then
 							logError(Message)
 						end
 					end--]]
@@ -737,7 +737,7 @@ return function(Vargs, GetEnv)
 
 				if Variables.ServerLock and level < 1 then
 					Remote.Clients[key] = nil;
-					p:Kick(Variables.LockMessage or "::Adonis:: Server Locked")
+					p:Kick(Variables.LockMessage or "::Hyperion:: Server Locked")
 					return "REMOVED"
 				end
 
@@ -754,7 +754,7 @@ return function(Vargs, GetEnv)
 
 					if not listed and level == 0 then
 						Remote.Clients[key] = nil;
-						p:Kick(Variables.LockMessage or "::Adonis:: Whitelist Enabled")
+						p:Kick(Variables.LockMessage or "::Hyperion:: Whitelist Enabled")
 						return "REMOVED"
 					end
 				end
@@ -765,7 +765,7 @@ return function(Vargs, GetEnv)
 						for filter,func in pairs(server.Variables.PlayerJoinFilters) do
 							local success, res, message = pcall(func, p, PlayerData)
 							if success and res == false then
-								p:Kick(`::Adonis:: {message or Settings.CustomJoinFilterKickMessage or "You are not allowed to join this experience"}`)
+								p:Kick(`::Hyperion:: {message or Settings.CustomJoinFilterKickMessage or "You are not allowed to join this experience"}`)
 								Logs.AddLog(server.Logs.Script, `{tostring(p)} failed the join filter {filter}`)
 								Removed = true
 								break
@@ -784,7 +784,7 @@ return function(Vargs, GetEnv)
 
 			if not ran then
 				AddLog("Errors", `{p.Name} PlayerAdded Failed: {err}`)
-				warn("~! :: Adonis :: SOMETHING FAILED DURING PLAYERADDED:")
+				warn("~! :: Hyperion :: SOMETHING FAILED DURING PLAYERADDED:")
 				warn(tostring(err))
 			end
 
@@ -829,7 +829,7 @@ return function(Vargs, GetEnv)
 					end
 				end)
 			elseif ran and err ~= "REMOVED" then
-				Anti.RemovePlayer(p, ":: Adonis :: Loading Error [Missing player, keys, or removed]")
+				Anti.RemovePlayer(p, ":: Hyperion :: Loading Error [Missing player, keys, or removed]")
 			end
 		end;
 

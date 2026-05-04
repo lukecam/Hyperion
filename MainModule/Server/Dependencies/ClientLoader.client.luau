@@ -1,8 +1,8 @@
 --# selene: allow(empty_loop)
---// ACLI - Adonis Client Loading Initializer
+--// ACLI - Hyperion Client Loading Initializer
 if true then return end --// #DISABLED
 
-local DebugMode = script.Parent:FindFirstChild("ADONIS_DEBUGMODE_ENABLED", true) ~= nil
+local DebugMode = script.Parent:FindFirstChild("HYPERION_DEBUGMODE_ENABLED", true) ~= nil
 local otime = os.time
 local time = time
 local game = game
@@ -122,7 +122,7 @@ end
 local function checkChild(child)
 	print(`Checking child: {child and child.ClassName} : {child and child:GetFullName()}`)
 	callCheck(child)
-	if child and not foundClient and not checkedChildren[child] and child:IsA("Folder") and child.Name == "Adonis_Client" then
+	if child and not foundClient and not checkedChildren[child] and child:IsA("Folder") and child.Name == "Hyperion_Client" then
 		print("Loading Folder...")
 		local nameVal
 		local origName
@@ -150,7 +150,7 @@ local function checkChild(child)
 		child.Parent = nil
 
 		print("Destroying parent...")
-		if container and container:IsA("ScreenGui") and container.Name == "Adonis_Container" then
+		if container and container:IsA("ScreenGui") and container.Name == "Hyperion_Container" then
 			task.spawn(function()
 				task.wait(0.5)
 				container:Destroy()
@@ -161,7 +161,7 @@ local function checkChild(child)
 			print("Debug: Loading the client?")
 			local meta = require(clientModule)
 			print(`Got metatable: {meta}`)
-			if meta and type(meta) == "userdata" and tostring(meta) == "Adonis" then
+			if meta and type(meta) == "userdata" and tostring(meta) == "Hyperion" then
 				local ran, ret = pcall(meta, {
 					Module = clientModule,
 					Start = start,
@@ -198,8 +198,8 @@ local function scan(folder)
 	warn("Scanning for client...")
 	if not doPcall(function()
 		for i,child in folder:GetChildren() do
-			if child.Name == "Adonis_Container" then
-				local client = child:FindFirstChildOfClass("Folder") or child:WaitForChild("Adonis_Client", 5)
+			if child.Name == "Hyperion_Container" then
+				local client = child:FindFirstChildOfClass("Folder") or child:WaitForChild("Hyperion_Client", 5)
 				if client then
 					doPcall(checkChild, client)
 				end
@@ -245,7 +245,7 @@ else
 
 	finderEvent = playerGui.ChildAdded:Connect(function(child)
 		print("Child Added")
-		if not foundClient and child.Name == "Adonis_Container" then
+		if not foundClient and child.Name == "Hyperion_Container" then
 			local client = child:FindFirstChildOfClass("Folder")
 			doPcall(checkChild, client)
 		end
@@ -271,6 +271,6 @@ else
 		warn("Loading took too long")
 		Kick(player, "[ACLI-0x1162246]: Loading Error [Took Too Long (>10 Minutes)]")
 	else
-		print("Debug: Adonis loaded? Took:", time())
+		print("Debug: Hyperion loaded? Took:", time())
 	end
 end

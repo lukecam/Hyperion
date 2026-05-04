@@ -10,11 +10,11 @@ return {
 	BatchKey = "|";				-- :kill me | :ff bob | :explode scel
 	ConsoleKeyCode = "Quote";	-- Keybind to open the console; Rebindable per player in userpanel; KeyCodes: https://developer.roblox.com/en-us/api-reference/enum/KeyCode
 
-	HideScript = true;	-- When the game starts the Adonis_Loader model will be hidden so other scripts cannot access the settings module; Disable if your game uses AssetService:SavePlaceAsync()
+	HideScript = true;	-- When the game starts the Hyperion_Loader model will be hidden so other scripts cannot access the settings module; Disable if your game uses AssetService:SavePlaceAsync()
 
 	DataStoreEnabled = true;		-- Disable if you don't want to load settings and admins from the datastore; PlayerData will still save
 	LocalDatastore = false;			-- If this is turned on, a mock DataStore will forcibly be used instead and shall never save across servers
-	DataStore = "Adonis_1";			-- DataStore the script will use for saving data; Changing this will lose any saved data
+	DataStore = "Hyperion_1";			-- DataStore the script will use for saving data; Changing this will lose any saved data
 	DataStoreKey = "CHANGE_THIS";	-- CHANGE THIS TO ANYTHING RANDOM! Key used to encrypt all datastore entries; Changing this will lose any saved data
 
 	SaveAdmins = true;			-- If true anyone you :admin or :headadmin in-game will save
@@ -73,10 +73,10 @@ return {
 	WarnDangerousCommand = false;		-- Do dangerous commands ask for confirmation?
 	CommandFeedback = false;			-- Should players be notified when commands with non-obvious effects are run on them?
 	SilentCommandDenials = false;		-- If true, there will be no differences between the error messages shown when a user enters an invalid command and when they have insufficient permissions for the command
-	OverrideChatCallbacks = true;		-- If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Adonis on load. Required for slowmode. Mutes use a CanSend method to mute when this is set to false.
+	OverrideChatCallbacks = true;		-- If the TextChatService ShouldDeliverCallbacks of all channels are overridden by Hyperion on load. Required for slowmode. Mutes use a CanSend method to mute when this is set to false.
 	ChatCreateRobloxCommands = false;	-- Whether "/" commands for Roblox should get created in new Chat
 
-	CodeExecution = false;	-- Enables the use of code execution in Adonis. Scripting related (such as :s) and a few other commands require this
+	CodeExecution = false;	-- Enables the use of code execution in Hyperion. Scripting related (such as :s) and a few other commands require this
 
 	Notification = true;	-- Whether or not to show the "You're an admin" and "Updated" notifications
 	SongHint = true;		-- Display a hint with the current song name and ID when a song is played via :music
@@ -92,7 +92,7 @@ return {
 
 	HelpSystem = true;	-- Allows players to call admins for help using !help
 	HelpButton = true;	-- Shows a little help button in the bottom right corner.
-	HelpButtonImage = "rbxassetid://357249130";	-- Sets the image used for the Adonis help button above.
+	HelpButtonImage = "rbxassetid://357249130";	-- Sets the image used for the Hyperion help button above.
 
 	HttpWait = 60;	-- How long things that use the HttpService will wait before updating again
 };

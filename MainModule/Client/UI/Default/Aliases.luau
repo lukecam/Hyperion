@@ -148,7 +148,7 @@ return function(data, env)
 			local i = 1
 			content:Add("TextLabel", {
 				Text = "  Alias: ";
-				ToolTip = "Set the alias Adonis should check for in chat";
+				ToolTip = "Set the alias Hyperion should check for in chat";
 				BackgroundTransparency = (i%2 == 0 and 0) or 0.2;
 				Size = UDim2.new(1, -10, 0, 30);
 				Position = UDim2.new(0, 5, 0, (30*(i-1))+5);
@@ -168,7 +168,7 @@ return function(data, env)
 			i = i + 1
 			content:Add("TextLabel", {
 				Text = "  Command: ";
-				ToolTip = "Set the command(s) Adonis should execute when finding the alias";
+				ToolTip = "Set the command(s) Hyperion should execute when finding the alias";
 				BackgroundTransparency = (i%2 == 0 and 0) or 0.2;
 				Size = UDim2.new(1, -10, 0, 30);
 				Position = UDim2.new(0, 5, 0, (30*(i-1))+5);

@@ -54,77 +54,14 @@ return function(data, env)
 	local gTable
 	local window = UI.Make("Window", {
 		Name  = "UserPanel";
-		Title = Variables.NightlyMode and "Adonis Nightly" or "Adonis";
-		Icon = Variables.NightlyMode and "rbxassetid://6877822142" or "rbxassetid://7681261289"; --"rbxassetid://7681088830"; --"rbxassetid://7681233602"; --"rbxassetid://7681048299";
+		Title = Variables.NightlyMode and "Hyperion Nightly" or "Hyperion";
+		Icon = Variables.NightlyMode and "rbxassetid://92621595595713" or "rbxassetid://92621595595713"; --"rbxassetid://7681088830"; --"rbxassetid://7681233602"; --"rbxassetid://7681048299";
 		Size  = {465, 340};
 		AllowMultiple = false;
 		OnClose = function()
 			Variables.WaitingForBind = false
 		end
 	})
-
-	local function createPurchaseWindow(isGamepass, id)
-		local purchaseWindow = UI.Make("Window", {
-			Name = "Purchase window";
-			Title = `Purchase {isGamepass and "gamepass" or "asset"}`;
-			Icon = client.MatIcons["Shopping cart"];
-			AllowMultiple = false;
-			Size = {380, 160};
-			SizeLocked = true;
-		})
-
-		if purchaseWindow then
-			purchaseWindow:Add("TextLabel", {
-				Size = UDim2.new(1, -20, 1, -55);
-				Position = UDim2.new(0.5, 0, 0, 10);
-				AnchorPoint = Vector2.new(0.5, 0);
-				ZIndex = 2;
-				TextScaled = true;
-				Text = "This game does not allow third party purchases. If you would like to purchase, please copy the link below and put it in your browser.";
-			})
-
-			purchaseWindow:Add("TextBox", {
-				Size = UDim2.new(1, -20, 0, 30);
-				Position = UDim2.new(0.5, 0, 1, -10);
-				AnchorPoint = Vector2.new(0.5, 1);
-				ZIndex = 2;
-				ClearTextOnFocus = false;
-				TextEditable = false;
-				TextScaled = true;
-				Text = string.format("https://roblox.com/%s/%d/", isGamepass and "game-pass" or "library", id)
-			})
-
-			purchaseWindow:Ready()
-		end
-	end
-
-	local function promptPurchase(isGamepass, id)
-		if Variables.AllowThirdPartyPurchases == false then
-			createPurchaseWindow(isGamepass, id)
-		else
-			local logEvent, finishEvent
-
-			logEvent = service.LogService.MessageOut:Connect(function(msg, typ)
-				if typ == Enum.MessageType.MessageWarning and string.find(msg, "AllowThirdPartySales has blocked the purchase prompt") then
-					Variables.AllowThirdPartyPurchases = false
-
-					createPurchaseWindow(isGamepass, id)
-				end
-			end)
-			finishEvent = service.MarketPlace[isGamepass and "PromptGamePassPurchaseFinished" or "PromptPurchaseFinished"]:Connect(function(plr, aid)
-				if plr == service.Players.LocalPlayer and aid == id then
-					logEvent:Disconnect()
-					finishEvent:Disconnect()
-				end
-			end)
-
-			if isGamepass then
-				service.MarketPlace:PromptGamePassPurchase(service.Players.LocalPlayer, id)
-			else
-				service.MarketPlace:PromptPurchase(service.Players.LocalPlayer, id)
-			end
-		end
-	end
 
 	local function showTable(tab, setting)
 		local tabPath = type(setting) == "table" and setting
@@ -377,7 +314,7 @@ return function(data, env)
 		--// Help/Info
 		do
 			infoTab:Add("TextLabel", {
-				Text = "Adonis is a frequently updated, community maintained, open source administration system created by Sceleratis (Davey_Bones). \n\nIts purpose is to assist in the\nadministration and moderation\nof Roblox game servers.\n\nFeel free to take and edit it on\nthe condition that existing credits remain.\nHave an idea? Let us know!";
+				Text = "Hyperion is a frequently updated, community maintained, open source administration system created by Sceleratis (Davey_Bones). \n\nIts purpose is to assist in the\nadministration and moderation\nof Roblox game servers.\n\nFeel free to take and edit it on\nthe condition that existing credits remain.\nHave an idea? Let us know!";
 				TextWrapped = true;
 				Size = UDim2.new(1, -145, 1, -10);
 				Position = UDim2.new(0, 5, 0, 5);
@@ -1007,7 +944,7 @@ return function(data, env)
 				};
 				{
 					Text = "UI Keep Alive: ";
-					Desc = "- Prevents Adonis UI deletion on death";
+					Desc = "- Prevents Hyperion UI deletion on death";
 					Entry = "Boolean";
 					Value = Variables.UIKeepAlive;
 					Function = function(enabled, toggle)
@@ -1020,7 +957,7 @@ return function(data, env)
 				};
 				{
 					Text = "Particle Effects: ";
-					Desc = "- Enables/Disables Adonis made particles";
+					Desc = "- Enables/Disables Hyperion made particles";
 					Entry = "Boolean";
 					Value = Variables.ParticlesEnabled;
 					Function = function(enabled, toggle)
@@ -1135,7 +1072,7 @@ return function(data, env)
 				};
 				{
 					Text = "Theme: ";
-					Desc = "- Allows you to set the Adonis UI theme";
+					Desc = "- Allows you to set the Hyperion UI theme";
 					Entry = "DropDown";
 					Setting = "CustomTheme";
 					Value = Variables.CustomTheme or "Game Theme";

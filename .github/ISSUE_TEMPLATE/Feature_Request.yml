@@ -11,7 +11,7 @@ body:
   - type: dropdown
     id: segment
     attributes:
-      label: What part of Adonis is this related to?
+      label: What part of Hyperion is this related to?
       options:
         - Loader/Settings
         - Command

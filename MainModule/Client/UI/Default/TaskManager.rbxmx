@@ -2696,19 +2696,19 @@ return function(data, env)
 				else
 					task:Pause()
 				end
-				wait(0.5)
+				task.wait(0.5)
 				updateLists()
 			end)
 			
 			frame.Kill.MouseButton1Down:Connect(function()
 				task:Kill()
-				wait(0.5)
+				task.wait(0.5)
 				updateLists()
 			end)
 			
 			frame.Stop.MouseButton1Down:Connect(function()
 				task:Stop()
-				wait(0.5)
+				task.wait(0.5)
 				updateLists()
 			end)
 			
@@ -2725,7 +2725,7 @@ return function(data, env)
 	Close.MouseButton1Click:Connect(function()
 		drag.Draggable = false
 		drag:TweenPosition(UDim2.new(drag.Position.X.Scale, drag.Position.X.Offset, 1,0), "Out", "Sine", 0.5, true)
-		wait(0.5)
+		task.wait(0.5)
 		gTable:Destroy()
 	end)
 
@@ -2778,7 +2778,7 @@ return function(data, env)
 	
 	gTable:Ready()
 	
-	while wait(1) do
+	while task.wait(1) do
 		updateLists()
 	end
 end

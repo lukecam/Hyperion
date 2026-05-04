@@ -30,7 +30,7 @@ return function(Vargs, GetEnv)
 		end, ...)
 	end
 	server.cPcall, service.cPcall = cPcall, cPcall
-	service.AltUnpack = function(args, shift) -- TODO: Remove. This is not used in Adonis at all and is easily replicatable so you can safely remove it withour fear
+	service.AltUnpack = function(args, shift) -- TODO: Remove. This is not used in Hyperion at all and is easily replicatable so you can safely remove it withour fear
 		return table.unpack(args, 1 + (shift and shift - 1 or 0), 10 + (shift and shift - 1 or 0))
 	end
 	service.CloneTable = function(tbl)

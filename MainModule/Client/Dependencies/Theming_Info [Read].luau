@@ -25,7 +25,7 @@
 	
 	Basic theming related information;
 		
-		All Adonis GUIs have a code module that makes them run. If you are only changing minor things on an
+		All Hyperion GUIs have a code module that makes them run. If you are only changing minor things on an
 		existing GUI (such as colors) then you do not need to include a code module, instead it will use the
 		default's. If you need to change the code for the GUI then you MUST include a code module inside a Config
 		folder.

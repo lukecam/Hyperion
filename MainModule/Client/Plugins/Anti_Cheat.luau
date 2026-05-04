@@ -167,10 +167,10 @@ return function(Vargs)
 				end
 				hasActivated = true
 				Detected("crash", "Tamper Protection 0xC0FA6; "..tostring(message).."; ")
-				wait(1)
-				pcall(Disconnect, "Adonis_0xC0FA6")
-				pcall(Kill, "Adonis_0xC0FA6")
-				pcall(Kick, Player, "Adonis_0xC0FA6")
+				task.wait(1)
+				pcall(Disconnect, "Hyperion_0xC0FA6")
+				pcall(Kill, "Hyperion_0xC0FA6")
+				pcall(Kick, Player, "Hyperion_0xC0FA6")
 			end
 
 			if isStudio then
@@ -253,7 +253,7 @@ return function(Vargs)
 		--Detected('log','Client-Side Tool Detected')
 
 		HumanoidState = function()
-			wait(1)
+			task.wait(1)
 			local humanoid = service.Player.Character:WaitForChild("Humanoid", 2) or service.Player.Character:FindFirstChildOfClass("Humanoid")
 			local event
 			local doing = true
@@ -488,9 +488,9 @@ return function(Vargs)
 				elseif type(Message) ~= "string" then
 					pcall(Detected, "crash", "Tamper Protection 0x600D")
 					task.wait(1)
-					pcall(Disconnect, "Adonis_0x600D")
-					pcall(Kill, "Adonis_0x600D")
-					pcall(Kick, Player, "Adonis_0x600D")
+					pcall(Disconnect, "Hyperion_0x600D")
+					pcall(Kill, "Hyperion_0x600D")
+					pcall(Kick, Player, "Hyperion_0x600D")
 				elseif check(Message) then
 					Detected("crash", "Exploit detected; "..Message)
 				end
@@ -758,9 +758,9 @@ return function(Vargs)
 					if violations >= 5 then
 						opcall(Detected, "crash", "Tamper Protection 0x16471")
 						oWait(1)
-						opcall(Disconnect, "Adonis_0x16471")
-						opcall(Kill, "Adonis_0x16471")
-						opcall(Kick, Player, "Adonis_0x16471")
+						opcall(Disconnect, "Hyperion_0x16471")
+						opcall(Kill, "Hyperion_0x16471")
+						opcall(Kick, Player, "Hyperion_0x16471")
 					else
 						violations += 1
 					end
@@ -792,9 +792,9 @@ return function(Vargs)
 					if violations >= 5 then
 						opcall(Detected, "crash", "Tamper Protection 0xE28D")
 						oWait(1)
-						opcall(Disconnect, "Adonis_0xE28D")
-						opcall(Kill, "Adonis_0xE28D")
-						opcall(Kick, Player, "Adonis_0xE28D")
+						opcall(Disconnect, "Hyperion_0xE28D")
+						opcall(Kill, "Hyperion_0xE28D")
+						opcall(Kick, Player, "Hyperion_0xE28D")
 					else
 						violations += 1
 					end
@@ -808,9 +808,9 @@ return function(Vargs)
 		end, function()
 			opcall(Detected, "crash", "Tamper Protection 0x36C6")
 			oWait(1)
-			opcall(Disconnect, "Adonis_0x36C6")
-			opcall(Kill, "Adonis_0x36C6")
-			opcall(Kick, Player, "Adonis_0x36C6")
+			opcall(Disconnect, "Hyperion_0x36C6")
+			opcall(Kill, "Hyperion_0x36C6")
+			opcall(Kick, Player, "Hyperion_0x36C6")
 		end)
 	end
 end

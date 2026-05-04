@@ -593,7 +593,7 @@ return function(Vargs, env)
 				end
 
 				service.New("StringValue", {
-					Name = `__ADONIS_VARIABLES_{Variables.CodeName}`,
+					Name = `__HYPERION_VARIABLES_{Variables.CodeName}`,
 					Parent = F3X
 				})
 
@@ -1080,7 +1080,7 @@ return function(Vargs, env)
 				for _, v in service.GetPlayers(plr, args[1]) do
 					Remote.Send(v, "Function", "SetCore", "SendNotification", {
 						Title = "Notification";
-						Text = args[3] or "Hello, from Adonis!";
+						Text = args[3] or "Hello, from Hyperion!";
 						Duration = tonumber(args[2]) or 5;
 					})
 				end

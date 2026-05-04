@@ -91,12 +91,12 @@ return function(data, env)
 			table.move(args, 4, math.max(4, args.n or #args), 3) -- Get rid of self arg
 
 			if args[2] == "GetContainer" then
-				return service.UnWrap(service.SoundService:FindFirstChild("ADONIS_AUDIOLIB"))
+				return service.UnWrap(service.SoundService:FindFirstChild("HYPERION_AUDIOLIB"))
 			elseif args[2] == "GetSound" then
 				return service.UnWrap(
 					assert(
 						assert(
-							service.SoundService:FindFirstChild("ADONIS_AUDIOLIB"),
+							service.SoundService:FindFirstChild("HYPERION_AUDIOLIB"),
 							"No server AudioLib folder found!"
 						):FindFirstChild(localAudioLib._defaultSoundName),
 						"No server AudioLib sound object found!"
@@ -151,7 +151,7 @@ return function(data, env)
 				return service.UnWrap(
 					assert(
 						assert(
-							service.SoundService:FindFirstChild("ADONIS_AUDIOLIB"),
+							service.SoundService:FindFirstChild("HYPERION_AUDIOLIB"),
 							"No server AudioLib folder found!"
 						):FindFirstChild(localAudioLib._defaultSoundName),
 						"No server AudioLib sound object found!"
@@ -469,10 +469,10 @@ return function(data, env)
 			activeSongList = availableSongLists["Game"] or {}
 		end;
 	})
-	local adonisTab = tabFrame:NewTab("Adonis", {
-		Text = "Adonis";
+	local hyperionTab = tabFrame:NewTab("Hyperion", {
+		Text = "Hyperion";
 		OnFocus = function()
-			activeSongList = availableSongLists["Adonis"] or {}
+			activeSongList = availableSongLists["Hyperion"] or {}
 		end;
 	})
 	local customTab = tabFrame:NewTab("Custom", {
@@ -907,12 +907,12 @@ return function(data, env)
 
 	loadingMessage(personalTab)
 	loadingMessage(gameTab)
-	loadingMessage(adonisTab)
+	loadingMessage(hyperionTab)
 	registerSoundIdEvent()
 	getSongs(personalTab, client.Functions.Playlist().Playlist or {})
 	local musicList = client.Remote.Get("Variable", "MusicList") or {}
 	getSongs(gameTab, musicList)
-	getSongs(adonisTab, table.move(service.DeepCopy(musicList), 1, #musicList - #(client.Remote.Get("Setting", "MusicList") or {}), 1, {}))
+	getSongs(hyperionTab, table.move(service.DeepCopy(musicList), 1, #musicList - #(client.Remote.Get("Setting", "MusicList") or {}), 1, {}))
 	activeSongList = availableSongLists["Personal"] or {}
 
 	task.spawn(function()

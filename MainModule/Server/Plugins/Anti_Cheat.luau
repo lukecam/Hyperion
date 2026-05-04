@@ -32,7 +32,7 @@ return function(Vargs, GetEnv)
 		end
 
 		if not Settings.Detection then
-			Logs:AddLog("Script", "Didn't load Adonis protection systems due to settings.Detection being set to false.")
+			Logs:AddLog("Script", "Didn't load Hyperion protection systems due to settings.Detection being set to false.")
 			return
 		end
 
