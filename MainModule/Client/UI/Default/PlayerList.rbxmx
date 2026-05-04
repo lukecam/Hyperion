@@ -266,10 +266,10 @@ return function(data, env)
 					elseif p.UserId==game.CreatorId then
 						image.Image = 'rbxasset://textures/ui/icon_placeowner.png'
 						image.Visible = true
-					elseif p:IsInGroup(1200769) then
+					elseif p:IsInGroupAsync(1200769) then
 						image.Image = 'http://www.roblox.com/asset/?id=99727663'
 						image.Visible = true
-					elseif localplayer:IsFriendsWith(p.UserId) and p~=localplayer then
+					elseif localplayer:IsFriendsWithAsync(p.UserId) and p~=localplayer then
 						image.Image = 'http://www.roblox.com/asset/?id=99749771'
 						image.Visible = true
 					elseif p.MembershipType==Enum.MembershipType.BuildersClub then
