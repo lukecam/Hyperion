@@ -7,10 +7,7 @@ logError = nil
 
 --// Commands
 --// Highly recommended you disable Intellesense before editing this...
-return function(Vargs, GetEnv)
-	local env = GetEnv(nil, {script = script})
-	setfenv(1, env)
-
+return function(Vargs)
 	local server = Vargs.Server
 	local service = Vargs.Service
 
