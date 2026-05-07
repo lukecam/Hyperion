@@ -153,8 +153,8 @@ return function(data, env)
 
 		overviewtab:ResizeCanvas(false, true, false, false, 5, 5)
 
-		spawn(function()
-			while wait(0.5) do
+		task.spawn(function()
+			while task.wait(0.5) do
 				local timeNow = os.time()
 				if not displays["Server Speed"] or not displays["Server Age"] then break end
 				displays["Server Speed"].Text = math.round(data.ServerSpeed or 0)
@@ -309,21 +309,8 @@ return function(data, env)
 				if subEntryText and subEntryText ~= "Player" then
 					adminCount += 1
 
-					if table.find(data.Refreshables.Donors, playerName) then
-						subEntryText ..= " | Donor"
-					end
-
 					entry:Add("TextLabel", {
 						Text = ` {subEntryText}  `;
-						BackgroundTransparency = 1;
-						Size = UDim2.new(0, 120, 1, 0);
-						Position = UDim2.new(1, -120, 0, 0);
-						TextXAlignment = "Right";
-					})
-				elseif table.find(data.Refreshables.Donors, playerName) then
-					playerCount += 1
-					entry:Add("TextLabel", {
-						Text = " Donor  ";
 						BackgroundTransparency = 1;
 						Size = UDim2.new(0, 120, 1, 0);
 						Position = UDim2.new(1, -120, 0, 0);
@@ -333,7 +320,7 @@ return function(data, env)
 					playerCount += 1
 				end
 
-				spawn(function()
+				task.spawn(function()
 					entry:Add("ImageLabel", {
 						Image = service.Players:GetUserThumbnailAsync(service.Players[playerName].UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48);
 						BackgroundTransparency = 1;
@@ -354,7 +341,7 @@ return function(data, env)
 				})
 			end
 			scroller:ResizeCanvas(false, true, false, false, 5, 5)
-			search.PlaceholderText = `Players: {playerCount}{data.Refreshables.Admins and ` | Admins: {adminCount}` or ""} | Donors: {#data.Refreshables.Donors}`
+			search.PlaceholderText = `Players: {playerCount}{data.Refreshables.Admins and ` | Admins: {adminCount}` or ""}`
 		end
 
 		search:GetPropertyChangedSignal("Text"):Connect(function()
