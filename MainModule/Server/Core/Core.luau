@@ -653,14 +653,6 @@ return function(Vargs, GetEnv)
 
 		DefaultPlayerData = function(p)
 			return {
-				Donor = {
-					Cape = {
-						Image = "0";
-						Color = "White";
-						Material = "Neon";
-					};
-					Enabled = false;
-				};
 				Banned = false;
 				TimeBan = false;
 				AdminNotes = {};
@@ -1540,8 +1532,6 @@ return function(Vargs, GetEnv)
 				IsBanned = MetaFunc(Admin.CheckBan, true, { PlayerType });
 
 				IsMuted = MetaFunc(Admin.IsMuted, true, { t.instanceOf("Player") });
-
-				CheckDonor = MetaFunc(Admin.CheckDonor, true, { t.instanceOf("Player") });
 
 				GetLevel = MetaFunc(Admin.GetLevel, true, { PlayerType });
 

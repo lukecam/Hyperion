@@ -80,7 +80,6 @@ return function(Vargs, GetEnv)
 		BanMessage = "Banned",
 		PlayerJoinFilters = {};
 		LockMessage = "Not Whitelisted",
-		DonorPass = {1348327, 1990427, 1911740, 167686, 98593, "6878510605", 5212082, 5212081}, --// Strings are items; numbers are gamepasses
 		WebPanel_Initiated = false,
 		HTTPCheckUrl = "https://www.google.com/humans.txt",
 		IPInfoUrl = "https://speed.cloudflare.com/meta",
@@ -238,7 +237,6 @@ return function(Vargs, GetEnv)
 			{Name = "epix", 		Material = "Plastic", 	Color = "Really black", 		ID = 149442745},
 			{Name = "superman", 	Material = "Fabric", 	Color = "Bright blue", 			ID = 108597677},
 			{Name = "swag", 		Material = "Fabric", 	Color = "Pink", 			ID = 109301474},
-			{Name = "donor", 		Material = "Plastic", 	Color = "White", 			ID = 149009184},
 			{Name = "gomodern", 	Material = "Plastic", 	Color = "Really black", 		ID = 149438175},
 			{Name = "admin", 		Material = "Plastic", 	Color = "White", 			ID = 149092195},
 			{Name = "giovannis", 	Material = "Plastic", 	Color = "White", 			ID = 149808729},

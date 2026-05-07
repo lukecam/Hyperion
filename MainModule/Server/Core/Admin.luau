@@ -1109,7 +1109,6 @@ return function(Vargs, GetEnv)
 					{ PlayerData = {
 						Player = plr,
 						Level = 0,
-						isDonor = false,
 					} }
 				)
 			end
@@ -1597,7 +1596,6 @@ return function(Vargs, GetEnv)
 			local pDat = {
 				Player = p;
 				Level = Admin.GetLevel(p);
-				isDonor = Admin.CheckDonor(p);
 			}
 
 			for ind, cmd in Commands do

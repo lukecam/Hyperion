@@ -595,10 +595,6 @@ order = {
 	"HelpButton";
 	"HelpButtonImage";
 	" ";
-	"DonorCommands";
-	"DonorCapes";
-	"LocalCapes";
-	" ";
 	"AllowClientAntiExploit";
 	"Detection";
 	"CheckClients";
