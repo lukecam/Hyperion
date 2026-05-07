@@ -12,18 +12,10 @@
 				"MainModule": {
 					"$path": "MainModule"
 				},
-
-				"LICENSE": {
-					"$path": "LICENSE.luau"
-				},
 				
 				"Hyperion_Loader": {
 					"$className": "Model",
-					"$path": "Loader",
-
-					"LICENSE": {
-						"$path": "LICENSE.luau"
-					}
+					"$path": "Loader"
 				}
 			}
 		}
