@@ -120,6 +120,89 @@ return function(Vargs, env)
 			end
 		};
 
+		-- readded by request
+		ScriptEditor = {
+			Prefix = Settings.Prefix;
+			Commands = {"scripteditor", "se"};
+			Args = {"new/edit/delete/run","name"};
+			Description = "Opens Script editor";
+			CrossServerDenied = true;
+			AdminLevel = "Creators";
+			Function = function(plr: Player, args: {string})
+				assert(Settings.CodeExecution, "CodeExecution must be enabled for this command to work")
+				assert(plr ~= false and not service.Wrapped(plr), "A player is needed to run CodeExecution related commands.")
+
+				if type(Remote.RemoteExecutionConfirmed) == "table" and not Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] then
+					local ans = Remote.GetGui(plr, "YesNoPrompt", {
+						Icon = server.MatIcons.Warning;
+						Question = "Are you sure you want to use the script editor command? (Once confirmed, you will not be asked again)";
+						Title = "Adonis ScriptEditor";
+						Delay = 3;
+					})
+
+					if ans == "Yes" then
+						Remote.RemoteExecutionConfirmed[tostring(plr.UserId)] = true
+					else
+						return
+					end
+				end
+
+				local Operation = assert(args[1], "Operation not defined (argument #1)")
+				local Name = assert(args[2], "Name not defined (argument #2)")
+				local se = Variables.ScriptEditor[tostring(plr.UserId)]
+				if not se then
+					se = {}
+					Variables.ScriptEditor[tostring(plr.UserId)] = se
+				end
+
+				if Operation:lower() == "new" then
+					se[Name] = {
+						Script = false;
+					}
+
+					Commands.ScriptEditor.Function(plr,{"edit",Name})
+				elseif Operation:lower() == "edit" then
+					Remote.MakeGui(plr, "ScriptEditor",{
+						Name = Name;
+						Script = se[Name].Script
+					})
+				elseif Operation:lower() == "delete" then
+					assert(se[Name], "No script found")
+
+					se[Name] = nil
+				elseif Operation:lower() == "run" then
+					assert(se[Name], "No script found")
+
+					local oError = error
+					local newenv = setfenv(getfenv(),{
+						print = function(...) local args, str = table.pack(...), "" for i = 1, args.n do str ..= `{(i > 1 and " " or "")}{args[i]}` end Remote.MakeGui(plr, "Output",{Title = "WARN"; Message = `{str}`}) end;
+						warn = function(...) local args, str = table.pack(...), "" for i = 1, args.n do str ..= `{(i > 1 and " " or "")}{args[i]}` end Remote.MakeGui(plr, "Output",{Title = "WARN"; Message = `{str}`}) end;
+						error = function(reason, level)
+							if level ~= nil and type(level) ~= "number" then
+								oError(string.format("bad argument #2 to 'error' (number expected, got %s)", type(level)), 2)
+							end
+
+							Remote.MakeGui(plr, "Output",{Title = "LUA_DEMAND_ERROR"; Message = `LUA_DEMAND_ERROR: {reason}`})
+							oError(`Adonis ScriptEditor error: {reason}`, (level or 1) + 1)
+						end;
+					})
+
+					service.TrackTask(`Thread: ScriptEditor: {plr.UserId}: {Name}`,function()
+						local func,err = Core.Loadstring(se[Name]["Script"], newenv)
+						if func then
+							local Succ,Err = pcall(function()
+								func()
+							end)
+
+							Remote.MakeGui(plr,'Output',{Title = 'ScriptEditor error'; Message = `ScriptEditor error: {Err}`})
+						else
+							Remote.MakeGui(plr,'Output',{Title = 'ScriptEditor error'; Message = `ScriptEditor error: {err}`})
+						end
+					end)
+				end
+			end,
+		};
+
 		MakeHeadAdmin = {
 			Prefix = Settings.Prefix;
 			Commands = {"headadmin"};
