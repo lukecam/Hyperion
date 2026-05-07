@@ -314,8 +314,9 @@ return function(data, env)
 		--// Help/Info
 		do
 			infoTab:Add("TextLabel", {
-				Text = "Hyperion is a frequently updated, community maintained, open source administration system created by Sceleratis (Davey_Bones). \n\nIts purpose is to assist in the\nadministration and moderation\nof Roblox game servers.\n\nFeel free to take and edit it on\nthe condition that existing credits remain.\nHave an idea? Let us know!";
+				Text = "Hyperion is an Adonis fork focusing on providing a less bloated and nicer to use experience. \n\nHyperion is currently in an extremely early state, please report any bugs you can to us.\n\n<b>Thanks for trying out this early version!</b>";
 				TextWrapped = true;
+				RichText = true;
 				Size = UDim2.new(1, -145, 1, -10);
 				Position = UDim2.new(0, 5, 0, 5);
 			})
@@ -333,14 +334,31 @@ return function(data, env)
 			})
 
 			infoTab:Add("TextButton", {
-				Text = "Changelog";
+				Text = "Hyperion Changelog";
 				Size = UDim2.new(0, 130, 0, 40);
 				Position = UDim2.new(1, -135, 0, 50);
 				BackgroundTransparency = 0.5;
 				Events = {
 					MouseButton1Down = function()
 						UI.Make("List", {
-							Title = "Changelog";
+							Title = "Hyperion Changelog";
+							Table = {"Changelogs are coming soon!"};
+							RichText = true;
+							Size = {500, 400};
+						})
+					end
+				}
+			})
+
+			infoTab:Add("TextButton", {
+				Text = "Adonis Changelog";
+				Size = UDim2.new(0, 130, 0, 40);
+				Position = UDim2.new(1, -135, 0, 95);
+				BackgroundTransparency = 0.5;
+				Events = {
+					MouseButton1Down = function()
+						UI.Make("List", {
+							Title = "Adonis Changelog";
 							Table = client.FormattedChangelog;
 							RichText = true;
 							Size = {500, 400};
@@ -352,7 +370,7 @@ return function(data, env)
 			infoTab:Add("TextButton", {
 				Text = "Credits";
 				Size = UDim2.new(0, 130, 0, 40);
-				Position = UDim2.new(1, -135, 0, 95);
+				Position = UDim2.new(1, -135, 0, 140);
 				BackgroundTransparency = 0.5;	
 				Events = {
 					MouseButton1Down = function()
@@ -364,7 +382,7 @@ return function(data, env)
 			infoTab:Add("TextButton", {
 				Text = "Open Console";
 				Size = UDim2.new(0, 130, 0, 40);
-				Position = UDim2.new(1, -135, 0, 140);
+				Position = UDim2.new(1, -135, 0, 185);
 				BackgroundTransparency = 0.5;
 				Events = {
 					MouseButton1Down = function()
