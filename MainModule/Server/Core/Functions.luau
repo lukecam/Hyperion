@@ -20,8 +20,7 @@ return function(Vargs, GetEnv)
 		Variables = server.Variables;
 		Settings = server.Settings;
 		logError = server.logError;
-		Functions.NuclearExplode = select(2, xpcall(require, warn, server.Dependencies.FastNuke));
-
+		
 		Functions.Init = nil
 		Logs:AddLog("Script", "Functions Module Initialized")
 	end;
