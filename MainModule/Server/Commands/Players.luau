@@ -5,7 +5,6 @@ return function(Vargs)
 	local Settings = server.Settings
 	local Functions, Commands, Admin, Anti, Core, HTTP, Logs, Remote, Process, Variables, Deps =
 		server.Functions, server.Commands, server.Admin, server.Anti, server.Core, server.HTTP, server.Logs, server.Remote, server.Process, server.Variables, server.Deps
-	warn("setfenv was supposed to be here: ".. debug.traceback())
 
 	local Routine = function(func, ...)
 		return coroutine.resume(coroutine.create(func), ...)
