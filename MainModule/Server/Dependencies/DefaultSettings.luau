@@ -318,7 +318,7 @@ settings.Console_AdminsOnly = false -- If true, only admins will be able to acce
 
 settings.HelpSystem = true		-- Allows players to call admins for help using !help
 settings.HelpButton = true		-- Shows a little help button in the bottom right corner.
-settings.HelpButtonImage = "rbxassetid://357249130" -- Sets the image used for the Hyperion help button above.
+settings.HelpButtonImage = "rbxassetid://87643267773593" -- Sets the image used for the Hyperion help button above.
 
 
 --------------------

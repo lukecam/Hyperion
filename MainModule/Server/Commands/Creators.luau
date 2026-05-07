@@ -136,7 +136,7 @@ return function(Vargs, env)
 					local ans = Remote.GetGui(plr, "YesNoPrompt", {
 						Icon = server.MatIcons.Warning;
 						Question = "Are you sure you want to use the script editor command? (Once confirmed, you will not be asked again)";
-						Title = "Adonis ScriptEditor";
+						Title = "Hyperion ScriptEditor";
 						Delay = 3;
 					})
 
@@ -183,7 +183,7 @@ return function(Vargs, env)
 							end
 
 							Remote.MakeGui(plr, "Output",{Title = "LUA_DEMAND_ERROR"; Message = `LUA_DEMAND_ERROR: {reason}`})
-							oError(`Adonis ScriptEditor error: {reason}`, (level or 1) + 1)
+							oError(`Hyperion ScriptEditor error: {reason}`, (level or 1) + 1)
 						end;
 					})
 

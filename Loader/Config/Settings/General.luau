@@ -92,7 +92,7 @@ return {
 
 	HelpSystem = true;	-- Allows players to call admins for help using !help
 	HelpButton = true;	-- Shows a little help button in the bottom right corner.
-	HelpButtonImage = "rbxassetid://357249130";	-- Sets the image used for the Hyperion help button above.
+	HelpButtonImage = "rbxassetid://87643267773593"; -- Sets the image used for the Hyperion help button above.
 
 	HttpWait = 60;	-- How long things that use the HttpService will wait before updating again
 };

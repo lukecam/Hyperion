@@ -32,7 +32,7 @@ return function(data, env)
 		Position = UDim2.new(1, -45, 1, -45);
 		Size = UDim2.fromOffset(40, 40);
 		Image = client.HelpButtonImage;
-		ImageTransparency = 0.5;
+		ImageTransparency = 0.2;
 	})
 
 	--if UI.Get("Chat") then
