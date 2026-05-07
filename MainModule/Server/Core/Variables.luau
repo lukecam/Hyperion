@@ -75,7 +75,6 @@ return function(Vargs, GetEnv)
 		FrozenObjects = {},
 		ScriptBuilder = {},
 		ScriptEditor = {},
-		CachedDonors = {},
 		Aliases = {},
 		ReturnPoints = {},
 		BanMessage = "Banned",

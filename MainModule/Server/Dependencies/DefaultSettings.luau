@@ -321,15 +321,6 @@ settings.HelpButton = true		-- Shows a little help button in the bottom right co
 settings.HelpButtonImage = "rbxassetid://87643267773593" -- Sets the image used for the Hyperion help button above.
 
 
---------------------
--- DONOR SETTINGS --
---------------------
-
-settings.DonorCapes = true 		-- Donors get to show off their capes; Not disruptive :)
-settings.DonorCommands = true	-- Show your support for the script and let donors use harmless commands like !sparkles
-settings.LocalCapes = false	 	-- Makes Donor capes local so only the donors see their cape [All players can still disable capes locally]
-
-
 --------------------------
 -- HTTP/TRELLO SETTINGS --
 --------------------------
@@ -491,10 +482,6 @@ descs.PlayerList = [[ Custom playerlist ]]
 
 descs.Console = [[ Command console ]]
 descs.Console_AdminsOnly = [[ Makes it so if the console is enabled, only admins will see it ]]
-
-descs.DonorCommands = [[ Show your support for the script and let donors use commands like !sparkles ]]
-descs.DonorCapes = [[ Determines if donors have capes ]]
-descs.LocalCapes = [[ Makes Donor capes local instead of removing them ]]
 
 descs.HelpSystem = [[ Allows players to call admins for help using !help ]]
 descs.HelpButton = [[ Shows a little help button in the bottom right corner ]]

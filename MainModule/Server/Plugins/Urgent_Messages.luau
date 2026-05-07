@@ -49,7 +49,7 @@ return function(Vargs, GetEnv)
 		end
 
 		local MessageVersion = Alerts.MessageVersion;			--// Message version/number
-		local MessageAdminType = Alerts.MessageAdminType;  		--// Minimum admin level to be notified (Or Donors or Players or nil to not notify)
+		local MessageAdminType = Alerts.MessageAdminType;  		--// Minimum admin level to be notified (Or Players or nil to not notify)
 		local MessageDate = Alerts.MessageDate;					--// Time of message creation
 		local MessageDuration = Alerts.MessageDuration; 		--// How long should we notify people about this message
 		LastDateTime = Alerts.LastDateTime;						--// Last message date and time
@@ -61,10 +61,6 @@ return function(Vargs, GetEnv)
 			if lastMessage < MessageVersion and os.time() - MessageDate <= MessageDuration then
 				if MessageAdminType == "Players" then
 					return true
-				elseif MessageAdminType == "Donors" then
-					if Admin.CheckDonor(p) then
-						return true
-					end
 				elseif type(MessageAdminType) == "number" and Admin.GetLevel(p) >= MessageAdminType then
 					return true
 				end
