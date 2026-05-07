@@ -7,10 +7,7 @@ logError = nil
 
 --// Commands
 --// Highly recommended you disable Intellesense before editing this...
-return function(Vargs, GetEnv)
-	local env = GetEnv(nil, {script = script})
-	setfenv(1, env)
-
+return function(Vargs)
 	local server = Vargs.Server
 	local service = Vargs.Service
 
@@ -45,8 +42,6 @@ return function(Vargs, GetEnv)
 			NoStudio = t.boolean,
 			NoLog = t.boolean,
 			NonChattable = t.boolean,
-			AllowDonors = t.boolean,
-			Donors = t.boolean,
 			Filter = t.boolean,
 			Dangerous = t.boolean,
 			Function = t.callback,
@@ -76,8 +71,6 @@ return function(Vargs, GetEnv)
 				NoStudio = false;
 				NoLog = false;
 				NonChattable = false;
-				AllowDonors = false;
-				Donors = false;
 				CrossServerDenied = false;
 				IsCrossServer = false;
 				Filter = false;
@@ -113,7 +106,7 @@ return function(Vargs, GetEnv)
 			cmd.Args = cmd.Args or cmd.Arguments or {}
 
 			local lvl = cmd.AdminLevel
-			if type(lvl) == "string" and lvl ~= "Donors" then
+			if type(lvl) == "string" then
 				cmd.AdminLevel = Admin.StringToComLevel(lvl)
 			elseif type(lvl) == "table" then
 				for b, v in lvl do

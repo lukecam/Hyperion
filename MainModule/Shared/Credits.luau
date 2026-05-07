@@ -124,7 +124,6 @@ return {
 		{Text = "Krypt",					Desc = "Wrote Slider module used for AudioPlayer"};
 		{Text = "",};
 		{Text = "~ :) ~",};
-		{Text = "Donors",					Desc = "Donors keep the wheels turning ;)"};
 		{Text = "The Users [You :)]",		Desc = "For using the script and keeping it alive :)"};
 		{Text = "Special thanks", 			Desc = "Special thanks to everyone who helped along the way and suggested new ideas!"};
 		{Text = "Not listed?",				Desc = "Message Davey_Bones and tell me what you need to be credited for and I'll add you in! (also sorry for missing you the first time)"};

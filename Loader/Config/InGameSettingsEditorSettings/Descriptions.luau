@@ -47,7 +47,7 @@ return {
 	WhitelistEnabled = [[ If true enables the whitelist/server lock; Only lets admins & whitelisted users join ]];
 
 	Prefix = [[ The : in :kill me ]];
-	PlayerPrefix = [[ The ! in !donate; Mainly used for commands that any player can run ]];
+	PlayerPrefix = [[ The ! in !help; Mainly used for commands that any player can run ]];
 	SpecialPrefix = [[ Used for things like "all", "me" and "others" (If changed to ! you would do :kill !me) ]];
 	SplitKey = [[ The space in ;kill me (eg if you change it to / :kill me would be :kill/me) ]];
 	BatchKey = [[ :kill me | :ff bob | :explode scel ]];

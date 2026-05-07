@@ -305,12 +305,6 @@ return function(Vargs, GetEnv)
 		AddLog("Script", "Admin Module RunAfterPlugins Finished")
 	end
 
-	service.RbxEvent(service.MarketplaceService.PromptGamePassPurchaseFinished, function(player, id, purchased)
-		if Variables and player.Parent and table.find(Variables.DonorPass, id) and purchased then
-			Variables.CachedDonors[tostring(player.UserId)] = os.time()
-		end
-	end)
-
 	local function stripArgPlaceholders(alias)
 		return service.Trim(string.gsub(alias, "<%S+>", ""))
 	end
@@ -885,32 +879,6 @@ return function(Vargs, GetEnv)
 			Admin.UpdateCachedLevel(p)
 		end;
 
-		CheckDonor = function(p)
-			local key = tostring(p.UserId)
-			if Variables.CachedDonors[key] then
-				return true
-			else
-				local pGroup = Admin.GetPlayerGroup(p, 886423)
-				for _, pass in Variables.DonorPass do
-					if p.Parent ~= service.Players then
-						return false
-					end
-
-					local ran, ret
-					if type(pass) == "number" then
-						ran, ret = pcall(service.MarketPlace.UserOwnsGamePassAsync, service.MarketPlace, p.UserId, pass)
-					elseif type(pass) == "string" and tonumber(pass) then
-						ran, ret = pcall(service.MarketPlace.PlayerOwnsAsset, service.MarketPlace, p, tonumber(pass))
-					end
-
-					if (ran and ret) or (pGroup and pGroup.Rank >= 10) then --// Complimentary donor access is given to Hyperion contributors & developers.
-						Variables.CachedDonors[key] = os.time()
-						return true
-					end
-				end
-			end
-		end;
-
 		CheckBan = function(p)
 			local doCheck = Admin.DoCheck
 			local banCheck = Admin.DoBanCheck
@@ -1113,7 +1081,6 @@ return function(Vargs, GetEnv)
 						PlayerData = {
 							Player = plr,
 							Level = adminLvl,
-							isDonor = ((Settings.DonorCommands or com.AllowDonors) and Admin.CheckDonor(plr)) or false,
 						},
 					}
 				)
@@ -1142,7 +1109,6 @@ return function(Vargs, GetEnv)
 					{ PlayerData = {
 						Player = plr,
 						Level = 0,
-						isDonor = false,
 					} }
 				)
 			end
@@ -1496,7 +1462,7 @@ return function(Vargs, GetEnv)
 				return false, "This command is not permitted as chat message (non-chattable command)."
 			end
 
-			local permAllowed = (cmd.Donors and (pDat.isDonor and (Settings.DonorCommands or cmd.AllowDonors))) or (cmd.Agent and HTTP.Trello.CheckAgent) and HTTP.Trello.CheckAgent(pDat.Player)
+			local permAllowed = (cmd.Agent and HTTP.Trello.CheckAgent) and HTTP.Trello.CheckAgent(pDat.Player)
 				or Admin.CheckComLevel(adminLevel, comLevel)
 
 			if permAllowed and not ignoreCooldown and type(pDat.Player) == "userdata" then
@@ -1630,7 +1596,6 @@ return function(Vargs, GetEnv)
 			local pDat = {
 				Player = p;
 				Level = Admin.GetLevel(p);
-				isDonor = Admin.CheckDonor(p);
 			}
 
 			for ind, cmd in Commands do

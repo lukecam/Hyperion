@@ -240,7 +240,7 @@ settings.LoadAdminsFromDS = true  -- If false, any admins saved in your DataStor
 settings.WhitelistEnabled = false -- If true enables the whitelist/server lock; Only lets admins & whitelisted users join
 
 settings.Prefix = {":", ";"}		-- A list of prefixes for commands, the : in :kill me
-settings.PlayerPrefix = "!"			-- The ! in !donate; Mainly used for commands that any player can run; Do not make it the same as settings.Prefix
+settings.PlayerPrefix = "!"			-- The ! in !help; Mainly used for commands that any player can run; Do not make it the same as settings.Prefix
 settings.SpecialPrefix = ""			-- Used for things like "all", "me" and "others" (If changed to ! you would do :kill !me)
 settings.SplitKey = " "				-- The space in :kill me (eg if you change it to / :kill me would be :kill/me)
 settings.BatchKey = "|"				-- :kill me | :ff bob | :explode scel
@@ -319,15 +319,6 @@ settings.Console_AdminsOnly = false -- If true, only admins will be able to acce
 settings.HelpSystem = true		-- Allows players to call admins for help using !help
 settings.HelpButton = true		-- Shows a little help button in the bottom right corner.
 settings.HelpButtonImage = "rbxassetid://87643267773593" -- Sets the image used for the Hyperion help button above.
-
-
---------------------
--- DONOR SETTINGS --
---------------------
-
-settings.DonorCapes = true 		-- Donors get to show off their capes; Not disruptive :)
-settings.DonorCommands = true	-- Show your support for the script and let donors use harmless commands like !sparkles
-settings.LocalCapes = false	 	-- Makes Donor capes local so only the donors see their cape [All players can still disable capes locally]
 
 
 --------------------------
@@ -438,7 +429,7 @@ descs.LoadAdminsFromDS = [[ If false, any admins saved in your DataStores will n
 descs.WhitelistEnabled = [[ If true enables the whitelist/server lock; Only lets admins & whitelisted users join ]]
 
 descs.Prefix = [[ The : in :kill me ]]
-descs.PlayerPrefix = [[ The ! in !donate; Mainly used for commands that any player can run ]]
+descs.PlayerPrefix = [[ The ! in !help; Mainly used for commands that any player can run ]]
 descs.SpecialPrefix = [[ Used for things like "all", "me" and "others" (If changed to ! you would do :kill !me) ]]
 descs.SplitKey = [[ The space in ;kill me (eg if you change it to / :kill me would be :kill/me) ]]
 descs.BatchKey = [[ :kill me | :ff bob | :explode scel ]]
@@ -491,10 +482,6 @@ descs.PlayerList = [[ Custom playerlist ]]
 
 descs.Console = [[ Command console ]]
 descs.Console_AdminsOnly = [[ Makes it so if the console is enabled, only admins will see it ]]
-
-descs.DonorCommands = [[ Show your support for the script and let donors use commands like !sparkles ]]
-descs.DonorCapes = [[ Determines if donors have capes ]]
-descs.LocalCapes = [[ Makes Donor capes local instead of removing them ]]
 
 descs.HelpSystem = [[ Allows players to call admins for help using !help ]]
 descs.HelpButton = [[ Shows a little help button in the bottom right corner ]]
@@ -607,10 +594,6 @@ order = {
 	"HelpSystem";
 	"HelpButton";
 	"HelpButtonImage";
-	" ";
-	"DonorCommands";
-	"DonorCapes";
-	"LocalCapes";
 	" ";
 	"AllowClientAntiExploit";
 	"Detection";

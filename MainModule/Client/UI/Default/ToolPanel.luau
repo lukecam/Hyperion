@@ -1,10 +1,6 @@
 client, service = nil, nil
 
-return function(data, env)
-	if env then
-		setfenv(1, env)
-	end
-	
+return function(data)
 	local generateStorage, generateAdded
 
 	local window = client.UI.Make("Window", {
@@ -243,7 +239,7 @@ return function(data, env)
 							self.AutoButtonColor = false
 							self.Text = ". . ."
 							client.Remote.Send("ProcessCommand", string.format("%sremovetools%s%s%s", data.Prefix, data.SplitKey, data.SpecialPrefix, selected.Name))
-							wait(2)
+							task.wait(2)
 							if self then
 								self.Text = "Remove All Tools"
 								self.AutoButtonColor = true
@@ -347,7 +343,7 @@ return function(data, env)
 		end)
 	end)
 
-	spawn(function()
+	task.spawn(function()
 		local tab = tabFrame:NewTab("Gear", {
 			Text = "Insert Gear"
 		})
@@ -386,7 +382,7 @@ return function(data, env)
 						self.AutoButtonColor = false
 						self.Text = ". . ."
 						client.Remote.Send("ProcessCommand", string.format("%sgear%s%sme%s%s", data.Prefix, data.SplitKey, data.SpecialPrefix, data.SplitKey, currentId))
-						wait(2)
+						task.wait(2)
 						if self then
 							self.Text = "Spawn"
 							self.AutoButtonColor = true

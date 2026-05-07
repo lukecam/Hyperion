@@ -2,7 +2,7 @@
 
 return {
 	MessageVersion = 5;					--// Message version/number
-	MessageAdminType = 900;  			--// Minimum admin level to be notified (Or Donors or Players or nil to not notify)
+	MessageAdminType = 900;  			--// Minimum admin level to be notified (Or Players or nil to not notify)
 	MessageDate = "1707264000";			--// Time of message creation
 	MessageDuration = 60*60*24*7; 	--// How long should we notify people about this message
 	LastDateTime = "2024-02-07 00:00:01 UTC";

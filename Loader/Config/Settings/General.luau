@@ -4,7 +4,7 @@
 
 return {
 	Prefix = {":", ";"};		-- A list of prefixes for commands, the : in :kill me
-	PlayerPrefix = "!";			-- The ! in !donate; Mainly used for commands that any player can run; Do not make it the same as Prefix
+	PlayerPrefix = "!";			-- The ! in !help; Mainly used for commands that any player can run; Do not make it the same as Prefix
 	SpecialPrefix = "";			-- Used for things like "all", "me" and "others" (If changed to ! you would do :kill !me)
 	SplitKey = " ";				-- The space in :kill me (eg if you change it to / :kill me would be :kill/me)
 	BatchKey = "|";				-- :kill me | :ff bob | :explode scel

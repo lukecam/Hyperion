@@ -76,8 +76,6 @@ return function(Vargs, GetEnv)
 			HelpButtonImage = true;
 			BatchKey = true;
 			AnyPrefix = true;
-			DonorCommands = true;
-			DonorCapes = true;
 			SplitKey = true;
 			Prefix = true;
 			PlayerPrefix = true;
@@ -394,32 +392,6 @@ return function(Vargs, GetEnv)
 				return "Updated"
 			end;
 
-			UpdateDonor = function(p: Player, args: {[number]: any})
-				local playerData = Core.GetPlayer(p)
-				local resp = "OK"
-
-				if Settings.DonorCapes and playerData.isDonor then
-					local donor = args[1]
-					if type(donor) == "table" and donor.Cape and type(donor.Cape) == "table" then
-						playerData.Donor = donor
-						if donor.Enabled then
-							Functions.Donor(p)
-						else
-							Functions.UnCape(p)
-						end
-
-						Core.SavePlayer(p, playerData)
-						resp = "Updated"
-					else
-						resp = "Error"
-					end
-				else
-					resp = "Error"
-				end
-
-				return resp
-			end;
-
 			UpdateAliases = function(p: Player, args: {[number]: any})
 				local aliases = args[1] or {};
 
@@ -439,7 +411,6 @@ return function(Vargs, GetEnv)
 
 			PlayerData = function(p: Player,args: {[number]: any})
 				local data = Core.GetPlayer(p)
-				data.isDonor = Admin.CheckDonor(p)
 				return data
 			end;
 
